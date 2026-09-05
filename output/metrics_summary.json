@@ -1,0 +1,45 @@
+{
+    "total_runs": 1000,
+    "elapsed_time_sec": 3.692797899246216,
+    "survival_rates_pct": {
+        "WHITE": 3.6166666666666667,
+        "BLUE": 87.26666666666667,
+        "RED": 30.133333333333333,
+        "BLACK": 100.0
+    },
+    "mean_survivors": {
+        "WHITE": 0.217,
+        "BLUE": 2.618,
+        "RED": 0.904,
+        "BLACK": 1.0
+    },
+    "prize_per_capita_krw": {
+        "WHITE": {
+            "mean": 2419836.971892767,
+            "std": 5009944.355908306,
+            "median": 0.0
+        },
+        "BLUE": {
+            "mean": 34256615.84711323,
+            "std": 12167868.331238387,
+            "median": 36896606.443667635
+        },
+        "RED": {
+            "mean": 1731150.232460684,
+            "std": 1828777.392179348,
+            "median": 1909438.0796508454
+        },
+        "BLACK": {
+            "mean": 2704804.502413518,
+            "std": 6315839.3942205915,
+            "median": 0.0
+        }
+    },
+    "war_occurrence_rate_pct": 81.6,
+    "mean_attacks_per_session": 1.649,
+    "pollution_disaster_rate_pct": 95.3,
+    "mean_final_pollution_index": 67.2,
+    "black_confiscation_rate_pct": 6.3,
+    "mean_remaining_life_reserve": 16.869,
+    "mean_final_jewel_unit_value": 551931.3582152565
+}
