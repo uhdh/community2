@@ -88,8 +88,8 @@ def test_arms_strike_deals_damage_and_pays_black():
     assert engine.state.war_attacks_count == 1
 
 
-def test_famine_eliminates_all_without_life():
-    """Verify that when mortal teams have 0 life and 0 reserve, they are eliminated without forced survival."""
+def test_group_last_survivor_exception_rule():
+    """Verify official rulebook exception: each group's last 1 survivor never starves even at 0 life."""
     config = SimulationConfig(
         TOTAL_DAYS=1,
         WHITE_LIFE=0,
@@ -101,10 +101,10 @@ def test_famine_eliminates_all_without_life():
     engine = SimulationEngine(config=config)
     final_state = engine.run_simulation()
 
-    mortal_survivors = sum(
-        final_state.teams[t].surviving_members for t in ["WHITE", "BLUE", "RED"]
-    )
-    assert mortal_survivors == 0
+    # Each group has exactly 1 protected survivor
+    assert final_state.teams["WHITE"].surviving_members == 1
+    assert final_state.teams["BLUE"].surviving_members == 1
+    assert final_state.teams["RED"].surviving_members == 1
 
 
 def test_monte_carlo_fast_run():

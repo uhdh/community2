@@ -1,6 +1,7 @@
 """
 models/team.py
 Team state and attributes definition for 'The Community 2: Invisible Hand'.
+Includes the official exception rule: Group's last survivor is protected even at 0 life.
 """
 
 from dataclasses import dataclass, field
@@ -35,10 +36,10 @@ class TeamState:
         """
         Consumes daily life for each surviving member.
         Returns the number of deaths this turn.
+        공식 룰북 예외 규정: 그룹별 최후의 1인이 남을 경우 라이프가 0이 되어도 탈락하지 않음.
         """
         if self.team_type == TeamType.BLACK:
-            # Black does not die from lack of life directly,
-            # but mart operating costs 1 life if available.
+            # Black mart operating costs 1 life if available (exempt on Day 1 handled in engine)
             if self.resources.life >= 1:
                 self.resources.life -= 1
             return 0
@@ -48,9 +49,12 @@ class TeamState:
             self.resources.life -= needed
             return 0
         else:
-            # Insufficient life: survivors equal to available life
+            # Insufficient life:
             can_survive = self.resources.life // requirement
-            deaths = self.surviving_members - can_survive
+            # 예외 규정: 그룹별 최후의 1인이 남을 경우 라이프가 0이 되어도 탈락하지 않음
+            if self.surviving_members > 0:
+                can_survive = max(1, can_survive)
+            deaths = max(0, self.surviving_members - can_survive)
             self.resources.life = 0
             self.surviving_members = can_survive
             return deaths
