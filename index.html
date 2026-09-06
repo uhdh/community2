@@ -13,6 +13,9 @@
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
+    <!-- Pretendard Modern Font CDN (Readable, clean Korean typography) -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+
     <style>
         @font-face {
             font-family: 'Cafe24ProSlim';
@@ -21,43 +24,41 @@
             font-style: normal;
             font-display: swap;
         }
-        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
 
         :root {
-            --black: #080808;
-            --paper: #f0eee7;
-            --blue: #1646f5;
-            --red: #ef321f;
-            --card-bg: #121212;
-            --line: #262626;
-            --line-light: #383838;
-            --muted: #888888;
+            --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Noto Sans KR', sans-serif;
+            --primary: #2563eb;
+            --red: #dc2626;
+            --white-team: #475569;
+            --black-mart: #09090b;
         }
 
         body {
-            background-color: var(--black);
-            color: var(--paper);
-            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            font-family: var(--font-sans);
             word-break: keep-all;
             overflow-x: hidden;
+            letter-spacing: -0.015em;
         }
 
-        .font-cafe24 { font-family: 'Cafe24ProSlim', sans-serif; }
-        .font-mono { font-family: 'IBM Plex Mono', monospace; }
+        /* Hero Main Title ONLY uses Cafe24ProSlim */
+        .font-hero-title {
+            font-family: 'Cafe24ProSlim', sans-serif;
+            letter-spacing: -0.02em;
+        }
 
+        /* Clean Modern Marquee Ribbon */
         .marquee {
             overflow: hidden;
             white-space: nowrap;
             display: flex;
-            background: var(--paper);
-            color: var(--black);
-            border-top: 1px solid var(--black);
-            border-bottom: 1px solid var(--black);
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.16em;
+            background: #1e293b;
+            color: #f8fafc;
+            font-size: 12px;
+            font-weight: 600;
             padding: 8px 0;
+            border-bottom: 1px solid #334155;
         }
         .marquee__inner {
             display: inline-flex;
@@ -68,42 +69,24 @@
             100% { transform: translateX(-50%); }
         }
 
-        .section-label {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 11px;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-            color: var(--muted);
-            margin-bottom: 12px;
+        /* Modern interactive pills & cards */
+        .team-card-white {
+            border-top: 4px solid #64748b;
         }
-        .section-label b {
-            color: var(--paper);
+        .team-card-blue {
+            border-top: 4px solid #2563eb;
+        }
+        .team-card-red {
+            border-top: 4px solid #dc2626;
         }
 
-        .brutalist-border {
-            border: 1px solid var(--line);
-        }
-        .brutalist-border:hover {
-            border-color: #484848;
-        }
-
-        /* Interactive Board Tabs */
-        .tab-btn.active {
-            background-color: #1646f5;
-            color: #ffffff;
-            border-color: #1646f5;
-        }
-
-        /* Screen shake animation for war */
+        /* Screen shake animation for war button */
         @keyframes warShake {
             0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            20% { transform: translate(-6px, 4px) rotate(-1deg); }
-            40% { transform: translate(6px, -4px) rotate(1deg); }
-            60% { transform: translate(-4px, 2px) rotate(-0.5deg); }
-            80% { transform: translate(4px, -2px) rotate(0.5deg); }
+            20% { transform: translate(-4px, 3px) rotate(-1deg); }
+            40% { transform: translate(4px, -3px) rotate(1deg); }
+            60% { transform: translate(-3px, 2px) rotate(-0.5deg); }
+            80% { transform: translate(3px, -2px) rotate(0.5deg); }
         }
         .screen-war-shake {
             animation: warShake 0.4s ease-in-out;
@@ -122,67 +105,74 @@
             pointer-events: auto;
         }
 
-        /* Capsule glowing effects */
-        .capsule-glow {
-            filter: drop-shadow(0 0 6px rgba(22, 70, 245, 0.7));
+        /* Custom scrollbar for action logs */
+        #boardActionLogs::-webkit-scrollbar {
+            width: 4px;
         }
-        .capsule-white-glow {
-            filter: drop-shadow(0 0 6px rgba(240, 238, 231, 0.7));
-        }
-        .capsule-red-glow {
-            filter: drop-shadow(0 0 6px rgba(239, 50, 31, 0.7));
+        #boardActionLogs::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1;
+            border-radius: 4px;
         }
 
-        /* Accordion Styling */
-        details summary::-webkit-details-marker {
-            display: none;
+        /* Capsule glowing effects */
+        .capsule-glow {
+            filter: drop-shadow(0 0 4px rgba(37, 99, 235, 0.4));
+        }
+        .capsule-white-glow {
+            filter: drop-shadow(0 0 4px rgba(100, 116, 139, 0.3));
+        }
+        .capsule-red-glow {
+            filter: drop-shadow(0 0 4px rgba(220, 38, 38, 0.4));
         }
     </style>
 </head>
-<body class="selection:bg-[#1646f5] selection:text-white">
+<body class="selection:bg-blue-600 selection:text-white">
 
-    <!-- Top Navigation -->
-    <nav class="sticky top-0 z-50 bg-[#080808]/95 backdrop-blur border-b border-[#262626]">
+    <!-- Top Navigation (Clean White & High Contrast) -->
+    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-xs">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
                 <!-- Brand Wordmark & Tag -->
                 <div class="flex items-center space-x-3">
-                    <a href="#" class="block w-28 text-[#f0eee7] hover:opacity-90 transition-opacity">
+                    <a href="#" class="block w-28 text-slate-900 hover:opacity-80 transition-opacity">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 322" aria-label="더 커뮤니티"><path fill="currentColor" fill-rule="evenodd" d="M448,205 448,244 472,244 473,245 473,321 515,321 515,245 516,244 542,244 543,245 543,321 585,321 585,245 586,244 612,244 612,205ZM453,1 453,186 609,186 609,1ZM496,43 566,43 567,44 567,142 566,143 496,143 495,142 495,44ZM957,0 957,320 998,320 999,319 999,0ZM820,0 820,320 923,320 923,281 863,281 862,280 862,169 863,168 923,168 923,129 863,129 862,128 862,40 863,39 922,39 923,38 923,0ZM759,0 759,320 801,320 801,0ZM629,0 629,227 630,228 630,236 631,237 631,241 632,242 632,245 633,246 633,248 634,249 634,251 635,252 636,257 643,271 645,273 647,277 650,280 650,281 666,297 667,297 670,300 671,300 679,306 691,312 696,313 699,315 702,315 703,316 705,316 706,317 710,317 711,318 715,318 716,319 723,319 724,320 732,320 732,279 726,279 725,278 720,278 719,277 716,277 715,276 712,276 711,275 709,275 699,270 693,265 692,265 682,255 682,254 679,251 678,248 675,244 675,242 673,239 673,237 672,236 672,233 671,232 671,227 670,226 670,0ZM388,0 388,114 387,115 365,115 365,154 387,154 388,155 388,320 430,320 430,0ZM250,0 250,41 258,41 259,42 263,42 264,43 271,44 274,46 276,46 282,49 284,51 288,53 301,66 301,67 305,72 308,78 308,80 309,81 309,83 311,87 311,92 312,93 312,129 311,130 250,130 250,169 311,169 312,170 312,320 353,320 353,91 352,90 352,84 351,83 350,74 349,73 349,71 348,70 347,65 344,60 344,58 342,54 340,52 339,49 333,41 333,40 320,26 319,26 311,19 310,19 305,15 300,13 296,10 294,10 289,7 287,7 286,6 284,6 283,5 281,5 277,3 274,3 273,2 268,2 267,1 261,1 260,0ZM138,0 138,114 137,115 105,115 104,116 104,154 137,154 138,155 138,320 179,320 180,319 180,0ZM0,0 0,319 1,320 103,320 103,281 43,281 42,280 42,40 43,39 103,39 103,0Z"/></svg>
                     </a>
-                    <div class="hidden sm:flex items-center space-x-1.5 pl-2.5 border-l border-[#262626]">
-                        <span class="px-2 py-0.5 rounded-full bg-[#1646f5]/20 text-[#3898ec] border border-[#1646f5]/40 font-mono text-[10px] font-bold">
-                            LIVE HUD & 시뮬레이터
+                    <div class="hidden sm:flex items-center space-x-1.5 pl-2.5 border-l border-slate-200">
+                        <span class="px-2 py-0.5 rounded-md bg-blue-50 text-blue-700 border border-blue-200 text-xs font-semibold">
+                            3개 거주팀 + 특수 블랙 마트
                         </span>
                     </div>
                 </div>
 
                 <!-- Nav Links -->
-                <div class="hidden lg:flex items-center space-x-6 font-mono text-xs uppercase tracking-wider text-neutral-400">
-                    <a href="#liveboard" class="text-[#1646f5] hover:text-white font-bold">[01] 실시간 HUD 🌟</a>
-                    <a href="currencies.html" class="text-amber-300 hover:text-white transition-colors font-bold">[02] 재화 알아보기 💎</a>
-                    <a href="#marketwar" class="hover:text-[#f0eee7] transition-colors text-[#ef321f] font-bold">[03] 전쟁 룰 💣</a>
-                    <a href="#data" class="hover:text-[#f0eee7] transition-colors">[04] 최종 1등 🏆</a>
+                <div class="hidden lg:flex items-center space-x-6 text-sm font-medium text-slate-600">
+                    <a href="#liveboard" class="text-blue-600 hover:text-blue-700 font-semibold">[01] 실시간 현황 🌟</a>
+                    <a href="currencies.html" class="text-amber-600 hover:text-amber-700 font-semibold flex items-center gap-1">
+                        <span>[02] 재화 알아보기</span>
+                        <span class="text-xs bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded-full font-bold">도감</span>
+                    </a>
+                    <a href="#marketwar" class="hover:text-slate-900 transition-colors text-red-600 font-semibold">[03] 전쟁 룰 💣</a>
+                    <a href="#data" class="hover:text-slate-900 transition-colors font-semibold">[04] 최종 랭킹 🏆</a>
                 </div>
 
                 <!-- Action Button -->
                 <div>
-                    <a href="#liveboard" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#1646f5] hover:bg-blue-600 text-white font-mono text-xs font-bold transition-all shadow-[0_0_12px_rgba(22,70,245,0.4)]">
-                        <i data-lucide="play" class="w-3.5 h-3.5 fill-current"></i> 실시간 대시보드
+                    <a href="currencies.html" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-lg shadow-sm transition-all">
+                        <i data-lucide="book-open" class="w-4 h-4"></i> 재화 세부 도감
                     </a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Sticky Sub-Nav Live Stock Bar (Broadcast HUD) -->
-    <div id="stickyStockBar" class="sticky top-16 z-40 bg-[#0c0c0c]/95 backdrop-blur border-b border-[#262626] py-1.5 px-4 shadow-md hidden sm:block">
-        <div class="max-w-7xl mx-auto flex items-center justify-between gap-3">
-            <div class="flex items-center space-x-2 font-mono text-xs text-neutral-400 shrink-0">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span class="font-bold text-[#f0eee7]">실시간 팀 재고:</span>
+    <!-- Sticky Sub-Nav Live Stock Bar (Light Mode) -->
+    <div id="stickyStockBar" class="sticky top-16 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 py-2 px-4 shadow-xs hidden sm:block">
+        <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+            <div class="flex items-center space-x-2 text-xs font-medium text-slate-500 shrink-0">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span class="font-bold text-slate-900">3개 팀 실시간 재고:</span>
             </div>
-            <div id="topStockPillsContainer" class="flex items-center space-x-2 sm:space-x-3 overflow-x-auto py-0.5">
+            <div id="topStockPillsContainer" class="flex items-center space-x-3 overflow-x-auto py-0.5">
                 <!-- Dynamically injected by JS -->
             </div>
         </div>
@@ -191,954 +181,798 @@
     <!-- Running Marquee Ribbon -->
     <div class="marquee">
         <div class="marquee__inner">
-            <span>THE COMMUNITY 2 — INVISIBLE HAND • 💎 총 상금 2억 원 • ❤️ 생존 라이프 50개 한도 (밤마다 1개씩 필수 제출!) • ⚡ 생산 크레딧 36개 • 💣 가격이 너무 비싸면 쾅! 전쟁 선포! • </span>
-            <span>THE COMMUNITY 2 — INVISIBLE HAND • 💎 총 상금 2억 원 • ❤️ 생존 라이프 50개 한도 (밤마다 1개씩 필수 제출!) • ⚡ 생산 크레딧 36개 • 💣 가격이 너무 비싸면 쾅! 전쟁 선포! • </span>
+            <span>THE COMMUNITY 2 : INVISIBLE HAND • 🏆 진짜 현금 2억 원 분배 • 💎 초기 보석 200개 (1개 = 100만 원) • ❤️ 생존 라이프 50개 한도 (밤마다 1인당 1개 제출) • ⚡ 크레딧 36개 생산 • 💣 바가지 씌우면 쾅! 가격 불만 전쟁 선포! • 🛒 특수 상인 블랙의 무기 독점 • </span>
+            <span>THE COMMUNITY 2 : INVISIBLE HAND • 🏆 진짜 현금 2억 원 분배 • 💎 초기 보석 200개 (1개 = 100만 원) • ❤️ 생존 라이프 50개 한도 (밤마다 1인당 1개 제출) • ⚡ 크레딧 36개 생산 • 💣 바가지 씌우면 쾅! 가격 불만 전쟁 선포! • 🛒 특수 상인 블랙의 무기 독점 • </span>
         </div>
     </div>
 
-    <!-- HERO HEADER -->
-    <section class="relative overflow-hidden pt-12 pb-14 lg:pt-14 lg:pb-16 bg-[#080808] border-b border-[#262626]">
-        <div class="font-cafe24 absolute right-4 sm:right-12 top-0 select-none pointer-events-none opacity-5 text-transparent" style="-webkit-text-stroke: 1.5px #f0eee7; font-size: clamp(180px, 25vw, 380px); line-height: 0.85;">
-            02
-        </div>
-
+    <!-- HERO HEADER (Clean White & High Legibility) -->
+    <section class="relative overflow-hidden pt-12 pb-14 lg:pt-16 lg:pb-18 bg-white border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="max-w-3xl">
-                <div class="section-label">
+                <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-semibold mb-4">
                     <span>SEASON 02</span>
-                    <b>THE COMMUNITY : INVISIBLE HAND</b>
+                    <span class="w-1 h-1 rounded-full bg-blue-500"></span>
+                    <span>더 커뮤니티 : 보이지 않는 손</span>
                 </div>
 
-                <h1 class="font-cafe24 text-4xl sm:text-6xl text-[#f0eee7] tracking-tight leading-none">
+                <!-- Main Hero Title ONLY uses Cafe24ProSlim -->
+                <h1 class="font-hero-title text-4xl sm:text-6xl text-slate-900 tracking-tight leading-[1.08]">
                     더 커뮤니티 2:<br>
-                    <span class="text-[#1646f5]">보이지 않는 손</span>
+                    <span class="text-blue-600">보이지 않는 손</span>
                 </h1>
 
-                <p class="mt-4 text-neutral-300 text-base sm:text-lg leading-relaxed font-light">
-                    4개 마을 주민 13명이 모여 살면서 <strong>진짜 현금 2억 원</strong>을 나눠 갖는 생존 게임!<br>
-                    <strong>라이프(목숨)가 없으면 사고, 바가지 씌우면 쾅! 💣 전쟁을 선포합니다.</strong>
+                <p class="mt-4 text-slate-600 text-base sm:text-lg leading-relaxed font-normal">
+                    13명이 모여 <strong>진짜 현금 2억 원</strong>을 나눠 갖는 리얼 생존 경제 게임!<br>
+                    <strong>3개 거주 팀(화이트·블루·레드 12명)</strong>이 생존 경쟁을 펼치고, 
+                    <strong>블랙(1명)은 비밀 상점</strong>에서 무기와 식료품을 판매합니다.
                 </p>
+                
+                <div class="mt-3 p-3 bg-amber-50 border border-amber-200 rounded-xl text-amber-900 text-xs sm:text-sm font-medium flex items-center gap-2">
+                    <span class="text-base">💡</span>
+                    <span><strong>보이지 않는 손 규칙:</strong> 라이프(목숨) 가격을 너무 비싸게 올리면, 참지 못한 팀들이 <strong>15보석으로 전쟁을 선포</strong>해 자원의 절반(50%)을 털어갑니다!</span>
+                </div>
             </div>
 
-            <!-- 4 Key Big Statistics Counters -->
-            <div class="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-3.5 font-mono">
+            <!-- 4 Key Big Statistics Cards -->
+            <div class="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-4">
                 <!-- Stat 1: Total Prize -->
-                <div class="p-4 bg-[#121212] brutalist-border border-t-2 !border-t-[#1646f5]">
-                    <div class="flex items-center justify-between text-neutral-400 text-xs">
+                <div class="p-5 bg-white rounded-2xl border border-slate-200 shadow-xs hover:shadow-md transition-all border-t-4 !border-t-blue-600">
+                    <div class="flex items-center justify-between text-slate-500 text-xs font-medium">
                         <span>🏆 진짜 현금 상금</span>
-                        <i data-lucide="trophy" class="w-4 h-4 text-[#1646f5]"></i>
+                        <i data-lucide="trophy" class="w-4 h-4 text-blue-600"></i>
                     </div>
-                    <div class="font-cafe24 text-2xl sm:text-3xl text-[#f0eee7] mt-1.5">2억 원</div>
-                    <div class="text-[11px] text-neutral-400 mt-0.5">마지막에 보석 지분 분배</div>
+                    <div class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">2억 원</div>
+                    <div class="text-xs text-slate-500 mt-1">최종 보석 지분율로 분배</div>
                 </div>
 
                 <!-- Stat 2: Initial Jewels -->
-                <div class="p-4 bg-[#121212] brutalist-border border-t-2 !border-t-white">
-                    <div class="flex items-center justify-between text-neutral-400 text-xs">
+                <div class="p-5 bg-white rounded-2xl border border-slate-200 shadow-xs hover:shadow-md transition-all border-t-4 !border-t-emerald-500">
+                    <div class="flex items-center justify-between text-slate-500 text-xs font-medium">
                         <span>💎 초기 보석</span>
                         <img src="./brand/icon-jewel.svg" class="w-4 h-4 object-contain" alt="보석">
                     </div>
-                    <div class="font-cafe24 text-2xl sm:text-3xl text-[#f0eee7] mt-1.5">200개</div>
-                    <div class="text-[11px] text-emerald-400 mt-0.5 font-bold">1개 = 약 1,000,000 원</div>
+                    <div class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">200개</div>
+                    <div class="text-xs text-emerald-600 font-bold mt-1">1개 = 1,000,000 원</div>
                 </div>
 
                 <!-- Stat 3: Initial Life -->
-                <div class="p-4 bg-[#121212] brutalist-border border-t-2 !border-t-[#ef321f]">
-                    <div class="flex items-center justify-between text-neutral-400 text-xs">
-                        <span>❤️ 초기 라이프</span>
+                <div class="p-5 bg-white rounded-2xl border border-slate-200 shadow-xs hover:shadow-md transition-all border-t-4 !border-t-red-600">
+                    <div class="flex items-center justify-between text-slate-500 text-xs font-medium">
+                        <span>❤️ 총 라이프 한도</span>
                         <img src="./brand/icon-life.svg" class="w-2.5 h-4 object-contain" alt="라이프">
                     </div>
-                    <div class="font-cafe24 text-2xl sm:text-3xl text-[#ef321f] mt-1.5">43개</div>
-                    <div class="text-[11px] text-neutral-400 mt-0.5">총 한도 50개 (지하 잔여 7개)</div>
+                    <div class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">50개</div>
+                    <div class="text-xs text-red-600 font-medium mt-1">밤마다 1인당 1개 제출</div>
                 </div>
 
-                <!-- Stat 4: Initial Credits -->
-                <div class="p-4 bg-[#121212] brutalist-border border-t-2 !border-t-amber-400">
-                    <div class="flex items-center justify-between text-neutral-400 text-xs">
+                <!-- Stat 4: Credits -->
+                <div class="p-5 bg-white rounded-2xl border border-slate-200 shadow-xs hover:shadow-md transition-all border-t-4 !border-t-amber-500">
+                    <div class="flex items-center justify-between text-slate-500 text-xs font-medium">
                         <span>⚡ 초기 크레딧</span>
-                        <img src="./brand/icon-credit.svg" class="w-2.5 h-4 object-contain" alt="크레딧">
+                        <img src="./brand/icon-credit.svg" class="w-3.5 h-4 object-contain" alt="크레딧">
                     </div>
-                    <div class="font-cafe24 text-2xl sm:text-3xl text-amber-400 mt-1.5">36개</div>
-                    <div class="text-[11px] text-neutral-400 mt-0.5">물건/라이프 생산 연료</div>
-                </div>
-            </div>
-
-            <!-- 3-STEP INTRO -->
-            <div id="eli5-intro" class="mt-8 p-5 bg-[#101010] border border-[#333] rounded-sm">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <!-- Step 1 -->
-                    <div class="p-4 bg-[#151515] border border-[#282828] flex flex-col justify-between">
-                        <div>
-                            <div class="text-amber-400 font-mono text-xs font-bold uppercase mb-1">
-                                1. 보물 모으기
-                            </div>
-                            <h3 class="font-cafe24 text-lg text-[#f0eee7]">보석 1개 = 100만 원!</h3>
-                            <p class="mt-1.5 text-neutral-300 text-xs leading-relaxed font-sans">
-                                보석을 많이 모을수록 마지막 날 <strong>진짜 현금 2억 원</strong> 중에서 내 몫이 커져요!
-                            </p>
-                        </div>
-                        <div class="mt-3 pt-2 border-t border-[#262626] font-mono text-[11px] text-emerald-400 font-bold">
-                            👉 보석 = 최종 상금 지분권
-                        </div>
-                    </div>
-
-                    <!-- Step 2 -->
-                    <div class="p-4 bg-[#151515] border border-[#282828] flex flex-col justify-between">
-                        <div>
-                            <div class="text-[#ef321f] font-mono text-xs font-bold uppercase mb-1">
-                                2. 생존 라이프 챙기기
-                            </div>
-                            <h3 class="font-cafe24 text-lg text-[#ef321f]">매일 밤 1개씩 제출!</h3>
-                            <p class="mt-1.5 text-neutral-300 text-xs leading-relaxed font-sans">
-                                게임 속 목숨이에요! 밤 10시에 라이프 1개를 못 내면 <strong>즉시 탈락해서 집에 가야 해요</strong>.
-                            </p>
-                        </div>
-                        <div class="mt-3 pt-2 border-t border-[#262626] font-mono text-[11px] text-[#ef321f] font-bold">
-                            👉 라이프 미제출 시 즉시 영구 탈락
-                        </div>
-                    </div>
-
-                    <!-- Step 3 -->
-                    <div class="p-4 bg-[#151515] border border-[#282828] flex flex-col justify-between">
-                        <div>
-                            <div class="text-[#3898ec] font-mono text-xs font-bold uppercase mb-1">
-                                3. 사오거나 전쟁 쾅!
-                            </div>
-                            <h3 class="font-cafe24 text-lg text-[#f0eee7]">바가지 씌우면 전쟁!</h3>
-                            <p class="mt-1.5 text-neutral-300 text-xs leading-relaxed font-sans">
-                                라이프가 모자라면 다른 팀한테 사와야 해요. 근데 너무 비싸게 굴면? <strong>쾅! 💣 전쟁 선포하고 창고를 털어요!</strong>
-                            </p>
-                        </div>
-                        <div class="mt-3 pt-2 border-t border-[#262626] font-mono text-[11px] text-[#3898ec] font-bold">
-                            👉 가격 불만이면 전쟁 선포
-                        </div>
-                    </div>
+                    <div class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">36개</div>
+                    <div class="text-xs text-amber-600 font-medium mt-1">환경오염 임계치 50</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ★ SECTION 01: 4개 팀 창고 실시간 재고 (LIVE HUD) & 인터랙티브 대시보드 (맨 위로 배치!) -->
-    <section id="liveboard" class="py-12 lg:py-16 bg-[#080808] border-b border-[#262626]">
+    <!-- SECTION 01: 3개 팀 실시간 창고 & 특수 블랙 마트 (LIVE HUD) -->
+    <section id="liveboard" class="py-12 lg:py-16 bg-slate-50 border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="section-label">
-                <span>SECTION 01 // LIVE HUD & DASHBOARD</span>
-                <b>🌟 4개 팀 창고 실시간 재고 (LIVE HUD) & 타임라인 시뮬레이터</b>
-            </div>
-
-            <!-- Main Header -->
-            <div class="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-4 mb-6">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-3 mb-6">
                 <div>
-                    <h2 class="font-cafe24 text-3xl sm:text-5xl text-[#f0eee7] tracking-tight">
-                        4개 팀 창고 실시간 재고 (LIVE HUD)
+                    <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800 text-xs font-bold mb-2">
+                        SECTION 01
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
+                        3개 팀 실시간 창고 & 특수 블랙 마트
                     </h2>
-                    <p class="mt-2 text-neutral-400 text-sm leading-relaxed max-w-2xl">
-                        어느 팀이 보석, 라이프, 크레딧을 얼마나 쥐고 있는지 실시간으로 확인하세요!
+                    <p class="text-slate-500 text-xs sm:text-sm mt-1">
+                        D-0부터 D-9까지 날짜 버튼을 누르면 팀별 재고와 사건을 직관적으로 확인할 수 있습니다.
                     </p>
                 </div>
-                <div class="flex items-center space-x-2 font-mono text-xs">
-                    <span class="text-neutral-400">보석 1개 가치:</span>
-                    <span id="boardUnitValBadge" class="px-2.5 py-1 bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 font-bold">1,000,000 원</span>
-                </div>
-            </div>
-
-            <!-- ★ 1. LIVE INVENTORY STATUS PILL BAR (맨 위에 바로 노출!) -->
-            <div class="mb-6 p-4 bg-[#101010] brutalist-border">
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-3 pb-2 border-b border-[#262626]">
-                    <div class="flex items-center space-x-2 font-mono text-xs font-bold text-[#f0eee7]">
-                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                        <span>4개 팀 창고 실시간 재고 (LIVE HUD)</span>
-                    </div>
-                    <div class="flex items-center space-x-2">
-                        <button id="btnHudThemeToggle" onclick="board.toggleHudTheme()" class="px-2.5 py-1 bg-[#1e1e1e] hover:bg-[#2a2a2a] border border-[#444] rounded text-[11px] font-mono text-neutral-200 transition-colors">
-                            📺 방송 송출형 (Light HUD)
-                        </button>
-                    </div>
-                </div>
-
-                <!-- 4 Team Stock Pills Grid -->
-                <div id="teamStockPillsContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 transition-all">
-                    <!-- Injected by JS -->
-                </div>
-            </div>
-
-            <!-- ★ 2. 4 TEAMS VISUAL VAULT CARDS (WITH HUMAN FIGURES) -->
-            <div id="viewTeamsContainer" class="mb-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-                <!-- Injected by JS -->
-            </div>
-
-            <!-- 3. 9-DAY SURVIVAL TIMELINE STEPPER -->
-            <div id="timeline-stepper" class="mb-5 p-4 bg-[#101010] brutalist-border">
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-3 pb-2 border-b border-[#262626]">
-                    <div class="flex items-center space-x-2 font-mono text-xs font-bold text-[#f0eee7]">
-                        <i data-lucide="calendar" class="w-4 h-4 text-[#1646f5]"></i>
-                        <span>📅 8박 9일 생존 타임라인 (원하는 날을 클릭해보세요!)</span>
-                    </div>
-                    <div class="flex items-center space-x-2 font-mono text-[11px] text-neutral-400">
-                        <span class="flex items-center"><span class="w-2 h-2 rounded-full bg-emerald-400 mr-1"></span>완료</span>
-                        <span class="flex items-center"><span class="w-2 h-2 rounded-full bg-[#1646f5] mr-1"></span>오늘(실측)</span>
-                        <span class="flex items-center"><span class="w-2 h-2 rounded-full bg-amber-500 mr-1"></span>미래 예측</span>
-                    </div>
-                </div>
-
-                <!-- 10 Day Stepper Buttons Grid -->
-                <div class="grid grid-cols-2 sm:grid-cols-5 lg:grid-cols-10 gap-1.5 font-mono text-xs" id="timelineStepButtons">
-                    <!-- Day 0 -->
-                    <button onclick="board.loadPreset(0)" id="tbtn-0" class="timeline-btn p-2 border border-[#333] bg-[#141414] hover:bg-[#202020] text-left transition-all">
-                        <div class="text-[10px] text-neutral-500">D-0 입주</div>
-                        <div class="font-bold text-neutral-200 mt-0.5">🏛️ 시작!</div>
-                        <div class="text-[9px] text-emerald-400 mt-0.5">200💎/43❤️</div>
-                    </button>
-                    <!-- Day 1 -->
-                    <button onclick="board.loadPreset(1)" id="tbtn-1" class="timeline-btn p-2 border border-[#333] bg-[#141414] hover:bg-[#202020] text-left transition-all">
-                        <div class="text-[10px] text-neutral-500">D-1 거래</div>
-                        <div class="font-bold text-neutral-200 mt-0.5">🟢 전원생존</div>
-                        <div class="text-[9px] text-emerald-400 mt-0.5">13명 통과</div>
-                    </button>
-                    <!-- Day 2 -->
-                    <button onclick="board.loadPreset(2)" id="tbtn-2" class="timeline-btn p-2 border border-[#1646f5] bg-[#1646f5]/20 text-left transition-all shadow-[0_0_10px_rgba(22,70,245,0.3)]">
-                        <div class="text-[10px] text-[#3898ec] font-bold">D-2 실측 📍</div>
-                        <div class="font-bold text-white mt-0.5">🔵 소금 리더</div>
-                        <div class="text-[9px] text-[#3898ec] mt-0.5">라이프 21개독점</div>
-                    </button>
-                    <!-- Day 3 -->
-                    <button onclick="board.loadPreset(3)" id="tbtn-3" class="timeline-btn p-2 border border-[#333] bg-[#141414] hover:bg-[#202020] text-left transition-all">
-                        <div class="text-[10px] text-neutral-500">D-3 예측</div>
-                        <div class="font-bold text-neutral-200 mt-0.5">🔮 가격폭등</div>
-                        <div class="text-[9px] text-amber-400 mt-0.5">라이프 25보석</div>
-                    </button>
-                    <!-- Day 4 -->
-                    <button onclick="board.loadPreset(4)" id="tbtn-4" class="timeline-btn p-2 border border-[#333] bg-[#141414] hover:bg-[#202020] text-left transition-all">
-                        <div class="text-[10px] text-neutral-500">D-4 예측</div>
-                        <div class="font-bold text-neutral-200 mt-0.5">💣 무기사기</div>
-                        <div class="text-[9px] text-neutral-400 mt-0.5">군비 경쟁</div>
-                    </button>
-                    <!-- Day 5 -->
-                    <button onclick="board.loadPreset(5)" id="tbtn-5" class="timeline-btn p-2 border border-[#333] bg-[#141414] hover:bg-[#202020] text-left transition-all">
-                        <div class="text-[10px] text-neutral-500">D-5 예측</div>
-                        <div class="font-bold text-[#ef321f] mt-0.5">⚔️ 전쟁발발</div>
-                        <div class="text-[9px] text-[#ef321f] mt-0.5">창고 50%털기</div>
-                    </button>
-                    <!-- Day 6 -->
-                    <button onclick="board.loadPreset(6)" id="tbtn-6" class="timeline-btn p-2 border border-[#333] bg-[#141414] hover:bg-[#202020] text-left transition-all">
-                        <div class="text-[10px] text-neutral-500">D-6 예측</div>
-                        <div class="font-bold text-amber-400 mt-0.5">⚠️ 매연위기</div>
-                        <div class="text-[9px] text-amber-400 mt-0.5">공해 경보</div>
-                    </button>
-                    <!-- Day 7 -->
-                    <button onclick="board.loadPreset(7)" id="tbtn-7" class="timeline-btn p-2 border border-[#333] bg-[#141414] hover:bg-[#202020] text-left transition-all">
-                        <div class="text-[10px] text-neutral-500">D-7 예측</div>
-                        <div class="font-bold text-neutral-300 mt-0.5">😢 기근탈락</div>
-                        <div class="text-[9px] text-rose-400 mt-0.5">5명 아사</div>
-                    </button>
-                    <!-- Day 8 -->
-                    <button onclick="board.loadPreset(8)" id="tbtn-8" class="timeline-btn p-2 border border-[#333] bg-[#141414] hover:bg-[#202020] text-left transition-all">
-                        <div class="text-[10px] text-neutral-500">D-8 예측</div>
-                        <div class="font-bold text-neutral-200 mt-0.5">👑 최후1인</div>
-                        <div class="text-[9px] text-neutral-400 mt-0.5">특별생존</div>
-                    </button>
-                    <!-- Day 9 -->
-                    <button onclick="board.loadPreset(9)" id="tbtn-9" class="timeline-btn p-2 border border-[#333] bg-[#141414] hover:bg-[#202020] text-left transition-all">
-                        <div class="text-[10px] text-neutral-500">D-9 정산</div>
-                        <div class="font-bold text-amber-300 mt-0.5">🏆 최종상금</div>
-                        <div class="text-[9px] text-amber-400 mt-0.5">2억 원 배분</div>
-                    </button>
-                </div>
-            </div>
-
-            <!-- BIG STORY BALLOON -->
-            <div id="boardStoryBalloon" class="mb-6 p-4 bg-[#141414] border-l-4 border-amber-400 brutalist-border flex items-start space-x-3 transition-all">
-                <span class="text-3xl shrink-0" id="storyBalloonEmoji">💬</span>
-                <div>
-                    <div class="flex items-center space-x-2">
-                        <span id="storyBalloonDayTag" class="px-2 py-0.5 text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40 uppercase">DAY 2 스토리</span>
-                        <span class="text-xs text-neutral-400">오늘 무슨 일이 있었을까?</span>
-                    </div>
-                    <div id="storyBalloonText" class="mt-1.5 text-sm sm:text-base text-[#f0eee7] font-medium leading-relaxed">
-                        👑 블루 팀 새 리더로 '소금' 님이 뽑혔어요! 블루가 라이프 21개를 꼭 쥐고 안 놔주자, 다른 팀들이 슬슬 불안해하고 있어요!
-                    </div>
-                </div>
-            </div>
-
-            <!-- VIEW CONTAINER 2: 200 JEWELS MAP (10x20 Grid) -->
-            <div id="viewJewelsContainer" class="mt-6 p-5 brutalist-border bg-[#101010] hidden">
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4 pb-3 border-b border-[#262626]">
-                    <div class="flex items-center space-x-2">
-                        <img src="./brand/icon-jewel.svg" class="w-5 h-5 object-contain" alt="보석">
-                        <h3 class="font-cafe24 text-xl text-[#f0eee7]">💎 보석 200개는 지금 어디에 있을까?</h3>
-                    </div>
-                    <div class="flex items-center space-x-3 font-mono text-xs">
-                        <span>화이트 (<span id="jewelPctWhite">45%</span>)</span>
-                        <span>블루 (<span id="jewelPctBlue">30%</span>)</span>
-                        <span>레드 (<span id="jewelPctRed">25%</span>)</span>
-                        <span>블랙 (<span id="jewelPctBlack">0%</span>)</span>
-                    </div>
-                </div>
-                <div id="jewelTokenMatrix" class="grid grid-cols-10 sm:grid-cols-20 gap-1.5 p-3.5 bg-[#080808] border border-[#222]">
-                    <!-- Injected by JS -->
-                </div>
-            </div>
-
-            <!-- VIEW CONTAINER 3: 50 LIFE CAPSULES MAP -->
-            <div id="viewLifeContainer" class="mt-6 p-5 brutalist-border bg-[#101010] hidden">
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4 pb-3 border-b border-[#262626]">
-                    <div class="flex items-center space-x-2">
-                        <img src="./brand/icon-life.svg" class="w-3 h-6 object-contain" alt="라이프">
-                        <h3 class="font-cafe24 text-xl text-[#ef321f]">❤️ 세상의 모든 라이프 50개 지도</h3>
-                    </div>
-                    <div class="flex items-center space-x-2 font-mono text-xs">
-                        <span>블루: <span id="lifeMapBlue">21</span>개</span>
-                        <span>화이트: <span id="lifeMapWhite">10</span>개</span>
-                        <span>레드: <span id="lifeMapRed">6</span>개</span>
-                        <span>소모: <span id="lifeMapUsed">10</span>개</span>
-                    </div>
-                </div>
-                <div id="lifeCapsuleMatrix" class="grid grid-cols-10 gap-x-2 gap-y-3 p-4 bg-[#080808] border border-[#222] justify-items-center">
-                    <!-- Injected by JS -->
-                </div>
-            </div>
-
-            <!-- View Mode Switcher Buttons -->
-            <div class="mt-4 flex items-center justify-end space-x-2 font-mono text-xs">
-                <span class="text-neutral-400">지도 보기:</span>
-                <button id="tabModeTeams" class="tab-btn active px-2.5 py-1 border border-[#333] bg-[#181818] text-white">
-                    👥 4개 팀 창고
-                </button>
-                <button id="tabModeJewels" class="tab-btn px-2.5 py-1 border border-[#333] bg-[#181818] text-neutral-400 hover:text-white">
-                    💎 보석 200개 바둑판
-                </button>
-                <button id="tabModeLife" class="tab-btn px-2.5 py-1 border border-[#333] bg-[#181818] text-neutral-400 hover:text-white">
-                    ❤️ 라이프 50개 캡슐
-                </button>
-            </div>
-
-            <!-- ★ TOY BOX: ONE-CLICK INTERACTIVE SIMULATOR (원클릭 장난감 놀이터) -->
-            <div class="mt-6 p-5 brutalist-border bg-[#101010] border-t-2 !border-t-amber-400">
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-3 pb-2 border-b border-[#262626]">
-                    <div class="flex items-center space-x-2 font-mono text-xs font-bold text-amber-300">
-                        <span class="text-lg">🕹️</span>
-                        <span>내 맘대로 만져보는 장난감 버튼 (누르면 위 숫자가 바로 바뀌어요!)</span>
-                    </div>
-                    <span class="text-[11px] text-neutral-500 font-mono">언제든 D-2 버튼 누르면 원래대로 돌아와요</span>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 font-mono text-xs">
-                    <!-- Action 1: White buys Life -->
-                    <button onclick="board.toyAction('BUY_LIFE')" class="p-3 bg-[#151515] hover:bg-[#202020] border border-[#333] hover:border-[#1646f5] text-left transition-all group">
-                        <div class="text-[#3898ec] font-bold group-hover:translate-x-0.5 transition-transform flex items-center">
-                            <span class="mr-1.5">🤝</span>
-                            <span>화이트가 라이프 1개 사기 (20💎)</span>
-                        </div>
-                        <div class="text-neutral-400 text-[11px] mt-1 font-sans">화이트: 보석 -20개 ➔ 라이프 +1개 충전!</div>
-                    </button>
-
-                    <!-- Action 2: Red trades credit -->
-                    <button onclick="board.toyAction('TRADE_CREDIT')" class="p-3 bg-[#151515] hover:bg-[#202020] border border-[#333] hover:border-amber-400 text-left transition-all group">
-                        <div class="text-amber-400 font-bold group-hover:translate-x-0.5 transition-transform flex items-center">
-                            <span class="mr-1.5">⚡</span>
-                            <span>레드가 크레딧 주고 라이프 받기 (10⚡)</span>
-                        </div>
-                        <div class="text-neutral-400 text-[11px] mt-1 font-sans">레드: 크레딧 -10개 ➔ 라이프 +1개 획득!</div>
-                    </button>
-
-                    <!-- Action 3: War Outbreak -->
-                    <button onclick="board.toyAction('WAR_OUTBREAK')" class="p-3 bg-[#241010] hover:bg-[#331414] border border-[#ef321f]/60 hover:border-[#ef321f] text-left transition-all group">
-                        <div class="text-[#ef321f] font-bold group-hover:translate-x-0.5 transition-transform flex items-center">
-                            <span class="mr-1.5">💣</span>
-                            <span>가격 불만! 쾅! 전쟁 선포! (-15💎)</span>
-                        </div>
-                        <div class="text-neutral-300 text-[11px] mt-1 font-sans">15보석 소멸 & 상대 창고 50% 털기!</div>
-                    </button>
-
-                    <!-- Action 4: Buy Grenade -->
-                    <button onclick="board.toyAction('BUY_GRENADE')" class="p-3 bg-[#151515] hover:bg-[#202020] border border-[#333] hover:border-amber-400 text-left transition-all group">
-                        <div class="text-amber-300 font-bold group-hover:translate-x-0.5 transition-transform flex items-center">
-                            <span class="mr-1.5">🛒</span>
-                            <span>블랙 상점에서 수류탄 사기 (30💎)</span>
-                        </div>
-                        <div class="text-neutral-400 text-[11px] mt-1 font-sans">보석 -30개 ➔ 블랙 아저씨 지갑으로 쏙!</div>
-                    </button>
-
-                    <!-- Action 5: Buy Food -->
-                    <button onclick="board.toyAction('BUY_FOOD')" class="p-3 bg-[#151515] hover:bg-[#202020] border border-[#333] hover:border-emerald-400 text-left transition-all group">
-                        <div class="text-emerald-400 font-bold group-hover:translate-x-0.5 transition-transform flex items-center">
-                            <span class="mr-1.5">🍚</span>
-                            <span>맛있는 밥 한 끼 사먹기 (1💎)</span>
-                        </div>
-                        <div class="text-neutral-400 text-[11px] mt-1 font-sans">1보석 내고 배부르게 먹기!</div>
-                    </button>
-
-                    <!-- Action 6: Reset to Day 2 -->
-                    <button onclick="board.loadPreset(2)" class="p-3 bg-[#101010] hover:bg-[#1a1a1a] border border-[#444] text-left transition-all group">
-                        <div class="text-neutral-300 font-bold group-hover:translate-x-0.5 transition-transform flex items-center">
-                            <span class="mr-1.5">🔄</span>
-                            <span>원래 실측 상태로 되돌리기</span>
-                        </div>
-                        <div class="text-neutral-500 text-[11px] mt-1 font-sans">2일차 공식 실측 데이터로 리셋</div>
-                    </button>
-                </div>
-
-                <!-- Action Log Console -->
-                <div class="mt-4 pt-3 border-t border-[#262626]">
-                    <div class="flex items-center justify-between text-[11px] font-mono text-neutral-400 mb-1.5">
-                        <span>📢 방금 일어난 일:</span>
-                    </div>
-                    <div id="boardActionLogs" class="p-2.5 h-20 overflow-y-auto space-y-1 font-mono text-[11px] bg-[#0c0c0c] border border-[#222]">
-                        <div class="text-neutral-400">• 장난감 버튼을 누르면 여기에 알림이 떠요!</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION 02: 3 CORE ITEMS & BLACK MART -->
-    <section id="currencies" class="py-12 lg:py-16 bg-[#0a0a0a] border-b border-[#262626]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="section-label">
-                <span>SECTION 02</span>
-                <b>3가지 필수 재화 상세 & 비밀 상점</b>
-            </div>
-
-            <div class="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-4">
-                <div class="max-w-3xl">
-                    <h2 class="font-cafe24 text-3xl sm:text-4xl text-[#f0eee7] tracking-tight">
-                        재화 알아보기 & 3대 아이템 설명서
-                    </h2>
-                    <p class="mt-2 text-neutral-400 text-sm leading-relaxed">
-                        초기 보석 200개 = 2억 원(1개 100만 원!), 찍어낼 수 있는 최대 수량, 유통 흐름, 전쟁 선포 시 소모량(15💎), 라이프·크레딧 세부 규칙을 탐색하세요.
-                    </p>
-                </div>
-                <a href="currencies.html" class="px-4 py-2.5 bg-amber-500 hover:bg-amber-400 text-black font-mono text-xs font-bold transition-all shrink-0 flex items-center shadow-lg rounded-xs">
-                    <i data-lucide="external-link" class="w-4 h-4 mr-1.5"></i>
-                    <span>일자별 세부 장부 & 가치 계산기 열기 ➔</span>
-                </a>
-            </div>
-
-            <!-- Callout to dedicated currencies.html page -->
-            <div class="mt-6 p-4 bg-[#141414] border-2 border-amber-500/50 brutalist-border flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
-                <div class="flex items-center space-x-3">
-                    <span class="text-2xl shrink-0">📊</span>
-                    <div>
-                        <div class="font-cafe24 text-lg text-amber-300">재화 세부 분석 & 8박 9일 일자별 장부 (D-0 ~ D-9)</div>
-                        <div class="font-sans text-xs text-neutral-300 mt-0.5">
-                            보석 수량별 가치 시뮬레이터, 화이트 1일 최대 200개 발행 한도, 전쟁세 15보석 소멸, 라이프 50개 한도 및 일자별 팀 보유량 대조표를 확인하세요.
-                        </div>
-                    </div>
-                </div>
-                <a href="currencies.html" class="px-3 py-1.5 bg-[#202020] hover:bg-[#2a2a2a] border border-amber-400 text-amber-300 font-mono text-xs font-bold transition-all shrink-0">
-                    장부 확인하기 ➔
-                </a>
-            </div>
-
-            <!-- 3 Simple Item Cards -->
-            <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-5">
-                <!-- 1. Jewel Card -->
-                <div class="brutalist-border bg-[#121212] p-5 flex flex-col justify-between hover:border-amber-400 transition-colors">
-                    <div>
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-2.5">
-                                <img src="./brand/icon-jewel.svg" class="w-8 h-8 object-contain" alt="보석">
-                                <div>
-                                    <h3 class="font-cafe24 text-2xl text-[#f0eee7]">💎 보석 (돈)</h3>
-                                    <span class="text-amber-400 font-mono text-xs font-bold">1개 = 약 100만 원</span>
-                                </div>
-                            </div>
-                            <span class="text-neutral-500 font-mono text-xs">총 200개</span>
-                        </div>
-                        <div class="mt-4 space-y-2 text-xs font-sans text-neutral-300">
-                            <div class="flex items-center space-x-2">
-                                <span class="text-emerald-400 font-bold">👑 발행 한도:</span>
-                                <span>화이트 독점 (1일 최대 200개 추가 발행 가능)</span>
-                            </div>
-                            <div class="flex items-center space-x-2">
-                                <span class="text-emerald-400 font-bold">💣 전쟁 소모:</span>
-                                <span>1회 선포 시 15보석 영구 소멸 (상금 1,500만 원 감액)</span>
-                            </div>
-                            <div class="flex items-center space-x-2">
-                                <span class="text-emerald-400 font-bold">📈 수량별 가치:</span>
-                                <span>200개(100만 원) ➔ 300개(66만 원) ➔ 400개(50만 원)</span>
-                            </div>
-                            <div class="flex items-center space-x-2">
-                                <span class="text-emerald-400 font-bold">💰 최종 환전:</span>
-                                <span>입주 종료 시 남은 2억 원 상금을 보석 수대로 분배</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-[#222] text-[11px] text-neutral-500 font-mono">
-                        💡 보석을 많이 모아 살아남으면 1등 부자가 돼요!
-                    </div>
-                </div>
-
-                <!-- 2. Life Card -->
-                <div class="brutalist-border bg-[#121212] p-5 flex flex-col justify-between border-t-2 !border-t-[#ef321f] hover:border-[#ef321f] transition-colors">
-                    <div>
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-2.5">
-                                <img src="./brand/icon-life.svg" class="w-4 h-8 object-contain" alt="라이프">
-                                <div>
-                                    <h3 class="font-cafe24 text-2xl text-[#ef321f]">❤️ 라이프 (생존권)</h3>
-                                    <span class="text-[#ef321f] font-mono text-xs font-bold">매일 밤 1개씩 제출</span>
-                                </div>
-                            </div>
-                            <span class="text-neutral-500 font-mono text-xs">상한 50개</span>
-                        </div>
-                        <div class="mt-4 space-y-2 text-xs font-sans text-neutral-300">
-                            <div class="flex items-center space-x-2">
-                                <span class="text-[#ef321f] font-bold">🏥 만드는 팀:</span>
-                                <span>블루 팀만 혼자 만들 수 있어요</span>
-                            </div>
-                            <div class="flex items-center space-x-2">
-                                <span class="text-[#ef321f] font-bold">⏰ 못 내면?:</span>
-                                <span>즉시 탈락! 짐 싸서 집에 가야 해요</span>
-                            </div>
-                            <div class="flex items-center space-x-2">
-                                <span class="text-[#ef321f] font-bold">⚠️ 무서운 비밀:</span>
-                                <span>세상에 딱 50개뿐이라 나중에 모자라요!</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-[#222] text-[11px] text-neutral-500 font-mono">
-                        💀 블루 팀이 라이프를 비싸게 팔면 다른 팀이 화가 나요!
-                    </div>
-                </div>
-
-                <!-- 3. Credit Card -->
-                <div class="brutalist-border bg-[#121212] p-5 flex flex-col justify-between hover:border-amber-400 transition-colors">
-                    <div>
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-2.5">
-                                <img src="./brand/icon-credit.svg" class="w-5 h-8 object-contain" alt="크레딧">
-                                <div>
-                                    <h3 class="font-cafe24 text-2xl text-amber-400">⚡ 크레딧 (생산 자원)</h3>
-                                    <span class="text-amber-400 font-mono text-xs font-bold">물건/라이프 생산 연료</span>
-                                </div>
-                            </div>
-                            <span class="text-neutral-500 font-mono text-xs">초기 36개</span>
-                        </div>
-                        <div class="mt-4 space-y-2 text-xs font-sans text-neutral-300">
-                            <div class="flex items-center space-x-2">
-                                <span class="text-amber-400 font-bold">🏭 만드는 팀:</span>
-                                <span>레드 팀이 생산 공장에서 펑펑 만들어요</span>
-                            </div>
-                            <div class="flex items-center space-x-2">
-                                <span class="text-amber-400 font-bold">🔋 어디에 써요?:</span>
-                                <span>블루가 라이프 채굴할 때 연료로 써요</span>
-                            </div>
-                            <div class="flex items-center space-x-2">
-                                <span class="text-amber-400 font-bold">🚨 주의할 점:</span>
-                                <span>매연을 너무 뿜으면 다 같이 망해요!</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-[#222] text-[11px] text-neutral-500 font-mono">
-                        ⚡ 레드는 크레딧을 라이프나 보석으로 바꿔서 살아남아요!
-                    </div>
-                </div>
-            </div>
-
-            <!-- Black Mart Visual Weapon Cards (Bite-sized) -->
-            <div class="mt-6 p-5 brutalist-border bg-[#101010]">
-                <div class="flex items-center justify-between pb-3 border-b border-[#262626]">
-                    <div class="flex items-center space-x-2.5">
-                        <span class="text-2xl">🛒</span>
-                        <div>
-                            <h3 class="font-cafe24 text-xl text-emerald-400">블랙 아저씨의 비밀 상점</h3>
-                            <span class="text-xs text-neutral-400 font-sans">밥과 무기를 독점 판매하는 중립 무기상인</span>
-                        </div>
-                    </div>
-                    <span class="px-2 py-0.5 bg-[#181818] border border-[#333] text-neutral-400 font-mono text-xs font-bold">
-                        1일차 운영비 무료
+                <div class="flex items-center space-x-2">
+                    <span id="boardUnitValBadge" class="px-3 py-1.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-lg text-xs font-bold">
+                        💎 보석 1개 = 1,000,000 원
                     </span>
+                    <a href="currencies.html" class="px-3 py-1.5 bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 rounded-lg text-xs font-semibold transition-all">
+                        재화 장부 보기 →
+                    </a>
+                </div>
+            </div>
+
+            <!-- 9-Day Timeline Stepper (Clean Light Tabs) -->
+            <div id="timeline-stepper" class="mb-6 p-4 bg-white rounded-2xl border border-slate-200 shadow-xs">
+                <div class="flex justify-between items-center mb-3">
+                    <span class="text-xs font-bold text-slate-700 flex items-center gap-1.5">
+                        <i data-lucide="calendar" class="w-4 h-4 text-blue-600"></i>
+                        <span>일자별 타임라인 선택 (D-0 ~ D-9)</span>
+                    </span>
+                    <span class="text-xs text-slate-400 font-medium">버튼을 클릭하여 일자별 상황을 확인하세요</span>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-5 lg:grid-cols-10 gap-2 text-xs font-medium">
+                    <button onclick="board.loadPreset(0)" id="tbtn-0" class="timeline-btn p-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-center transition-all">
+                        <div class="text-[10px] text-slate-400">D-0</div>
+                        <div class="font-bold">입주 시작</div>
+                    </button>
+                    <button onclick="board.loadPreset(1)" id="tbtn-1" class="timeline-btn p-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-center transition-all">
+                        <div class="text-[10px] text-slate-400">D-1</div>
+                        <div class="font-bold">첫 평화거래</div>
+                    </button>
+                    <button onclick="board.loadPreset(2)" id="tbtn-2" class="timeline-btn p-2 rounded-xl border-2 border-blue-600 bg-blue-50 text-blue-700 text-center font-bold shadow-xs">
+                        <div class="text-[10px] text-blue-500 font-bold">D-2</div>
+                        <div class="font-bold">소금 선출</div>
+                    </button>
+                    <button onclick="board.loadPreset(3)" id="tbtn-3" class="timeline-btn p-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-center transition-all">
+                        <div class="text-[10px] text-slate-400">D-3</div>
+                        <div class="font-bold">가격 폭등</div>
+                    </button>
+                    <button onclick="board.loadPreset(4)" id="tbtn-4" class="timeline-btn p-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-center transition-all">
+                        <div class="text-[10px] text-slate-400">D-4</div>
+                        <div class="font-bold">군비 경쟁</div>
+                    </button>
+                    <button onclick="board.loadPreset(5)" id="tbtn-5" class="timeline-btn p-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-center transition-all">
+                        <div class="text-[10px] text-slate-400">D-5</div>
+                        <div class="font-bold text-red-600">쾅! 전쟁</div>
+                    </button>
+                    <button onclick="board.loadPreset(6)" id="tbtn-6" class="timeline-btn p-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-center transition-all">
+                        <div class="text-[10px] text-slate-400">D-6</div>
+                        <div class="font-bold">매연 위기</div>
+                    </button>
+                    <button onclick="board.loadPreset(7)" id="tbtn-7" class="timeline-btn p-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-center transition-all">
+                        <div class="text-[10px] text-slate-400">D-7</div>
+                        <div class="font-bold text-red-600">생존 결핍</div>
+                    </button>
+                    <button onclick="board.loadPreset(8)" id="tbtn-8" class="timeline-btn p-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-center transition-all">
+                        <div class="text-[10px] text-slate-400">D-8</div>
+                        <div class="font-bold">최후 1인</div>
+                    </button>
+                    <button onclick="board.loadPreset(9)" id="tbtn-9" class="timeline-btn p-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-center transition-all">
+                        <div class="text-[10px] text-slate-400">D-9</div>
+                        <div class="font-bold text-amber-600">최종 상금</div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Day Story Callout Bubble (Friendly & Clear) -->
+            <div id="boardStoryBalloon" class="mb-8 p-5 bg-white rounded-2xl border-l-4 border-amber-500 border border-slate-200 shadow-xs flex items-start space-x-3.5">
+                <span id="storyEmoji" class="text-3xl shrink-0">👑</span>
+                <div>
+                    <div class="flex items-center space-x-2">
+                        <span id="storyBadge" class="px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 text-xs font-bold">D-2 상황</span>
+                        <h3 id="storyTitle" class="text-base font-bold text-slate-900">블루 팀 새 리더 소금 선출!</h3>
+                    </div>
+                    <p id="storyContent" class="text-sm text-slate-600 mt-1.5 leading-relaxed">
+                        블루 팀 리더로 소금(임지은) 님이 선출되었습니다! 블루가 라이프 21개를 비축하고 가격을 올리기 시작하자 다른 팀들의 불안이 커집니다.
+                    </p>
+                </div>
+            </div>
+
+            <!-- ★ PRIMARY 3 PLAYER TEAMS WAREHOUSE GRID (3 COLUMNS) -->
+            <div class="mb-3 flex items-center justify-between">
+                <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wide flex items-center gap-1.5">
+                    <i data-lucide="users" class="w-4 h-4 text-blue-600"></i>
+                    <span>3개 거주민 팀 창고 현황 (총 12인)</span>
+                </h3>
+                <span class="text-xs text-slate-500 font-medium">매일 밤 1인당 라이프 1개 제출 의무</span>
+            </div>
+
+            <div id="viewTeamsContainer" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <!-- Dynamically injected by JS: WHITE, BLUE, RED cards -->
+            </div>
+
+            <!-- ★ SPECIAL STANDALONE DOCK: BLACK MART (특수 예외 구역: 비밀 무기 & 식료품 상점) -->
+            <div class="mb-8 p-6 bg-gradient-to-r from-slate-900 via-zinc-900 to-slate-900 text-white rounded-3xl shadow-lg border-2 border-amber-400/80">
+                <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 pb-4 border-b border-zinc-700">
+                    <div class="flex items-center space-x-4">
+                        <div class="relative">
+                            <img src="./brand/figure-black-team.png" class="w-14 h-14 rounded-2xl object-cover border-2 border-amber-400 bg-zinc-800" alt="정재호">
+                            <span class="absolute -bottom-1 -right-1 bg-amber-400 text-black text-[10px] font-black px-1.5 py-0.2 rounded-full">상점</span>
+                        </div>
+                        <div>
+                            <div class="flex items-center space-x-2">
+                                <span class="px-2 py-0.5 rounded-full bg-amber-400/20 text-amber-300 border border-amber-400/40 text-[11px] font-bold">
+                                    ⚡ 특수 예외 구역
+                                </span>
+                                <span class="text-xs text-zinc-400 font-medium">1인 독방 · 비밀 상인</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mt-0.5">
+                                블랙 마트 & 비밀 무기 거래소 (벡터 · 정재호)
+                            </h3>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center space-x-3 text-xs bg-zinc-800/80 px-4 py-2 rounded-xl border border-zinc-700">
+                        <div class="text-zinc-300">
+                            특권: <span class="text-amber-300 font-bold">1일차 라이프 소모 면제</span>
+                        </div>
+                        <span class="text-zinc-600">|</span>
+                        <div class="text-zinc-300">
+                            수수료: <span class="text-amber-300 font-bold">전쟁 선포세 15💎 독식</span>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-3 font-mono text-xs">
-                    <!-- Grocery -->
-                    <div class="p-3 bg-[#151515] border border-[#333] flex flex-col items-center text-center">
-                        <span class="text-3xl mb-1">🍚</span>
-                        <div class="font-bold text-[#f0eee7]">맛있는 밥 한 끼</div>
-                        <div class="text-amber-400 font-bold mt-1">1 보석</div>
-                        <div class="text-[10px] text-neutral-500 mt-0.5">식료품 키트</div>
+                <div class="mt-4 grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div class="p-3.5 bg-zinc-800/60 rounded-xl border border-zinc-700/80">
+                        <div class="text-xs text-zinc-400">금고 보관 보석</div>
+                        <div class="text-2xl font-extrabold text-amber-400 mt-1" id="blackMartJewels">
+                            1.0 개
+                        </div>
+                        <div class="text-[11px] text-zinc-400 mt-0.5">전쟁세 & 무기 판매 대금 축적</div>
                     </div>
 
-                    <!-- C-Tier -->
-                    <div class="p-3 bg-[#151515] border border-[#333] flex flex-col items-center text-center">
-                        <img src="./brand/weapon-tier-c.png" class="h-16 object-contain mb-1" alt="C급 권총">
-                        <div class="font-bold text-neutral-300">C급 권총</div>
-                        <div class="text-amber-400 font-bold mt-0.5">10 보석</div>
-                        <div class="text-[10px] text-neutral-400">화력: 라이프 1개 소멸</div>
+                    <div class="p-3.5 bg-zinc-800/60 rounded-xl border border-zinc-700/80">
+                        <div class="text-xs text-zinc-400">판매 중인 무기 카탈로그</div>
+                        <div class="text-sm font-bold text-white mt-1">A급(30💎) / B급(20💎) / C급(10💎)</div>
+                        <div class="text-[11px] text-zinc-400 mt-0.5">선포권: 15💎 (총상금 영구 차감)</div>
                     </div>
 
-                    <!-- B-Tier -->
-                    <div class="p-3 bg-[#151515] border border-[#333] flex flex-col items-center text-center">
-                        <img src="./brand/weapon-tier-b.png" class="h-16 object-contain mb-1" alt="B급 소총">
-                        <div class="font-bold text-[#f0eee7]">B급 소총</div>
-                        <div class="text-amber-400 font-bold mt-0.5">20 보석</div>
-                        <div class="text-[10px] text-[#3898ec]">화력: 라이프 2개 소멸</div>
+                    <div class="p-3.5 bg-zinc-800/60 rounded-xl border border-zinc-700/80">
+                        <div class="text-xs text-zinc-400">생존 상태</div>
+                        <div class="text-sm font-bold text-emerald-400 mt-1">1명 무조건 결승 진출</div>
+                        <div class="text-[11px] text-zinc-400 mt-0.5">최후 1인 생존 예외 규칙 적용</div>
                     </div>
 
-                    <!-- A-Tier -->
-                    <div class="p-3 bg-[#151515] border border-amber-500/40 flex flex-col items-center text-center">
-                        <img src="./brand/weapon-tier-a.png" class="h-16 object-contain mb-1" alt="A급 수류탄">
-                        <div class="font-bold text-amber-300">A급 수류탄 💣</div>
-                        <div class="text-amber-400 font-bold mt-0.5">30 보석</div>
-                        <div class="text-[10px] text-amber-300 font-bold">화력: 라이프 4개 소멸</div>
+                    <div class="p-3.5 bg-zinc-800/60 rounded-xl border border-zinc-700/80 flex flex-col justify-between">
+                        <div class="text-xs text-zinc-400">역할 및 성격</div>
+                        <p class="text-xs text-zinc-300 leading-tight mt-1">
+                            "싸움은 3개 팀이 하고, 돈은 무기와 밥을 판 상점 아저씨가 법니다!"
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Interactive Action Panel (Hands-on Learning) -->
+            <div class="mb-8 p-5 bg-white rounded-2xl border border-slate-200 shadow-xs">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4">
+                    <div>
+                        <h4 class="text-sm font-bold text-slate-900 flex items-center gap-1.5">
+                            <i data-lucide="play-circle" class="w-4 h-4 text-blue-600"></i>
+                            <span>직접 눌러보는 실시간 거래 & 전쟁 시뮬레이터</span>
+                        </h4>
+                        <p class="text-xs text-slate-500 mt-0.5">
+                            버튼을 누르면 팀 간 자원이 실제로 이동하고 상금 가치가 재계산됩니다.
+                        </p>
+                    </div>
+                    <span class="text-[11px] text-slate-400 font-medium">자유롭게 조작해보세요!</span>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
+                    <button onclick="board.trade('WHITE_BUY_LIFE')" class="p-3 rounded-xl border border-blue-200 bg-blue-50/60 hover:bg-blue-100 text-blue-800 text-left transition-all">
+                        <div class="font-bold text-xs">🤝 1. 평화 거래하기</div>
+                        <div class="text-[11px] text-slate-600 mt-0.5">화이트가 블루에게 보석 20개 주고 라이프 1개 매입</div>
+                    </button>
+
+                    <button onclick="board.trade('DECLARE_WAR')" class="p-3 rounded-xl border border-red-200 bg-red-50/60 hover:bg-red-100 text-red-800 text-left transition-all">
+                        <div class="font-bold text-xs">💣 2. 쾅! 전쟁 선포하기</div>
+                        <div class="text-[11px] text-slate-600 mt-0.5">15보석 소각(상금 감액) & 블루 자원 50% 강탈!</div>
+                    </button>
+
+                    <button onclick="board.trade('BUY_WEAPON')" class="p-3 rounded-xl border border-amber-200 bg-amber-50/60 hover:bg-amber-100 text-amber-800 text-left transition-all">
+                        <div class="font-bold text-xs">⚔️ 3. 블랙 마트 무기 구매</div>
+                        <div class="text-[11px] text-slate-600 mt-0.5">화이트가 블랙에게 30보석 주고 A급 수류탄 구입</div>
+                    </button>
+
+                    <button onclick="board.loadPreset(board.currentDay)" class="p-3 rounded-xl border border-slate-200 bg-slate-100 hover:bg-slate-200 text-slate-700 text-left transition-all">
+                        <div class="font-bold text-xs">🔄 상태 초기화</div>
+                        <div class="text-[11px] text-slate-500 mt-0.5">현재 선택된 일자의 기본 데이터로 복원</div>
+                    </button>
+                </div>
+
+                <!-- Event Action Logs -->
+                <div class="mt-4 p-3 bg-slate-50 rounded-xl border border-slate-200">
+                    <div class="text-[11px] font-bold text-slate-500 mb-1.5 flex items-center gap-1">
+                        <i data-lucide="list" class="w-3.5 h-3.5"></i>
+                        <span>실시간 액션 기록</span>
+                    </div>
+                    <div id="boardActionLogs" class="text-xs text-slate-700 space-y-1 max-h-24 overflow-y-auto font-sans">
+                        <div class="text-slate-400">• 버튼을 클릭하여 거래나 전쟁을 실행해보세요!</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Visual Asset Maps (Jewel & Life Dot Matrix) -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- 200 Jewels Token Matrix -->
+                <div class="p-5 bg-white rounded-2xl border border-slate-200 shadow-xs">
+                    <div class="flex justify-between items-center mb-3">
+                        <div>
+                            <h4 class="text-sm font-bold text-slate-900 flex items-center gap-1.5">
+                                <img src="./brand/icon-jewel.svg" class="w-4 h-4 object-contain" alt="보석">
+                                <span>200개 보석 분배 지도</span>
+                            </h4>
+                            <p class="text-xs text-slate-500 mt-0.5">보석 1개 = 총상금의 1/200 지분 (약 100만 원)</p>
+                        </div>
+                        <span class="text-xs font-bold text-blue-600">총 200개</span>
+                    </div>
+
+                    <!-- Matrix Legend -->
+                    <div class="flex flex-wrap items-center gap-3 text-xs mb-3 font-medium">
+                        <div class="flex items-center space-x-1.5">
+                            <span class="w-3 h-3 rounded-sm bg-slate-300 border border-slate-400"></span>
+                            <span class="text-slate-600">화이트 (<span id="jewelPctWhite">45%</span>)</span>
+                        </div>
+                        <div class="flex items-center space-x-1.5">
+                            <span class="w-3 h-3 rounded-sm bg-blue-600"></span>
+                            <span class="text-slate-600">블루 (<span id="jewelPctBlue">30%</span>)</span>
+                        </div>
+                        <div class="flex items-center space-x-1.5">
+                            <span class="w-3 h-3 rounded-sm bg-red-600"></span>
+                            <span class="text-slate-600">레드 (<span id="jewelPctRed">25%</span>)</span>
+                        </div>
+                        <div class="flex items-center space-x-1.5">
+                            <span class="w-3 h-3 rounded-sm bg-zinc-800"></span>
+                            <span class="text-slate-600">블랙 상점 (<span id="jewelPctBlack">0%</span>)</span>
+                        </div>
+                    </div>
+
+                    <div id="jewelTokenMatrix" class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex flex-wrap gap-1 max-h-48 overflow-y-auto">
+                        <!-- Dynamically populated 200 tokens -->
+                    </div>
+                </div>
+
+                <!-- 50 Life Capsule Grid -->
+                <div class="p-5 bg-white rounded-2xl border border-slate-200 shadow-xs">
+                    <div class="flex justify-between items-center mb-3">
+                        <div>
+                            <h4 class="text-sm font-bold text-slate-900 flex items-center gap-1.5">
+                                <img src="./brand/icon-life.svg" class="w-3 h-4 object-contain" alt="라이프">
+                                <span>50개 라이프 캡슐 지도</span>
+                            </h4>
+                            <p class="text-xs text-slate-500 mt-0.5">세상에 단 50개만 존재하는 생명 캡슐</p>
+                        </div>
+                        <span class="text-xs font-bold text-red-600">총 50개 한도</span>
+                    </div>
+
+                    <!-- Capsule Legend -->
+                    <div class="flex flex-wrap items-center gap-3 text-xs mb-3 font-medium">
+                        <div class="flex items-center space-x-1.5">
+                            <span class="w-2.5 h-4 rounded-xs bg-blue-600"></span>
+                            <span class="text-slate-600">블루 보유 (<span id="lifeMapBlue">21</span>)</span>
+                        </div>
+                        <div class="flex items-center space-x-1.5">
+                            <span class="w-2.5 h-4 rounded-xs bg-slate-300 border border-slate-400"></span>
+                            <span class="text-slate-600">화이트 보유 (<span id="lifeMapWhite">10</span>)</span>
+                        </div>
+                        <div class="flex items-center space-x-1.5">
+                            <span class="w-2.5 h-4 rounded-xs bg-red-600"></span>
+                            <span class="text-slate-600">레드 보유 (<span id="lifeMapRed">6</span>)</span>
+                        </div>
+                        <div class="flex items-center space-x-1.5">
+                            <span class="w-2.5 h-4 rounded-xs bg-slate-200"></span>
+                            <span class="text-slate-400">소모/미생산</span>
+                        </div>
+                    </div>
+
+                    <div id="lifeCapsuleMatrix" class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex flex-wrap gap-2 items-center min-h-[120px]">
+                        <!-- Dynamically populated 50 capsules -->
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 03: WARTIME ACTIVITY & WEAPONS SYSTEM -->
-    <section id="marketwar" class="py-12 lg:py-16 bg-[#080808] border-b border-[#262626]">
+    <!-- SECTION 02: 재화 핵심 요약 & 세부 도감 링크 -->
+    <section id="currencies" class="py-12 lg:py-16 bg-white border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="section-label">
-                <span>SECTION 03</span>
-                <b>전쟁 룰 & 무기 설명서</b>
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-3 mb-8">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 text-xs font-bold mb-2">
+                        SECTION 02
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
+                        3대 재화의 역할과 흐름
+                    </h2>
+                    <p class="text-slate-500 text-xs sm:text-sm mt-1">
+                        보석, 라이프, 크레딧이 마을 안에서 어떻게 순환하는지 핵심만 정리했습니다.
+                    </p>
+                </div>
+                <a href="currencies.html" class="inline-flex items-center gap-2 px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold rounded-xl shadow-xs transition-all">
+                    <span>재화 상세 도감 & 가치 계산기 보기</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
             </div>
 
-            <div class="max-w-3xl">
-                <!-- WARNING Banner -->
-                <div class="p-3.5 bg-[#1a0c0c] border border-[#ef321f]/50 flex items-center space-x-3 mb-4">
-                    <img src="./brand/icon-war-warning.png" class="w-8 h-6 object-contain" alt="WARNING">
-                    <div class="font-mono text-xs text-[#ef321f] font-bold">
-                        "라이프 가격이 맘에 안 들면? 쾅! 💣 전쟁을 선포할 거야!"
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Jewel Card -->
+                <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-xs hover:shadow-md transition-all border-t-4 !border-t-emerald-500">
+                    <div class="flex items-center space-x-2 text-emerald-600 text-xs font-bold">
+                        <img src="./brand/icon-jewel.svg" class="w-4 h-4 object-contain" alt="보석">
+                        <span>보석 (JEWEL) — 진짜 상금 화폐</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mt-2">초기 200개 = 2억 원</h3>
+                    <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                        게임 마지막 날 남은 2억 원을 보석 지분율대로 나눠 갖습니다. 화이트 팀이 하루 최대 200개까지 추가 발행할 수 있지만, 많이 찍어낼수록 1개당 원화 가치가 떨어집니다.
+                    </p>
+                    <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] text-slate-500 font-medium">
+                        💡 <strong>전쟁 1회 선포 시:</strong> 15보석(약 1,500만 원)이 국고에서 영구 소멸됩니다.
                     </div>
                 </div>
 
-                <h2 class="font-cafe24 text-3xl sm:text-4xl text-[#f0eee7] tracking-tight">
-                    전쟁은 어떻게 일어날까? (전시 룰 4가지)
+                <!-- Life Card -->
+                <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-xs hover:shadow-md transition-all border-t-4 !border-t-red-600">
+                    <div class="flex items-center space-x-2 text-red-600 text-xs font-bold">
+                        <img src="./brand/icon-life.svg" class="w-3 h-4 object-contain" alt="라이프">
+                        <span>라이프 (LIFE) — 생존 목숨</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mt-2">총 50개 절대 한도</h3>
+                    <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                        매일 밤 1인당 1개씩 반드시 제출해야 하며, 못 내면 즉시 탈락합니다. 블루 팀만 지하 매장량(50개 한도)을 알고 독점 생산하여 시장 가격을 좌지우지합니다.
+                    </p>
+                    <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] text-slate-500 font-medium">
+                        💡 <strong>생존 예외 규칙:</strong> 각 팀의 최후 1명은 라이프가 0개여도 영구 생존합니다.
+                    </div>
+                </div>
+
+                <!-- Credit Card -->
+                <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-xs hover:shadow-md transition-all border-t-4 !border-t-amber-500">
+                    <div class="flex items-center space-x-2 text-amber-600 text-xs font-bold">
+                        <img src="./brand/icon-credit.svg" class="w-3.5 h-4 object-contain" alt="크레딧">
+                        <span>크레딧 (CREDIT) — 생산 에너지</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mt-2">환경오염 임계치 50</h3>
+                    <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                        라이프 생산(1개당 2크레딧)과 기술 연구에 사용되는 산업 연료입니다. 레드 팀이 무제한 생산할 수 있지만, 오염 생산을 남발하여 오염도가 50을 넘으면 전 팀의 자원이 30% 파괴됩니다.
+                    </p>
+                    <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] text-slate-500 font-medium">
+                        💡 <strong>청정 vs 오염 생산:</strong> 안전한 청정 생산과 대량의 오염 생산 사이의 딜레마!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 03: 보이지 않는 손과 전쟁 룰 (MARKET & WAR) -->
+    <section id="marketwar" class="py-12 lg:py-16 bg-slate-50 border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-8">
+                <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-red-100 text-red-800 text-xs font-bold mb-2">
+                    SECTION 03
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
+                    보이지 않는 손과 전쟁 룰 💣
                 </h2>
-                <p class="mt-2 text-neutral-400 text-xs sm:text-sm leading-relaxed">
-                    독점자가 라이프를 너무 비싸게 팔면 다른 팀들이 화가 나서 전쟁을 시작해요.
+                <p class="text-slate-500 text-xs sm:text-sm mt-1">
+                    가격을 너무 비싸게 받으면 시장이 붕괴하고, 결국 무력 전쟁이 터집니다!
                 </p>
             </div>
 
-            <!-- 4 War Rule Cards -->
-            <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 font-mono text-xs">
-                <!-- Rule 1 -->
-                <div class="brutalist-border bg-[#101010] p-4 border-t-2 !border-t-[#ef321f]">
-                    <div class="text-[#ef321f] font-bold text-sm">💣 1. 전쟁 선포 (15보석)</div>
-                    <p class="font-sans text-neutral-300 text-xs mt-2 leading-relaxed">
-                        15보석을 내면 전쟁이 시작돼요! 이 15보석은 영구히 사라져서 <strong>전체 상금(2억 원)도 줄어들어요!</strong>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                <!-- Step 1: Monopoly Price Gouging -->
+                <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-xs">
+                    <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-lg mb-3">
+                        1
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900">독점 폭리와 가격 불만</h3>
+                    <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                        블루 팀이 라이프를 독점하고 "라이프 1개에 보석 35개 내놔!"라고 바가지를 씌우면, 화이트와 레드는 생존 비용을 감당할 수 없게 됩니다.
                     </p>
                 </div>
 
-                <!-- Rule 2 -->
-                <div class="brutalist-border bg-[#101010] p-4 border-t-2 !border-t-[#1646f5]">
-                    <div class="text-[#3898ec] font-bold text-sm">🤝 2. 친구와 2:1 동맹</div>
-                    <p class="font-sans text-neutral-300 text-xs mt-2 leading-relaxed">
-                        힘이 모자라면 다른 1개 팀과 손잡고 함께 쳐들어갈 수 있어요!
+                <!-- Step 2: War Declaration -->
+                <div class="p-6 bg-white rounded-2xl border border-red-200 shadow-xs bg-red-50/20">
+                    <div class="w-10 h-10 rounded-xl bg-red-100 text-red-600 flex items-center justify-center font-bold text-lg mb-3">
+                        2
+                    </div>
+                    <h3 class="text-lg font-bold text-red-700">쾅! 공식 전쟁 선포 (15보석)</h3>
+                    <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                        비싼 돈을 주고 사느니 전쟁을 선포하는 게 경제적으로 이득입니다! <strong>15보석을 내고 전쟁을 선포하면, 총상금에서 1,500만 원이 영구 차감</strong>됩니다.
                     </p>
                 </div>
 
-                <!-- Rule 3 -->
-                <div class="brutalist-border bg-[#101010] p-4 border-t-2 !border-t-amber-400">
-                    <div class="text-amber-400 font-bold text-sm">💰 3. 창고 50% 털기!</div>
-                    <p class="font-sans text-neutral-300 text-xs mt-2 leading-relaxed">
-                        전쟁에서 이기면 상대방이 가진 모든 보석, 라이프, 크레딧의 <strong>절반(50%)을 몽땅 뺏어와요!</strong>
-                    </p>
-                </div>
-
-                <!-- Rule 4 -->
-                <div class="brutalist-border bg-[#101010] p-4 border-t-2 !border-t-neutral-500">
-                    <div class="text-neutral-300 font-bold text-sm">🚫 4. 블랙은 싸움 금지!</div>
-                    <p class="font-sans text-neutral-300 text-xs mt-2 leading-relaxed">
-                        상점 아저씨 블랙은 중립이라 전쟁에 나갈 수 없어요. 대신 무기를 팔아서 쏠쏠하게 돈을 벌어요!
+                <!-- Step 3: 50% Looting -->
+                <div class="p-6 bg-white rounded-2xl border border-amber-200 shadow-xs bg-amber-50/20">
+                    <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-bold text-lg mb-3">
+                        3
+                    </div>
+                    <h3 class="text-lg font-bold text-amber-800">승리 시 전리품 50% 강탈</h3>
+                    <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                        전쟁에서 이긴 팀은 패배한 팀 창고의 <strong>모든 보석, 라이프, 크레딧의 50%를 합법적으로 약탈</strong>하여 가져옵니다!
                     </p>
                 </div>
             </div>
 
-            <!-- Weapon Showcase Card -->
-            <div class="mt-6 p-4 brutalist-border bg-[#121212] flex flex-col md:flex-row items-center justify-between gap-4">
-                <div class="flex items-center space-x-3">
-                    <img src="./brand/weapons-official-all.png" class="max-h-24 object-contain rounded border border-[#333]" alt="무기 3종">
-                    <div>
-                        <div class="font-bold text-sm text-[#f0eee7]">공식 3대 전쟁 무기 카드</div>
-                        <div class="text-xs text-neutral-400 mt-0.5">A급(수류탄 30💎) • B급(소총 20💎) • C급(권총 10💎)</div>
+            <!-- Weapons Catalog Grid (Clean Light Cards) -->
+            <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-xs">
+                <h4 class="text-sm font-bold text-slate-900 mb-4 flex items-center gap-1.5">
+                    <i data-lucide="crosshair" class="w-4 h-4 text-red-600"></i>
+                    <span>블랙 마트 판매 무기 카탈로그</span>
+                </h4>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <!-- Weapon A -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 flex items-center space-x-3">
+                        <img src="./brand/weapon-tier-a.png" class="w-12 h-12 object-contain" alt="수류탄">
+                        <div>
+                            <div class="text-xs font-bold text-red-600">A급 무기 (수류탄)</div>
+                            <div class="text-sm font-extrabold text-slate-900 mt-0.5">라이프 4개 즉시 파괴</div>
+                            <div class="text-xs text-slate-500 mt-0.5">가격: 보석 30개</div>
+                        </div>
+                    </div>
+
+                    <!-- Weapon B -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 flex items-center space-x-3">
+                        <img src="./brand/weapon-tier-b.png" class="w-12 h-12 object-contain" alt="소총">
+                        <div>
+                            <div class="text-xs font-bold text-blue-600">B급 무기 (소총)</div>
+                            <div class="text-sm font-extrabold text-slate-900 mt-0.5">라이프 2개 파괴</div>
+                            <div class="text-xs text-slate-500 mt-0.5">가격: 보석 20개</div>
+                        </div>
+                    </div>
+
+                    <!-- Weapon C -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 flex items-center space-x-3">
+                        <img src="./brand/weapon-tier-c.png" class="w-12 h-12 object-contain" alt="권총">
+                        <div>
+                            <div class="text-xs font-bold text-slate-600">C급 무기 (권총)</div>
+                            <div class="text-sm font-extrabold text-slate-900 mt-0.5">라이프 1개 파괴</div>
+                            <div class="text-xs text-slate-500 mt-0.5">가격: 보석 10개</div>
+                        </div>
                     </div>
                 </div>
-                <span class="text-xs text-amber-400 font-mono">블랙 마트에서 언제든 구매 가능</span>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 04: DATA & FINAL RANKING -->
-    <section id="data" class="py-12 lg:py-16 bg-[#080808] border-b border-[#262626]">
+    <!-- SECTION 04: 컴퓨터 시뮬레이션 1,000회 대결 결과 -->
+    <section id="data" class="py-12 lg:py-16 bg-white border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="section-label">
-                <span>SECTION 04</span>
-                <b>컴퓨터 시뮬레이션 1,000회 대결 결과 (전쟁 & 거래 전면 재계산)</b>
+            <div class="mb-6">
+                <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold mb-2">
+                    SECTION 04
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
+                    컴퓨터 시뮬레이션 1,000회 대결 결과 🏆
+                </h2>
+                <p class="text-slate-500 text-xs sm:text-sm mt-1">
+                    전쟁과 시장 거래를 모두 반영하여 1,000번 반복 실행한 실전 최종 결과입니다.
+                </p>
             </div>
-
-            <h2 class="font-cafe24 text-3xl sm:text-4xl text-[#f0eee7] tracking-tight mb-2">
-                🏆 실전 거래와 전쟁을 반영하면 누가 1등일까?
-            </h2>
-            <p class="text-neutral-400 text-xs sm:text-sm mb-6">
-                컴퓨터 알고리즘으로 시장 거래(Trade)와 가격 불만 전쟁(Warfare)을 완전 적용하여 1,000회 반복 시뮬레이션한 최종 실전 결과입니다!
-            </p>
 
             <!-- Recalculation Notice Banner -->
-            <div class="mb-6 p-4 sm:p-5 bg-gradient-to-r from-red-950/40 via-[#181818] to-blue-950/30 border-2 border-[#ef321f]/80 shadow-[0_0_25px_rgba(239,50,31,0.15)]">
-                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 pb-2 border-b border-[#333]">
-                    <div class="flex items-center space-x-3">
-                        <span class="px-2.5 py-1 bg-[#ef321f] text-white font-mono font-bold text-xs uppercase tracking-wider animate-pulse">
+            <div class="mb-8 p-5 bg-gradient-to-r from-red-50 via-slate-50 to-blue-50 rounded-2xl border-2 border-red-300 shadow-xs">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 pb-2.5 border-b border-slate-200">
+                    <div class="flex items-center space-x-2.5">
+                        <span class="px-2.5 py-0.5 bg-red-600 text-white font-bold text-xs rounded-full uppercase tracking-wide">
                             🔥 몬테카를로 재계산 완료
                         </span>
-                        <span class="font-cafe24 text-lg sm:text-xl text-[#f0eee7]">
-                            시장 거래(Trade) & 가격 불만 전쟁(Warfare) 1,000회 실전 반영
+                        <span class="text-base sm:text-lg font-bold text-slate-900">
+                            시장 거래(Trade) & 가격 불만 전쟁(Warfare) 1,000회 전면 반영
                         </span>
                     </div>
-                    <span class="text-xs text-neutral-400 font-mono">2026.09.06 확정 룰 전면 반영</span>
+                    <span class="text-xs text-slate-500">2026.09.06 확정 룰 업데이트</span>
                 </div>
-                <p class="mt-2 text-xs sm:text-sm font-sans text-neutral-300 leading-relaxed">
-                    기존의 단순 계산(전쟁·거래 제외 모델)을 완전히 폐기하고, <strong>화이트의 보석 추가 발행 및 라이프 매입</strong>, <strong>블루의 라이프 독점 폭리</strong>, 이에 반발하여 폭발하는 <strong>가격 불만 전쟁 선포 (15보석 국고 소각 & 50% 자원 강탈)</strong>, 그리고 <strong>블랙 마트 무기 독점 수익</strong>을 1,000회 시뮬레이션으로 정밀 재계산했습니다.
+                <p class="mt-2 text-xs sm:text-sm text-slate-700 leading-relaxed font-normal">
+                    기존의 단순 계산(전쟁·거래 제외 모델)을 폐기하고, <strong>화이트의 보석 추가 발행 및 라이프 매입</strong>, <strong>블루의 라이프 독점 폭리</strong>, 이에 반발해 터지는 <strong>가격 불만 전쟁(15보석 국고 소각 & 자원 50% 강탈)</strong>, 그리고 <strong>블랙 마트의 무기 판매 수수료</strong>를 실전 알고리즘으로 완벽 재계산했습니다.
                 </p>
             </div>
 
-            <!-- Model Comparison Bar: Old vs Recalculated -->
-            <div class="mb-6 p-4 bg-[#121212] border border-[#262626]">
-                <div class="font-mono text-xs font-bold text-neutral-400 mb-3 flex items-center space-x-2">
-                    <i data-lucide="arrow-right-left" class="w-4 h-4 text-[#3898ec]"></i>
-                    <span>시뮬레이션 모델 전격 비교: 기존 단순 모델 vs 재계산 실전 모델</span>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono">
-                    <div class="p-3 bg-[#0d0d0d] border border-[#222]">
-                        <div class="text-neutral-500 font-bold mb-1.5 flex items-center gap-1">
-                            <span class="line-through">❌ 이전 단순 모델 (전쟁·거래 제외)</span>
+            <!-- Special Black Mart Winner Spotlight & 3 Player Teams Ranking -->
+            <div class="mb-8">
+                <!-- 1st Place Exception: Black Mart -->
+                <div class="mb-6 p-6 bg-gradient-to-r from-zinc-900 via-slate-900 to-zinc-900 text-white rounded-3xl border-2 border-amber-400 shadow-md flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-16 h-16 rounded-2xl bg-amber-400 text-black flex items-center justify-center font-black text-2xl shrink-0">
+                            🥇
                         </div>
-                        <ul class="space-y-1 text-neutral-400 font-sans text-[11px]">
-                            <li>• <strong>블랙:</strong> 9,736만 원 (무기 거래 없는 단순 가정)</li>
-                            <li>• <strong>블루:</strong> 5,842만 원 (라이프 독점으로 보석 축적)</li>
-                            <li>• <strong>레드:</strong> 2,921만 원 (단순 크레딧 생산)</li>
-                            <li>• <strong>화이트:</strong> 0원 (라이프 조기 고갈로 6명 전멸 가정)</li>
-                        </ul>
-                    </div>
-                    <div class="p-3 bg-[#161616] border border-emerald-500/50 shadow-[0_0_15px_rgba(16,185,129,0.1)]">
-                        <div class="text-emerald-400 font-bold mb-1.5 flex items-center gap-1">
-                            <span>✅ 재계산 실전 모델 (전쟁 9.3회 & 양자 거래 반영)</span>
+                        <div>
+                            <div class="flex items-center space-x-2">
+                                <span class="px-2 py-0.5 rounded-full bg-amber-400 text-black text-xs font-black">
+                                    최종 전체 1등 (최고 부자)
+                                </span>
+                                <span class="text-xs text-zinc-400">특수 상인 예외 구역</span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mt-1">블랙 (정재호) — 약 7,625만 원</h3>
+                            <p class="text-xs text-zinc-300 mt-1 max-w-xl leading-relaxed">
+                                "싸움은 거주민 3개 팀이 치열하게 벌였지만, 전쟁 선포세(15💎)와 A·B·C급 무기 대금이 전부 블랙 마트 금고로 들어가 <strong>혼자서 상금 76.2%를 독식</strong>했습니다!"
+                            </p>
                         </div>
-                        <ul class="space-y-1 text-[#f0eee7] font-sans text-[11px]">
-                            <li>• 🥇 <strong>블랙:</strong> <span class="text-amber-400 font-bold">약 7,625만 원</span> (무기·전쟁세 176.7💎 흡수, 76.2% 독식)</li>
-                            <li>• 🥈 <strong>화이트:</strong> <span class="text-emerald-300 font-bold">약 1,184만 원</span> (최후 1인 생존 + 전쟁 50% 약탈로 2위 대반전!)</li>
-                            <li>• 🥉 <strong>블루:</strong> <span class="text-[#3898ec] font-bold">약 1,068만 원</span> (폭리 취하다 가격 불만 전쟁으로 50% 피탈)</li>
-                            <li>• 💥 <strong>레드:</strong> <span class="text-[#ef321f] font-bold">약 339만 원</span> (크레딧 생산 선방했으나 라이프·무기 지출 과다)</li>
-                        </ul>
                     </div>
-                </div>
-            </div>
-
-            <!-- Leaderboard Cards -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 font-mono">
-                <!-- 1st: Black -->
-                <div class="p-5 bg-[#141414] border-2 border-amber-400 flex flex-col justify-between shadow-[0_0_20px_rgba(245,158,11,0.15)]">
-                    <div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-amber-400 font-bold text-xs">🥇 최종 1등 (최고 부자)</span>
-                            <span class="text-[10px] px-1.5 py-0.5 bg-amber-400/20 text-amber-300 border border-amber-400/30">1명 생존</span>
-                        </div>
-                        <h3 class="font-cafe24 text-2xl text-[#f0eee7] mt-1.5">블랙 (정재호)</h3>
-                        <div class="text-amber-300 font-bold text-xl mt-1">약 7,625만 원</div>
-                        <div class="text-[11px] text-neutral-400 mt-0.5">평균 보유 보석: 176.7개</div>
-                        <p class="font-sans text-xs text-neutral-300 mt-2.5 leading-relaxed">
-                            "싸움은 안 하고 뒤에서 전쟁 선포세(15💎)와 A·B·C급 무기만 팔았는데 국고와 보석 절반을 쓸어담았어요!"
-                        </p>
-                    </div>
-                    <div class="mt-3 pt-2.5 border-t border-[#333] text-[11px] text-amber-400 font-bold">
-                        👉 무기 상인의 압도적 대승리!
+                    <div class="shrink-0 text-right bg-zinc-800/80 px-4 py-3 rounded-2xl border border-zinc-700">
+                        <div class="text-xs text-zinc-400">평균 보유 보석</div>
+                        <div class="text-2xl font-black text-amber-400">176.7 개</div>
+                        <div class="text-[11px] text-zinc-400 mt-0.5">상금 점유율 76.2%</div>
                     </div>
                 </div>
 
-                <!-- 2nd: White -->
-                <div class="p-5 bg-[#141414] border-2 border-white/60 flex flex-col justify-between shadow-[0_0_15px_rgba(255,255,255,0.08)]">
-                    <div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-white font-bold text-xs">🥈 최종 2등 (대반전!)</span>
-                            <span class="text-[10px] px-1.5 py-0.5 bg-white/20 text-white border border-white/30">최후 1인 생존</span>
-                        </div>
-                        <h3 class="font-cafe24 text-2xl text-[#f0eee7] mt-1.5">화이트 (루나 팀)</h3>
-                        <div class="text-white font-bold text-xl mt-1">약 1,184만 원</div>
-                        <div class="text-[11px] text-neutral-400 mt-0.5">평균 보유 보석: 165.2개</div>
-                        <p class="font-sans text-xs text-neutral-300 mt-2.5 leading-relaxed">
-                            "블루가 폭리를 취하자 15보석으로 전쟁을 선포해 50%를 털어왔고, 최후 1인(루나) 생존 룰로 전멸을 피하며 2위 탈환!"
-                        </p>
-                    </div>
-                    <div class="mt-3 pt-2.5 border-t border-[#333] text-[11px] text-emerald-400 font-bold">
-                        👉 전쟁 약탈 & 최후 1인의 대역전!
-                    </div>
+                <!-- 3 Player Teams Championship Grid -->
+                <div class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-3 flex items-center gap-1.5">
+                    <i data-lucide="award" class="w-4 h-4 text-blue-600"></i>
+                    <span>3개 거주민 팀 랭킹 (거주민 리그 순위)</span>
                 </div>
 
-                <!-- 3rd: Blue -->
-                <div class="p-5 bg-[#141414] border border-[#1646f5] flex flex-col justify-between">
-                    <div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-[#3898ec] font-bold text-xs">🥉 최종 3등</span>
-                            <span class="text-[10px] px-1.5 py-0.5 bg-[#1646f5]/20 text-[#3898ec] border border-[#1646f5]/30">최후 1인 생존</span>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- 2nd: White Team (1st among player teams) -->
+                    <div class="p-6 bg-white rounded-2xl border-2 border-slate-300 shadow-xs flex flex-col justify-between border-t-4 !border-t-slate-700">
+                        <div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-800 font-bold text-xs">🥈 거주팀 1위 (전체 2위)</span>
+                                <span class="text-[11px] px-2 py-0.5 bg-slate-100 text-slate-700 rounded-full font-bold">최후 1인 생존</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mt-2">화이트 (루나 팀)</h3>
+                            <div class="text-2xl font-extrabold text-slate-900 mt-1">약 1,184만 원</div>
+                            <div class="text-xs text-slate-500 mt-0.5">평균 보유 보석: 165.2개</div>
+                            <p class="text-xs text-slate-600 mt-3 leading-relaxed">
+                                블루의 가격 폭리에 맞서 <strong>15보석으로 전쟁을 선포해 블루 자원의 50%를 강탈</strong>했고, <strong>최후 1인(루나) 생존 룰</strong>로 전멸을 피하며 당당히 2위를 차지했습니다!
+                            </p>
                         </div>
-                        <h3 class="font-cafe24 text-2xl text-[#f0eee7] mt-1.5">블루 (소금 팀)</h3>
-                        <div class="text-[#3898ec] font-bold text-xl mt-1">약 1,068만 원</div>
-                        <div class="text-[11px] text-neutral-400 mt-0.5">평균 보유 보석: 74.3개</div>
-                        <p class="font-sans text-xs text-neutral-300 mt-2.5 leading-relaxed">
-                            "라이프 독점으로 보석을 많이 벌었지만, 가격을 너무 올리자 타 팀들이 가격 불만 전쟁을 걸어와 50%를 털렸어요!"
-                        </p>
+                        <div class="mt-4 pt-3 border-t border-slate-100 text-xs text-emerald-600 font-bold">
+                            👉 전쟁 약탈과 최후 1인의 대역전!
+                        </div>
                     </div>
-                    <div class="mt-3 pt-2.5 border-t border-[#333] text-[11px] text-[#3898ec] font-bold">
-                        👉 보이지 않는 손(시장 보복)의 대가!
-                    </div>
-                </div>
 
-                <!-- 4th: Red -->
-                <div class="p-5 bg-[#141414] border border-[#ef321f] flex flex-col justify-between">
-                    <div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-[#ef321f] font-bold text-xs">💥 최종 4등</span>
-                            <span class="text-[10px] px-1.5 py-0.5 bg-[#ef321f]/20 text-[#ef321f] border border-[#ef321f]/30">최후 1인 생존</span>
+                    <!-- 3rd: Blue Team (2nd among player teams) -->
+                    <div class="p-6 bg-white rounded-2xl border border-blue-200 shadow-xs flex flex-col justify-between border-t-4 !border-t-blue-600">
+                        <div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-blue-600 font-bold text-xs">🥉 거주팀 2위 (전체 3위)</span>
+                                <span class="text-[11px] px-2 py-0.5 bg-blue-50 text-blue-700 rounded-full font-bold">최후 1인 생존</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mt-2">블루 (소금 팀)</h3>
+                            <div class="text-2xl font-extrabold text-blue-600 mt-1">약 1,068만 원</div>
+                            <div class="text-xs text-slate-500 mt-0.5">평균 보유 보석: 74.3개</div>
+                            <p class="text-xs text-slate-600 mt-3 leading-relaxed">
+                                라이프를 독점해 보석을 많이 벌었지만, 가격을 너무 올리자 타 팀들이 <strong>가격 불만 전쟁을 선포하여 창고의 50%를 약탈</strong>당해 상금이 크게 줄었습니다.
+                            </p>
                         </div>
-                        <h3 class="font-cafe24 text-2xl text-[#f0eee7] mt-1.5">레드 (마이야르 팀)</h3>
-                        <div class="text-[#ef321f] font-bold text-xl mt-1">약 339만 원</div>
-                        <div class="text-[11px] text-neutral-400 mt-0.5">평균 보유 보석: 23.6개</div>
-                        <p class="font-sans text-xs text-neutral-300 mt-2.5 leading-relaxed">
-                            "크레딧을 부지런히 만들었으나, 생존을 위한 라이프 매입과 자위적 무기 구입비로 보석을 많이 소모했어요!"
-                        </p>
+                        <div class="mt-4 pt-3 border-t border-slate-100 text-xs text-blue-600 font-bold">
+                            👉 보이지 않는 손(시장 보복)의 대가!
+                        </div>
                     </div>
-                    <div class="mt-3 pt-2.5 border-t border-[#333] text-[11px] text-[#ef321f] font-bold">
-                        👉 기술력 선방 & 끈질긴 생존!
+
+                    <!-- 4th: Red Team (3rd among player teams) -->
+                    <div class="p-6 bg-white rounded-2xl border border-red-200 shadow-xs flex flex-col justify-between border-t-4 !border-t-red-600">
+                        <div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-red-600 font-bold text-xs">💥 거주팀 3위 (전체 4위)</span>
+                                <span class="text-[11px] px-2 py-0.5 bg-red-50 text-red-700 rounded-full font-bold">최후 1인 생존</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mt-2">레드 (마이야르 팀)</h3>
+                            <div class="text-2xl font-extrabold text-red-600 mt-1">약 339만 원</div>
+                            <div class="text-xs text-slate-500 mt-0.5">평균 보유 보석: 23.6개</div>
+                            <p class="text-xs text-slate-600 mt-3 leading-relaxed">
+                                크레딧을 부지런히 생산해 발전시켰지만, 생존을 위한 라이프 매입비와 자위적 무기 구입비로 보석을 많이 소모했습니다.
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-100 text-xs text-red-600 font-bold">
+                            👉 기술력 선방 & 끈질긴 생존!
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Key Empirical Simulation Highlights (4 Macro Stats) -->
-            <div class="mt-6 grid grid-cols-2 lg:grid-cols-4 gap-3 font-mono text-xs">
-                <div class="p-3 bg-[#101010] border border-[#222]">
-                    <div class="text-neutral-500">💣 9일간 평균 전쟁 횟수</div>
-                    <div class="font-cafe24 text-xl text-[#ef321f] mt-1">9.32 회</div>
-                    <div class="text-[10px] text-neutral-400 mt-0.5">가격 불만 전쟁 & 보복전</div>
+            <div class="mb-8 grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                    <div class="text-xs text-slate-500 font-medium">💣 9일간 평균 전쟁 횟수</div>
+                    <div class="text-2xl font-extrabold text-red-600 mt-1">9.32 회</div>
+                    <div class="text-[11px] text-slate-400 mt-0.5">가격 불만 전쟁 & 보복전</div>
                 </div>
-                <div class="p-3 bg-[#101010] border border-[#222]">
-                    <div class="text-neutral-500">💰 블랙 무기/전쟁세 수익</div>
-                    <div class="font-cafe24 text-xl text-amber-400 mt-1">176.7 개 보석</div>
-                    <div class="text-[10px] text-neutral-400 mt-0.5">무기 상인의 독점적 부</div>
+                <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                    <div class="text-xs text-slate-500 font-medium">💰 블랙 무기/전쟁세 수익</div>
+                    <div class="text-2xl font-extrabold text-amber-600 mt-1">176.7 개</div>
+                    <div class="text-[11px] text-slate-400 mt-0.5">무기 상인의 독점적 부</div>
                 </div>
-                <div class="p-3 bg-[#101010] border border-[#222]">
-                    <div class="text-neutral-500">💎 최종 보석 1개 가치</div>
-                    <div class="font-cafe24 text-xl text-emerald-400 mt-1">약 431,373 원</div>
-                    <div class="text-[10px] text-neutral-400 mt-0.5">추가발행 및 전쟁세 소각 반영</div>
+                <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                    <div class="text-xs text-slate-500 font-medium">💎 최종 보석 1개 가치</div>
+                    <div class="text-2xl font-extrabold text-emerald-600 mt-1">약 431,373 원</div>
+                    <div class="text-[11px] text-slate-400 mt-0.5">추가발행 및 전쟁세 소각 반영</div>
                 </div>
-                <div class="p-3 bg-[#101010] border border-[#222]">
-                    <div class="text-neutral-500">🩸 지하 라이프 미채굴 잔량</div>
-                    <div class="font-cafe24 text-xl text-[#3898ec] mt-1">38.3 개</div>
-                    <div class="text-[10px] text-neutral-400 mt-0.5">크레딧 부족으로 미생산</div>
+                <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                    <div class="text-xs text-slate-500 font-medium">🩸 지하 라이프 미채굴 잔량</div>
+                    <div class="text-2xl font-extrabold text-blue-600 mt-1">38.3 개</div>
+                    <div class="text-[11px] text-slate-400 mt-0.5">크레딧 부족으로 미생산</div>
                 </div>
             </div>
 
-            <!-- Accordion: Adult Detailed Charts & Rulebook -->
-            <details class="mt-8 brutalist-border bg-[#101010] p-4 cursor-pointer group">
-                <summary class="flex justify-between items-center font-bold text-neutral-300 text-xs font-mono select-none">
-                    <span>📊 정밀 몬테카를로 차트 및 실전 알고리즘 분석 (클릭하여 펼치기)</span>
-                    <span class="text-neutral-500 group-open:rotate-180 transition-transform">▼</span>
+            <!-- Accordion: Detailed Charts & Rulebook -->
+            <details class="bg-white rounded-2xl border border-slate-200 p-5 cursor-pointer group shadow-xs">
+                <summary class="flex justify-between items-center font-bold text-slate-800 text-sm select-none">
+                    <span class="flex items-center gap-2">
+                        <i data-lucide="bar-chart-2" class="w-4 h-4 text-blue-600"></i>
+                        <span>📊 정밀 몬테카를로 차트 및 실전 알고리즘 분석 (클릭하여 펼치기)</span>
+                    </span>
+                    <span class="text-slate-400 group-open:rotate-180 transition-transform">▼</span>
                 </summary>
                 
-                <div class="mt-6 pt-4 border-t border-[#262626] space-y-6">
+                <div class="mt-6 pt-5 border-t border-slate-200 space-y-6">
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                        <div class="p-4 bg-[#141414] border border-[#222]">
-                            <div class="font-mono text-xs font-bold text-[#f0eee7] mb-2">일자별 평균 생존 인원 추이 (1,000회 실전)</div>
-                            <div class="h-56">
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <div class="text-xs font-bold text-slate-800 mb-2">일자별 평균 생존 인원 추이 (1,000회 실전)</div>
+                            <div class="h-60">
                                 <canvas id="survivalChart"></canvas>
                             </div>
                         </div>
-                        <div class="p-4 bg-[#141414] border border-[#222]">
-                            <div class="font-mono text-xs font-bold text-[#f0eee7] mb-2">1인당 최종 평균 기대 상금 (만 원)</div>
-                            <div class="h-56">
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <div class="text-xs font-bold text-slate-800 mb-2">1인당 최종 평균 기대 상금 (만 원)</div>
+                            <div class="h-60">
                                 <canvas id="prizeChart"></canvas>
                             </div>
                         </div>
                     </div>
 
                     <!-- 4 Major Simulation Takeaways -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 font-mono text-xs text-neutral-300">
-                        <div class="p-3.5 bg-[#141414] border border-[#222] space-y-1.5">
-                            <div class="text-emerald-400 font-bold flex items-center gap-1.5">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-slate-700">
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1.5">
+                            <div class="text-emerald-700 font-bold flex items-center gap-1.5">
                                 <span>💡 1. 화이트가 0원에서 2위(1,184만 원)로 올라선 이유</span>
                             </div>
-                            <p class="font-sans text-[11px] text-neutral-400 leading-relaxed">
-                                기존 모델에선 6명의 라이프 소모를 못 버티고 전멸(0원)한다고 보았으나, 실전에서는 화이트가 추가 보석을 발행해 라이프를 사고, 블루의 폭리에 맞서 <strong>15보석으로 전쟁을 선포해 블루 자원의 50%를 강탈</strong>했습니다. 여기에 <strong>'최후 1인 생존 룰'</strong>이 작동하여 루나가 끝까지 살아남아 팀 보석 지분을 분배받았습니다.
+                            <p class="text-slate-600 leading-relaxed font-normal">
+                                기존 모델에선 6명의 라이프 소모를 못 버티고 전멸한다고 보았으나, 실전에서는 화이트가 추가 보석을 발행해 라이프를 사고, 블루의 폭리에 맞서 <strong>15보석으로 전쟁을 선포해 블루 자원의 50%를 강탈</strong>했습니다. 여기에 <strong>'최후 1인 생존 룰'</strong>이 작동하여 루나가 끝까지 살아남아 팀 보석 지분을 분배받았습니다.
                             </p>
                         </div>
 
-                        <div class="p-3.5 bg-[#141414] border border-[#222] space-y-1.5">
-                            <div class="text-[#3898ec] font-bold flex items-center gap-1.5">
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1.5">
+                            <div class="text-blue-700 font-bold flex items-center gap-1.5">
                                 <span>💡 2. 블루가 5,842만 원에서 1,068만 원으로 떨어진 이유</span>
                             </div>
-                            <p class="font-sans text-[11px] text-neutral-400 leading-relaxed">
+                            <p class="text-slate-600 leading-relaxed font-normal">
                                 라이프를 독점하고 개당 35보석 이상의 폭리를 취하자, 시장의 '보이지 않는 손'이 작동했습니다. 화이트와 레드가 터무니없는 가격을 감당하기보다 <strong>전쟁을 선포하는 것이 경제적으로 이득</strong>이라 판단하여 연쇄 공격을 가했고, 블루는 보유 보석과 자원의 절반을 약탈당했습니다.
                             </p>
                         </div>
 
-                        <div class="p-3.5 bg-[#141414] border border-[#222] space-y-1.5">
-                            <div class="text-amber-400 font-bold flex items-center gap-1.5">
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1.5">
+                            <div class="text-amber-700 font-bold flex items-center gap-1.5">
                                 <span>💡 3. 블랙이 7,625만 원으로 여전히 압도적 1등인 이유</span>
                             </div>
-                            <p class="font-sans text-[11px] text-neutral-400 leading-relaxed">
+                            <p class="text-slate-600 leading-relaxed font-normal">
                                 9일간 총 9.32회의 전쟁이 터지면서, 각 팀이 전쟁 선포세(15💎)와 B급(20💎)/A급(30💎) 무기를 사기 위해 지불한 보석이 무려 <strong>평균 176.7개</strong>에 달했습니다. 이 보석들은 블랙 마트 금고로 직행했고, 1인 팀인 블랙이 혼자서 전체 상금의 76.2%를 독식했습니다.
                             </p>
                         </div>
 
-                        <div class="p-3.5 bg-[#141414] border border-[#222] space-y-1.5">
-                            <div class="text-[#ef321f] font-bold flex items-center gap-1.5">
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1.5">
+                            <div class="text-red-700 font-bold flex items-center gap-1.5">
                                 <span>💡 4. '최후 1인 생존 룰'과 5일차 맬서스 트랩</span>
                             </div>
-                            <p class="font-sans text-[11px] text-neutral-400 leading-relaxed">
+                            <p class="text-slate-600 leading-relaxed font-normal">
                                 1~4일차까지는 라이프가 유지되지만 5일차에 라이프 결핍이 폭발하며 팀원들이 줄어듭니다. 그러나 규칙상 각 팀의 최후 1명은 라이프가 없어도 영구 생존하므로, 4개 팀 모두 1명씩 최종 결승까지 진출하여 상금을 나누어 가졌습니다.
                             </p>
                         </div>
-                    </div>
-
-                    <div class="p-4 bg-[#141414] border border-[#222] font-mono text-xs text-neutral-300 space-y-2">
-                        <div class="text-[#3898ec] font-bold">📋 공식 룰북 핵심 요약:</div>
-                        <div>• <strong>라이프 제출:</strong> 매일 밤 1인당 1개 필수 제출 (미제출 시 즉시 영구 탈락).</div>
-                        <div>• <strong>생존 예외:</strong> 팀의 최후 1인은 라이프가 0개여도 탈락하지 않고 생존.</div>
-                        <div>• <strong>전쟁 선포:</strong> 보석 15개 국고 영구 차감, 승리 시 패배팀 전 자원 50% 강탈.</div>
-                        <div>• <strong>마트 운영:</strong> 1일차 라이프 소모 면제, 2일차부터 매일 1개씩 소모.</div>
                     </div>
                 </div>
             </details>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="py-8 bg-[#050505] font-mono text-xs text-neutral-500">
+    <!-- Footer (Clean Light Theme) -->
+    <footer class="py-8 bg-slate-900 text-slate-400 text-xs">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-3">
             <div class="flex items-center space-x-2">
-                <span class="text-neutral-300 font-bold">더 커뮤니티 2</span>
+                <span class="text-white font-bold">더 커뮤니티 2</span>
                 <span>/</span>
                 <span>보이지 않는 손</span>
             </div>
-            <div class="text-[11px] text-neutral-600">
-                INITIAL JEWELS 200 • 50 LIFE CAP • 4 TEAMS • LIVE HUD
+            <div class="text-slate-400">
+                초기 보석 200개 • 50 라이프 한도 • 3개 거주팀 + 특수 블랙 마트 • 실시간 시뮬레이터
             </div>
         </div>
     </footer>
 
     <!-- Floating Interactive Toast Feedback -->
-    <div id="interactiveToast" class="fixed bottom-16 left-1/2 -translate-x-1/2 z-50 bg-[#1646f5] text-white px-4 py-2.5 rounded-full shadow-2xl font-mono text-xs font-bold flex items-center space-x-2">
+    <div id="interactiveToast" class="fixed bottom-16 left-1/2 -translate-x-1/2 z-50 bg-slate-900 text-white px-5 py-2.5 rounded-full shadow-2xl text-xs font-bold flex items-center space-x-2">
         <span id="toastIcon">🎉</span>
         <span id="toastMsg">작업이 성공적으로 실행되었습니다!</span>
     </div>
 
     <!-- Floating Quick-Jump Dock -->
-    <div class="fixed bottom-3 left-1/2 -translate-x-1/2 z-50 bg-[#121212]/90 backdrop-blur-md border border-[#333] px-3 py-1.5 rounded-full shadow-2xl flex items-center space-x-2 text-xs font-mono">
-        <a href="#liveboard" class="px-2.5 py-1 rounded-full bg-[#1646f5] text-white hover:bg-blue-600 transition-all flex items-center font-bold">
-            <span>📊 실시간 HUD</span>
+    <div class="fixed bottom-3 left-1/2 -translate-x-1/2 z-50 bg-white/90 backdrop-blur-md border border-slate-300 px-3 py-1.5 rounded-full shadow-lg flex items-center space-x-2 text-xs font-medium">
+        <a href="#liveboard" class="px-2.5 py-1 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition-all font-bold">
+            <span>📊 3개팀 창고</span>
         </a>
-        <a href="#timeline-stepper" class="px-2.5 py-1 rounded-full bg-[#1e1e1e] text-neutral-300 hover:text-white hover:bg-[#282828] transition-all">
+        <a href="#timeline-stepper" class="px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all">
             <span>📅 9일 타임라인</span>
         </a>
-        <a href="currencies.html" class="px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 hover:bg-amber-500/30 transition-all font-bold">
-            <span>💎 재화 세부장부</span>
+        <a href="currencies.html" class="px-2.5 py-1 rounded-full bg-amber-100 text-amber-800 border border-amber-300 hover:bg-amber-200 transition-all font-bold">
+            <span>💎 재화 도감</span>
         </a>
-        <a href="#marketwar" class="px-2.5 py-1 rounded-full bg-[#1e1e1e] text-neutral-300 hover:text-white hover:bg-[#282828] transition-all">
+        <a href="#marketwar" class="px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all">
             <span>💣 전쟁 룰</span>
         </a>
-        <a href="#data" class="px-2.5 py-1 rounded-full bg-[#1e1e1e] text-neutral-300 hover:text-white hover:bg-[#282828] transition-all hidden sm:inline-block">
+        <a href="#data" class="px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all hidden sm:inline-block">
             <span>🏆 1등 랭킹</span>
         </a>
     </div>
@@ -1160,10 +994,10 @@
                         totalJewels: 200.0,
                         lifeReserve: 7,
                         teams: {
-                            WHITE: { name: '화이트', leader: '루나 (박세승)', initial: 6, surv: 6, jewels: 90.0, life: 14, credits: 7.0, color: '#f0eee7', avatar: './brand/figure-white-team.png', desc: '💎 보석 부자 마을' },
-                            BLUE:  { name: '블루',   leader: '지니 (이지나)', initial: 3, surv: 3, jewels: 60.0, life: 19, credits: 8.0, color: '#1646f5', avatar: './brand/figure-blue-team.png', desc: '❤️ 라이프 병원 마을' },
-                            RED:   { name: '레드',   leader: '마이야르 (승우아빠)', initial: 3, surv: 3, jewels: 50.0, life: 10, credits: 21.0, cleanCredits: 0, color: '#ef321f', avatar: './brand/figure-red-team.png', desc: '⚡ 크레딧 발전소 마을' },
-                            BLACK: { name: '블랙',   leader: '벡터 (정재호)', initial: 1, surv: 1, jewels: 0.0,  life: 0,  credits: 0.0, color: '#888888', avatar: './brand/figure-black-team.png', desc: '🛒 비밀 상점 아저씨' }
+                            WHITE: { name: '화이트', leader: '루나 (박세승)', initial: 6, surv: 6, jewels: 90.0, life: 14, credits: 7.0, avatar: './brand/figure-white-team.png', desc: '💎 보석 부자 마을 (발행권 보유)' },
+                            BLUE:  { name: '블루',   leader: '지니 (이지나)', initial: 3, surv: 3, jewels: 60.0, life: 19, credits: 8.0, avatar: './brand/figure-blue-team.png', desc: '❤️ 라이프 독점 마을 (의료원)' },
+                            RED:   { name: '레드',   leader: '마이야르 (승우아빠)', initial: 3, surv: 3, jewels: 50.0, life: 10, credits: 21.0, cleanCredits: 0, avatar: './brand/figure-red-team.png', desc: '⚡ 크레딧 발전소 마을' },
+                            BLACK: { name: '블랙',   leader: '벡터 (정재호)', initial: 1, surv: 1, jewels: 0.0,  life: 0,  credits: 0.0, avatar: './brand/figure-black-team.png', desc: '🛒 특수 비밀 상점' }
                         }
                     },
                     1: {
@@ -1175,25 +1009,25 @@
                         totalJewels: 200.0,
                         lifeReserve: 7,
                         teams: {
-                            WHITE: { name: '화이트', leader: '루나 (박세승)', initial: 6, surv: 6, jewels: 90.0, life: 14, credits: 7.0, color: '#f0eee7', avatar: './brand/figure-white-team.png', desc: '💎 보석 90개 부자' },
-                            BLUE:  { name: '블루',   leader: '지니 (이지나)', initial: 3, surv: 3, jewels: 60.0, life: 19, credits: 8.0, color: '#1646f5', avatar: './brand/figure-blue-team.png', desc: '❤️ 라이프 19개 비축' },
-                            RED:   { name: '레드',   leader: '마이야르 (승우아빠)', initial: 3, surv: 3, jewels: 50.0, life: 10, credits: 21.0, cleanCredits: 0, color: '#ef321f', avatar: './brand/figure-red-team.png', desc: '⚡ 크레딧 21개 생산' },
-                            BLACK: { name: '블랙',   leader: '벡터 (정재호)', initial: 1, surv: 1, jewels: 0.0,  life: 0,  credits: 0.0, color: '#888888', avatar: './brand/figure-black-team.png', desc: '🛒 마트 개점 (첫날 무료)' }
+                            WHITE: { name: '화이트', leader: '루나 (박세승)', initial: 6, surv: 6, jewels: 90.0, life: 14, credits: 7.0, avatar: './brand/figure-white-team.png', desc: '💎 보석 90개 부자' },
+                            BLUE:  { name: '블루',   leader: '지니 (이지나)', initial: 3, surv: 3, jewels: 60.0, life: 19, credits: 8.0, avatar: './brand/figure-blue-team.png', desc: '❤️ 라이프 19개 비축' },
+                            RED:   { name: '레드',   leader: '마이야르 (승우아빠)', initial: 3, surv: 3, jewels: 50.0, life: 10, credits: 21.0, cleanCredits: 0, avatar: './brand/figure-red-team.png', desc: '⚡ 크레딧 21개 생산' },
+                            BLACK: { name: '블랙',   leader: '벡터 (정재호)', initial: 1, surv: 1, jewels: 0.0,  life: 0,  credits: 0.0, avatar: './brand/figure-black-team.png', desc: '🛒 마트 개점 (첫날 무료 특례)' }
                         }
                     },
                     2: {
                         dayTitle: 'D-2 공식 실측 현황',
                         badgeText: 'DAY 2 실측',
                         emoji: '👑',
-                        storyText: '블루 팀 새 대장으로 소금 님이 뽑혔어요! 블루가 라이프 21개를 꽉 쥐고 안 놓자 다들 긴장하기 시작!',
+                        storyText: '블루 팀 새 리더로 소금(임지은) 님이 선출되었습니다! 블루가 라이프 21개를 꽉 쥐고 안 놓자 다들 긴장하기 시작!',
                         prizePool: 200000000,
                         totalJewels: 201.0,
                         lifeReserve: 3,
                         teams: {
-                            WHITE: { name: '화이트', leader: '루나 (박세승 연임)', initial: 6, surv: 6, jewels: 90.0, life: 10, credits: 6.0, color: '#f0eee7', avatar: './brand/figure-white-team.png', desc: '💎 보석 90개 (라이프 10개로 감소)' },
-                            BLUE:  { name: '블루',   leader: '소금 (임지은 신임)', initial: 3, surv: 3, jewels: 60.0, life: 21, credits: 5.0, color: '#1646f5', avatar: './brand/figure-blue-team.png', desc: '❤️ 라이프 21개 독점!' },
-                            RED:   { name: '레드',   leader: '마이야르 (승우아빠 연임)', initial: 3, surv: 3, jewels: 50.0, life: 6,  credits: 13.0, cleanCredits: 16.0, color: '#ef321f', avatar: './brand/figure-red-team.png', desc: '⚡ 크레딧 29개 폭증!' },
-                            BLACK: { name: '블랙',   leader: '벡터 (정재호 연임)', initial: 1, surv: 1, jewels: 1.0,  life: 0,  credits: 0.0, color: '#888888', avatar: './brand/figure-black-team.png', desc: '🛒 밥 팔아서 +1💎 벌음!' }
+                            WHITE: { name: '화이트', leader: '루나 (박세승 연임)', initial: 6, surv: 6, jewels: 90.0, life: 10, credits: 6.0, avatar: './brand/figure-white-team.png', desc: '보석 90개 (라이프 10개 보유)' },
+                            BLUE:  { name: '블루',   leader: '소금 (임지은 신임)', initial: 3, surv: 3, jewels: 60.0, life: 21, credits: 5.0, avatar: './brand/figure-blue-team.png', desc: '❤️ 라이프 21개 독점!' },
+                            RED:   { name: '레드',   leader: '마이야르 (승우아빠 연임)', initial: 3, surv: 3, jewels: 50.0, life: 6,  credits: 13.0, cleanCredits: 16.0, avatar: './brand/figure-red-team.png', desc: '⚡ 크레딧 29개 폭증!' },
+                            BLACK: { name: '블랙',   leader: '벡터 (정재호 연임)', initial: 1, surv: 1, jewels: 1.0,  life: 0,  credits: 0.0, avatar: './brand/figure-black-team.png', desc: '🛒 밥 팔아서 +1💎 벌음!' }
                         }
                     },
                     3: {
@@ -1205,25 +1039,25 @@
                         totalJewels: 205.0,
                         lifeReserve: 2,
                         teams: {
-                            WHITE: { name: '화이트', leader: '루나', initial: 6, surv: 6, jewels: 65.0, life: 8,  credits: 5.0, color: '#f0eee7', avatar: './brand/figure-white-team.png', desc: '보석 급감 (-25💎 지출)' },
-                            BLUE:  { name: '블루',   leader: '소금', initial: 3, surv: 3, jewels: 85.0, life: 20, credits: 4.0, color: '#1646f5', avatar: './brand/figure-blue-team.png', desc: '보석 쏠쏠하게 흡수 (+25💎)' },
-                            RED:   { name: '레드',   leader: '마이야르', initial: 3, surv: 3, jewels: 50.0, life: 5,  credits: 22.0, cleanCredits: 16.0, color: '#ef321f', avatar: './brand/figure-red-team.png', desc: '크레딧으로 라이프 교환 모색' },
-                            BLACK: { name: '블랙',   leader: '벡터', initial: 1, surv: 1, jewels: 5.0,  life: 0,  credits: 0.0, color: '#888888', avatar: './brand/figure-black-team.png', desc: '식료품 꾸준히 판매' }
+                            WHITE: { name: '화이트', leader: '루나', initial: 6, surv: 6, jewels: 65.0, life: 8,  credits: 5.0, avatar: './brand/figure-white-team.png', desc: '보석 급감 (-25💎 지출)' },
+                            BLUE:  { name: '블루',   leader: '소금', initial: 3, surv: 3, jewels: 85.0, life: 20, credits: 4.0, avatar: './brand/figure-blue-team.png', desc: '보석 쏠쏠하게 흡수 (+25💎)' },
+                            RED:   { name: '레드',   leader: '마이야르', initial: 3, surv: 3, jewels: 50.0, life: 5,  credits: 22.0, cleanCredits: 16.0, avatar: './brand/figure-red-team.png', desc: '크레딧으로 라이프 교환 모색' },
+                            BLACK: { name: '블랙',   leader: '벡터', initial: 1, surv: 1, jewels: 5.0,  life: 0,  credits: 0.0, avatar: './brand/figure-black-team.png', desc: '식료품 꾸준히 판매' }
                         }
                     },
                     4: {
                         dayTitle: 'D-4 군비 경쟁 시작',
-                        badgeText: 'DAY 4 예측',
+                        badgeText: 'DAY 4 군비',
                         emoji: '⚔️',
                         storyText: '화가 난 팀들이 블랙 상점에서 총과 수류탄을 사 모으기 시작했어요!',
                         prizePool: 200000000,
                         totalJewels: 208.0,
                         lifeReserve: 1,
                         teams: {
-                            WHITE: { name: '화이트', leader: '루나', initial: 6, surv: 6, jewels: 45.0, life: 7, credits: 4.0, color: '#f0eee7', avatar: './brand/figure-white-team.png', desc: '수류탄 A급 무기 구입 (-20💎)' },
-                            BLUE:  { name: '블루',   leader: '소금', initial: 3, surv: 3, jewels: 95.0, life: 18, credits: 3.0, color: '#1646f5', avatar: './brand/figure-blue-team.png', desc: 'B급 소총 방어 무기 구매' },
-                            RED:   { name: '레드',   leader: '마이야르', initial: 3, surv: 3, jewels: 40.0, life: 5, credits: 25.0, cleanCredits: 16.0, color: '#ef321f', avatar: './brand/figure-red-team.png', desc: '화이트와 동맹 비밀 협의' },
-                            BLACK: { name: '블랙',   leader: '벡터', initial: 1, surv: 1, jewels: 28.0, life: 0, credits: 0.0, color: '#888888', avatar: './brand/figure-black-team.png', desc: '무기 대량 판매로 보석 폭증 (+23💎)' }
+                            WHITE: { name: '화이트', leader: '루나', initial: 6, surv: 6, jewels: 45.0, life: 7, credits: 4.0, avatar: './brand/figure-white-team.png', desc: '수류탄 A급 무기 구입 (-20💎)' },
+                            BLUE:  { name: '블루',   leader: '소금', initial: 3, surv: 3, jewels: 95.0, life: 18, credits: 3.0, avatar: './brand/figure-blue-team.png', desc: 'B급 소총 방어 무기 구매' },
+                            RED:   { name: '레드',   leader: '마이야르', initial: 3, surv: 3, jewels: 40.0, life: 5, credits: 25.0, cleanCredits: 16.0, avatar: './brand/figure-red-team.png', desc: '화이트와 동맹 비밀 협의' },
+                            BLACK: { name: '블랙',   leader: '벡터', initial: 1, surv: 1, jewels: 28.0, life: 0, credits: 0.0, avatar: './brand/figure-black-team.png', desc: '무기 대량 판매로 보석 폭증 (+23💎)' }
                         }
                     },
                     5: {
@@ -1235,10 +1069,10 @@
                         totalJewels: 193.0,
                         lifeReserve: 0,
                         teams: {
-                            WHITE: { name: '화이트', leader: '루나', initial: 6, surv: 6, jewels: 58.0, life: 12, credits: 5.0, color: '#f0eee7', avatar: './brand/figure-white-team.png', desc: '전리품 약탈로 라이프 충원 (+5❤️)' },
-                            BLUE:  { name: '블루',   leader: '소금', initial: 3, surv: 3, jewels: 48.0, life: 9,  credits: 2.0, color: '#1646f5', avatar: './brand/figure-blue-team.png', desc: '창고 50% 강탈당함 (-47💎, -9❤️)' },
-                            RED:   { name: '레드',   leader: '마이야르', initial: 3, surv: 3, jewels: 44.0, life: 8,  credits: 20.0, cleanCredits: 16.0, color: '#ef321f', avatar: './brand/figure-red-team.png', desc: '동맹 참전 지분 획득' },
-                            BLACK: { name: '블랙',   leader: '벡터', initial: 1, surv: 1, jewels: 43.0, life: 0,  credits: 0.0, color: '#888888', avatar: './brand/figure-black-team.png', desc: '전쟁세 15💎 챙김!' }
+                            WHITE: { name: '화이트', leader: '루나', initial: 6, surv: 6, jewels: 58.0, life: 12, credits: 5.0, avatar: './brand/figure-white-team.png', desc: '전리품 약탈로 라이프 충원 (+5❤️)' },
+                            BLUE:  { name: '블루',   leader: '소금', initial: 3, surv: 3, jewels: 48.0, life: 9,  credits: 2.0, avatar: './brand/figure-blue-team.png', desc: '창고 50% 강탈당함 (-47💎, -9❤️)' },
+                            RED:   { name: '레드',   leader: '마이야르', initial: 3, surv: 3, jewels: 44.0, life: 8,  credits: 20.0, cleanCredits: 16.0, avatar: './brand/figure-red-team.png', desc: '동맹 참전 지분 획득' },
+                            BLACK: { name: '블랙',   leader: '벡터', initial: 1, surv: 1, jewels: 43.0, life: 0,  credits: 0.0, avatar: './brand/figure-black-team.png', desc: '전쟁세 15💎 챙김!' }
                         }
                     },
                     6: {
@@ -1250,207 +1084,161 @@
                         totalJewels: 193.0,
                         lifeReserve: 0,
                         teams: {
-                            WHITE: { name: '화이트', leader: '루나', initial: 6, surv: 6, jewels: 40.0, life: 6, credits: 4.0, color: '#f0eee7', avatar: './brand/figure-white-team.png', desc: '생존분 1일치 남음 (위기)' },
-                            BLUE:  { name: '블루',   leader: '소금', initial: 3, surv: 3, jewels: 50.0, life: 7, credits: 2.0, color: '#1646f5', avatar: './brand/figure-blue-team.png', desc: '상처 입었지만 자급자족' },
-                            RED:   { name: '레드',   leader: '마이야르', initial: 3, surv: 3, jewels: 40.0, life: 5, credits: 12.0, cleanCredits: 16.0, color: '#ef321f', avatar: './brand/figure-red-team.png', desc: '공해 정지, 생존 모드' },
-                            BLACK: { name: '블랙',   leader: '벡터', initial: 1, surv: 1, jewels: 63.0, life: 0, credits: 0.0, color: '#888888', avatar: './brand/figure-black-team.png', desc: '식료품 독점으로 계속 누적' }
+                            WHITE: { name: '화이트', leader: '루나', initial: 6, surv: 5, jewels: 40.0, life: 8, credits: 4.0, avatar: './brand/figure-white-team.png', desc: '라이프 부족으로 1명 탈락' },
+                            BLUE:  { name: '블루',   leader: '소금', initial: 3, surv: 3, jewels: 48.0, life: 6, credits: 2.0, avatar: './brand/figure-blue-team.png', desc: '생존 인원 방어 성공' },
+                            RED:   { name: '레드',   leader: '마이야르', initial: 3, surv: 3, jewels: 44.0, life: 5, credits: 15.0, cleanCredits: 16.0, avatar: './brand/figure-red-team.png', desc: '청정 발전으로 급전환' },
+                            BLACK: { name: '블랙',   leader: '벡터', initial: 1, surv: 1, jewels: 61.0, life: 0, credits: 0.0, avatar: './brand/figure-black-team.png', desc: '식료품 독점 가격 인상' }
                         }
                     },
                     7: {
-                        dayTitle: 'D-7 라이프 바닥 & 5명 탈락',
-                        badgeText: 'DAY 7 기근',
-                        emoji: '😢',
-                        storyText: '세상의 모든 라이프 50개가 다 떨어졌어요! 결국 라이프를 못 낸 5명이 아사 탈락하고 말았습니다...',
+                        dayTitle: 'D-7 생존 결핍 폭발!',
+                        badgeText: 'DAY 7 결핍',
+                        emoji: '🩸',
+                        storyText: '라이프가 완전히 바닥났어요! 화이트 팀원들이 쓰러지기 시작합니다.',
                         prizePool: 185000000,
-                        totalJewels: 192.0,
+                        totalJewels: 193.0,
                         lifeReserve: 0,
                         teams: {
-                            WHITE: { name: '화이트', leader: '루나', initial: 6, surv: 3, jewels: 15.0, life: 1, credits: 2.0, color: '#f0eee7', avatar: './brand/figure-white-team.png', desc: '3명 탈락 (생존 3명)' },
-                            BLUE:  { name: '블루',   leader: '소금', initial: 3, surv: 2, jewels: 52.0, life: 3, credits: 1.0, color: '#1646f5', avatar: './brand/figure-blue-team.png', desc: '1명 탈락 (생존 2명)' },
-                            RED:   { name: '레드',   leader: '마이야르', initial: 3, surv: 2, jewels: 38.0, life: 2, credits: 8.0, cleanCredits: 16.0, color: '#ef321f', avatar: './brand/figure-red-team.png', desc: '1명 탈락 (생존 2명)' },
-                            BLACK: { name: '블랙',   leader: '벡터', initial: 1, surv: 1, jewels: 87.0, life: 0, credits: 0.0, color: '#888888', avatar: './brand/figure-black-team.png', desc: '전체 보석의 45% 장악!' }
+                            WHITE: { name: '화이트', leader: '루나', initial: 6, surv: 2, jewels: 15.0, life: 2, credits: 1.0, avatar: './brand/figure-white-team.png', desc: '3명 추가 탈락 (2명 생존)' },
+                            BLUE:  { name: '블루',   leader: '소금', initial: 3, surv: 2, jewels: 50.0, life: 2, credits: 1.0, avatar: './brand/figure-blue-team.png', desc: '1명 탈락 (2명 생존)' },
+                            RED:   { name: '레드',   leader: '마이야르', initial: 3, surv: 2, jewels: 40.0, life: 2, credits: 8.0, cleanCredits: 16.0, avatar: './brand/figure-red-team.png', desc: '1명 탈락 (2명 생존)' },
+                            BLACK: { name: '블랙',   leader: '벡터', initial: 1, surv: 1, jewels: 88.0, life: 0, credits: 0.0, avatar: './brand/figure-black-team.png', desc: '보석 88개 축적' }
                         }
                     },
                     8: {
-                        dayTitle: 'D-8 최후의 1인 기적!',
-                        badgeText: 'DAY 8 기적',
-                        emoji: '👑',
-                        storyText: '팀에 혼자만 남으면 라이프 0개여도 안 죽는 기적의 룰 발동! 8명이 결승 진출!',
+                        dayTitle: 'D-8 최후의 1인 생존 룰',
+                        badgeText: 'DAY 8 최후',
+                        emoji: '🛡️',
+                        storyText: '각 팀의 마지막 1명은 라이프가 0개여도 절대 탈락하지 않는 특별 규칙이 발동했어요!',
                         prizePool: 185000000,
                         totalJewels: 191.0,
                         lifeReserve: 0,
                         teams: {
-                            WHITE: { name: '화이트', leader: '루나', initial: 6, surv: 1, jewels: 5.0,  life: 0, credits: 0.0, color: '#f0eee7', avatar: './brand/figure-white-team.png', desc: '최후의 1인 예외로 루나 생존!' },
-                            BLUE:  { name: '블루',   leader: '소금', initial: 3, surv: 2, jewels: 55.0, life: 1, credits: 0.0, color: '#1646f5', avatar: './brand/figure-blue-team.png', desc: '2명 생존 유지' },
-                            RED:   { name: '레드',   leader: '마이야르', initial: 3, surv: 2, jewels: 36.0, life: 1, credits: 4.0, cleanCredits: 16.0, color: '#ef321f', avatar: './brand/figure-red-team.png', desc: '2명 생존 유지' },
-                            BLACK: { name: '블랙',   leader: '벡터', initial: 1, surv: 1, jewels: 95.0, life: 0, credits: 0.0, color: '#888888', avatar: './brand/figure-black-team.png', desc: '보석 95개로 압도적 1위' }
+                            WHITE: { name: '화이트', leader: '루나', initial: 6, surv: 1, jewels: 5.0,  life: 0, credits: 0.0, avatar: './brand/figure-white-team.png', desc: '최후 1인 예외로 루나 생존!' },
+                            BLUE:  { name: '블루',   leader: '소금', initial: 3, surv: 2, jewels: 55.0, life: 1, credits: 0.0, avatar: './brand/figure-blue-team.png', desc: '2명 생존 유지' },
+                            RED:   { name: '레드',   leader: '마이야르', initial: 3, surv: 2, jewels: 36.0, life: 1, credits: 4.0, cleanCredits: 16.0, avatar: './brand/figure-red-team.png', desc: '2명 생존 유지' },
+                            BLACK: { name: '블랙',   leader: '벡터', initial: 1, surv: 1, jewels: 95.0, life: 0, credits: 0.0, avatar: './brand/figure-black-team.png', desc: '보석 95개로 압도적 1위' }
                         }
                     },
                     9: {
-                        dayTitle: 'D-9 최종 상금 정산!',
+                        dayTitle: 'D-9 최종 결승 상금 정산!',
                         badgeText: 'DAY 9 결승',
                         emoji: '🏆',
-                        storyText: '게임 끝! 싸움 안 하고 무기만 판 상점 아저씨 블랙이 9,736만 원으로 최종 1등 부자가 되었어요!',
+                        storyText: '게임 종료! 무기 상인 블랙이 7,625만 원으로 1등, 루나가 1,184만 원으로 2위를 차지했습니다!',
                         prizePool: 185000000,
                         totalJewels: 190.0,
                         lifeReserve: 0,
                         teams: {
-                            WHITE: { name: '화이트', leader: '루나', initial: 6, surv: 1, jewels: 2.0,  life: 0, credits: 0.0, color: '#f0eee7', avatar: './brand/figure-white-team.png', desc: '루나 최종 생존 (상금 약 194만 원)' },
-                            BLUE:  { name: '블루',   leader: '소금', initial: 3, surv: 2, jewels: 57.0, life: 0, credits: 0.0, color: '#1646f5', avatar: './brand/figure-blue-team.png', desc: '최종 2등! (팀 상금 5,550만 원)' },
-                            RED:   { name: '레드',   leader: '마이야르', initial: 3, surv: 2, jewels: 31.0, life: 0, credits: 0.0, color: '#ef321f', avatar: './brand/figure-red-team.png', desc: '최종 3등! (팀 상금 3,018만 원)' },
-                            BLACK: { name: '블랙',   leader: '벡터', initial: 1, surv: 1, jewels: 100.0, life: 0, credits: 0.0, color: '#888888', avatar: './brand/figure-black-team.png', desc: '🥇 최종 1등! (상금 9,736만 원 싹쓸이)' }
+                            WHITE: { name: '화이트', leader: '루나', initial: 6, surv: 1, jewels: 165.2, life: 0, credits: 0.0, avatar: './brand/figure-white-team.png', desc: '🥈 거주팀 1위 (상금 약 1,184만 원)' },
+                            BLUE:  { name: '블루',   leader: '소금', initial: 3, surv: 1, jewels: 74.3,  life: 0, credits: 0.0, avatar: './brand/figure-blue-team.png', desc: '🥉 거주팀 2위 (상금 약 1,068만 원)' },
+                            RED:   { name: '레드',   leader: '마이야르', initial: 3, surv: 1, jewels: 23.6,  life: 0, credits: 0.0, avatar: './brand/figure-red-team.png', desc: '💥 거주팀 3위 (상금 약 339만 원)' },
+                            BLACK: { name: '블랙',   leader: '벡터', initial: 1, surv: 1, jewels: 176.7, life: 0, credits: 0.0, avatar: './brand/figure-black-team.png', desc: '🥇 전체 1등 (상금 약 7,625만 원)' }
                         }
                     }
                 };
 
                 this.currentDay = 2;
-                this.hudTheme = 'light';
                 this.loadPreset(2);
-                this.bindControls();
             }
 
             showToast(msg, icon = '🎉') {
                 const toast = document.getElementById('interactiveToast');
                 const tMsg = document.getElementById('toastMsg');
                 const tIcon = document.getElementById('toastIcon');
-                if (!toast || !tMsg) return;
-                tMsg.innerText = msg;
-                if (tIcon) tIcon.innerText = icon;
-                toast.classList.add('show');
-                clearTimeout(this.toastTimer);
-                this.toastTimer = setTimeout(() => {
-                    toast.classList.remove('show');
-                }, 2500);
-            }
-
-            updateTimelineActiveButton(dayNum) {
-                for (let d = 0; d <= 9; d++) {
-                    const btn = document.getElementById(`tbtn-${d}`);
-                    if (btn) {
-                        if (d === dayNum) {
-                            btn.className = 'timeline-btn p-2 border border-[#1646f5] bg-[#1646f5]/25 text-left transition-all shadow-[0_0_12px_rgba(22,70,245,0.4)] scale-105';
-                        } else {
-                            btn.className = 'timeline-btn p-2 border border-[#333] bg-[#141414] hover:bg-[#202020] text-left transition-all';
-                        }
-                    }
+                if (toast && tMsg) {
+                    tMsg.innerText = msg;
+                    if (tIcon) tIcon.innerText = icon;
+                    toast.classList.add('show');
+                    clearTimeout(this.toastTimer);
+                    this.toastTimer = setTimeout(() => {
+                        toast.classList.remove('show');
+                    }, 2800);
                 }
             }
 
-            loadPreset(dayNum) {
-                if (!this.dayPresets[dayNum]) return;
-                const preset = JSON.parse(JSON.stringify(this.dayPresets[dayNum]));
-                this.currentDay = dayNum;
-                this.prizePool = preset.prizePool;
-                this.lifeReserve = preset.lifeReserve;
-                this.teams = preset.teams;
+            loadPreset(day) {
+                this.currentDay = day;
+                const p = this.dayPresets[day];
+                if (!p) return;
+
+                this.prizePool = p.prizePool;
+                this.totalJewels = p.totalJewels;
+                this.lifeReserve = p.lifeReserve;
+                this.teams = JSON.parse(JSON.stringify(p.teams));
 
                 // Update Story Balloon
-                const bEmoji = document.getElementById('storyBalloonEmoji');
-                const bTag = document.getElementById('storyBalloonDayTag');
-                const bText = document.getElementById('storyBalloonText');
-                if (bEmoji) bEmoji.innerText = preset.emoji || '💬';
-                if (bTag) bTag.innerText = `DAY ${dayNum} 스토리`;
-                if (bText) bText.innerText = preset.storyText;
+                document.getElementById('storyEmoji').innerText = p.emoji;
+                document.getElementById('storyBadge').innerText = p.badgeText;
+                document.getElementById('storyTitle').innerText = p.dayTitle;
+                document.getElementById('storyContent').innerText = p.storyText;
 
-                this.updateTimelineActiveButton(dayNum);
-                this.log(`[D-${dayNum}] ${preset.storyText}`, 'normal');
+                // Update Stepper Button Active styles
+                for (let i = 0; i <= 9; i++) {
+                    const btn = document.getElementById(`tbtn-${i}`);
+                    if (btn) {
+                        if (i === day) {
+                            btn.className = 'timeline-btn p-2 rounded-xl border-2 border-blue-600 bg-blue-50 text-blue-700 text-center font-bold shadow-xs';
+                        } else {
+                            btn.className = 'timeline-btn p-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-center transition-all';
+                        }
+                    }
+                }
+
                 this.render();
             }
 
-            bindControls() {
-                const tabs = [
-                    { id: 'tabModeTeams', container: 'viewTeamsContainer' },
-                    { id: 'tabModeJewels', container: 'viewJewelsContainer' },
-                    { id: 'tabModeLife', container: 'viewLifeContainer' }
-                ];
-
-                tabs.forEach(t => {
-                    const btn = document.getElementById(t.id);
-                    if (btn) {
-                        btn.onclick = () => {
-                            tabs.forEach(other => {
-                                document.getElementById(other.id).classList.remove('active', 'text-white');
-                                document.getElementById(other.id).classList.add('text-neutral-400');
-                                document.getElementById(other.container).classList.add('hidden');
-                            });
-                            btn.classList.add('active', 'text-white');
-                            btn.classList.remove('text-neutral-400');
-                            document.getElementById(t.container).classList.remove('hidden');
-                        };
-                    }
-                });
-            }
-
-            toyAction(type) {
-                if (type === 'BUY_LIFE') {
+            trade(type) {
+                if (type === 'WHITE_BUY_LIFE') {
                     if (this.teams.WHITE.jewels < 20) {
-                        alert('화이트 팀의 보석이 부족해요!');
+                        alert('화이트 팀의 보석이 부족합니다!');
                         return;
                     }
                     if (this.teams.BLUE.life < 1) {
-                        alert('블루 팀에 남은 라이프가 없어요!');
+                        alert('블루 팀에 팔 수 있는 라이프가 없습니다!');
                         return;
                     }
                     this.teams.WHITE.jewels -= 20;
                     this.teams.BLUE.jewels += 20;
-                    this.teams.BLUE.life -= 1;
                     this.teams.WHITE.life += 1;
-                    this.showToast('화이트: 라이프 샀다! 살았다! (보석 -20, 라이프 +1)', '🤝');
-                    this.log('🤝 [거래] 화이트가 블루에게 20보석을 주고 라이프 1개를 샀어요!', 'trade');
-                } else if (type === 'TRADE_CREDIT') {
-                    if (this.teams.RED.credits < 10) {
-                        alert('레드 팀의 크레딧이 부족해요!');
-                        return;
-                    }
-                    if (this.teams.BLUE.life < 1) {
-                        alert('블루 팀에 남은 라이프가 없어요!');
-                        return;
-                    }
-                    this.teams.RED.credits -= 10;
-                    this.teams.BLUE.credits += 10;
                     this.teams.BLUE.life -= 1;
-                    this.teams.RED.life += 1;
-                    this.showToast('레드: 크레딧으로 라이프 교환 성공! (크레딧 -10, 라이프 +1)', '⚡');
-                    this.log('⚡ [교환] 레드가 블루에게 크레딧 10개를 주고 라이프 1개를 얻었어요!', 'trade');
-                } else if (type === 'WAR_OUTBREAK') {
+                    this.showToast('거래 성공! 화이트 보석 -20 ➔ 블루 보석 +20, 라이프 1개 전달', '🤝');
+                    this.log('🤝 [평화 거래] 화이트가 블루에게 20보석을 주고 라이프 1개를 샀어요!', 'trade');
+                } else if (type === 'DECLARE_WAR') {
                     if (this.teams.WHITE.jewels < 15) {
-                        alert('화이트 팀 보석이 부족해 전쟁을 못 열어요!');
+                        alert('전쟁 선포 비용(15보석)이 부족합니다!');
                         return;
                     }
                     document.body.classList.add('screen-war-shake');
                     setTimeout(() => document.body.classList.remove('screen-war-shake'), 400);
 
                     this.teams.WHITE.jewels -= 15;
-                    this.teams.BLACK.jewels += 15;
                     this.prizePool = Math.max(0, this.prizePool - 15000000);
 
-                    const lootJ = Math.round(this.teams.BLUE.jewels * 0.5);
-                    const lootL = Math.floor(this.teams.BLUE.life * 0.5);
-                    this.teams.BLUE.jewels -= lootJ;
-                    this.teams.WHITE.jewels += lootJ;
-                    this.teams.BLUE.life -= lootL;
-                    this.teams.WHITE.life += lootL;
+                    const lootedJewels = Math.round(this.teams.BLUE.jewels * 0.5);
+                    const lootedLife = Math.floor(this.teams.BLUE.life * 0.5);
+                    const lootedCredits = Math.round(this.teams.BLUE.credits * 0.5);
 
-                    this.showToast('💥 쾅!! 전쟁 선포! 보석 15개 소멸 & 블루 창고 50% 약탈!', '💣');
-                    this.log(`💣 [전쟁] 화이트가 블루 창고 50% 약탈 (보석 +${lootJ}💎, 라이프 +${lootL}❤️)`, 'war');
-                } else if (type === 'BUY_GRENADE') {
+                    this.teams.BLUE.jewels -= lootedJewels;
+                    this.teams.BLUE.life -= lootedLife;
+                    this.teams.BLUE.credits -= lootedCredits;
+
+                    this.teams.WHITE.jewels += lootedJewels;
+                    this.teams.WHITE.life += lootedLife;
+                    this.teams.WHITE.credits += lootedCredits;
+
+                    this.teams.BLACK.jewels += 15; // Black Mart absorbs the war declaration fee!
+
+                    this.showToast(`쾅! 전쟁 발발! 15보석 소각 & 블루 자원 50% 약탈 완료!`, '💣');
+                    this.log(`💣 [전쟁 선포] 화이트가 블루를 공격! 15보석 소멸 & 블루 창고 50% 강탈 (+${lootedJewels}💎, +${lootedLife}❤️)!`, 'war');
+                } else if (type === 'BUY_WEAPON') {
                     if (this.teams.WHITE.jewels < 30) {
-                        alert('화이트 팀 보석이 부족해요!');
+                        alert('보석이 부족하여 A급 무기를 살 수 없습니다!');
                         return;
                     }
                     this.teams.WHITE.jewels -= 30;
                     this.teams.BLACK.jewels += 30;
-                    this.showToast('수류탄(A급) 구매 완료! 블랙 아저씨 보석 +30!', '💣');
-                    this.log('💣 [무기 구매] 화이트가 블랙 상점에서 A급 수류탄을 30보석에 샀어요!', 'war');
-                } else if (type === 'BUY_FOOD') {
-                    if (this.teams.WHITE.jewels < 1) {
-                        alert('보석이 없어서 밥을 못 사요!');
-                        return;
-                    }
-                    this.teams.WHITE.jewels -= 1;
-                    this.teams.BLACK.jewels += 1;
-                    this.showToast('맛있는 밥 냠냠! (보석 -1, 블랙 +1)', '🍚');
-                    this.log('🍚 [식료품] 화이트가 블랙 마트에서 1보석으로 밥을 사먹었어요!', 'trade');
+                    this.showToast('수류탄(A급) 구매 완료! 블랙 마트 보석 +30!', '⚔️');
+                    this.log('⚔️ [무기 구매] 화이트가 블랙 상점에서 A급 수류탄을 30보석에 샀어요!', 'war');
                 }
                 this.render();
             }
@@ -1459,199 +1247,169 @@
                 const box = document.getElementById('boardActionLogs');
                 if (!box) return;
                 const div = document.createElement('div');
-                div.className = (type === 'war') ? 'text-[#ef321f] font-bold' : (type === 'trade' ? 'text-[#3898ec]' : 'text-neutral-300');
+                div.className = (type === 'war') ? 'text-red-600 font-bold' : (type === 'trade' ? 'text-blue-600 font-medium' : 'text-slate-700');
                 div.innerText = `• ${msg}`;
                 box.appendChild(div);
                 box.scrollTop = box.scrollHeight;
             }
 
-            toggleHudTheme() {
-                this.hudTheme = (this.hudTheme === 'light') ? 'dark' : 'light';
-                const btn = document.getElementById('btnHudThemeToggle');
-                if (btn) {
-                    btn.innerText = (this.hudTheme === 'light') 
-                        ? '📺 방송 송출형 (Light HUD)' 
-                        : '⬛ 다크 모드 (Dark HUD)';
-                }
-                this.renderStockPills();
-            }
-
-            renderStockPills() {
-                const container = document.getElementById('teamStockPillsContainer');
-                const topContainer = document.getElementById('topStockPillsContainer');
-                const teamKeys = ['WHITE', 'BLUE', 'RED', 'BLACK'];
-                const isLight = (this.hudTheme === 'light');
-
-                if (container) {
-                    let html = '';
-                    teamKeys.forEach(k => {
-                        const t = this.teams[k];
-                        const dotColor = (k === 'WHITE') ? 'bg-[#d1d5db] border border-neutral-400' :
-                                         (k === 'BLUE') ? 'bg-[#1646f5]' :
-                                         (k === 'RED') ? 'bg-[#ef321f]' : 'bg-[#1a1a1a] border border-neutral-500';
-                        
-                        const cardBg = isLight 
-                            ? 'bg-[#ebedf1] border border-[#d6dbe1] shadow-xs' 
-                            : 'bg-[#181818] border border-[#333] shadow-md';
-                        const labelColor = isLight ? 'text-neutral-500' : 'text-neutral-400';
-                        const teamNameColor = isLight ? 'text-[#1f2937]' : 'text-[#f0eee7]';
-
-                        const jewelsDisp = Number.isInteger(t.jewels) ? t.jewels : t.jewels.toFixed(1);
-                        const lifeDisp = t.life;
-                        const creditsDisp = Number.isInteger(t.credits) ? t.credits : t.credits.toFixed(1);
-
-                        html += `
-                        <div class="px-3.5 py-2.5 rounded-2xl ${cardBg} flex items-center justify-between transition-all hover:scale-[1.02]">
-                            <div class="flex items-center space-x-2 shrink-0">
-                                <span class="w-3 h-3 rounded-full ${dotColor} inline-block shrink-0"></span>
-                                <span class="${teamNameColor} font-bold text-sm tracking-tight">${t.name}</span>
-                            </div>
-
-                            <div class="flex items-center space-x-3 pr-0.5">
-                                <div class="flex items-center space-x-1">
-                                    <img src="./brand/icon-jewel.svg" class="w-3.5 h-3.5 object-contain" alt="보석">
-                                    <div class="flex flex-col items-center leading-none">
-                                        <span class="font-mono font-bold text-xs sm:text-sm text-[#e58a2d]">${jewelsDisp}</span>
-                                        <span class="text-[9px] ${labelColor} font-medium mt-0.5">보석</span>
-                                    </div>
-                                </div>
-
-                                <div class="flex items-center space-x-1">
-                                    <img src="./brand/icon-life.svg" class="w-2.5 h-3.5 object-contain" alt="라이프">
-                                    <div class="flex flex-col items-center leading-none">
-                                        <span class="font-mono font-bold text-xs sm:text-sm text-[#ef321f]">${lifeDisp}</span>
-                                        <span class="text-[9px] ${labelColor} font-medium mt-0.5">라이프</span>
-                                    </div>
-                                </div>
-
-                                <div class="flex items-center space-x-1">
-                                    <img src="./brand/icon-credit.svg" class="w-2.5 h-3.5 object-contain" alt="크레딧">
-                                    <div class="flex flex-col items-center leading-none">
-                                        <span class="font-mono font-bold text-xs sm:text-sm text-[#16a34a]">${creditsDisp}</span>
-                                        <span class="text-[9px] ${labelColor} font-medium mt-0.5">크레딧</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>`;
-                    });
-                    container.innerHTML = html;
-                }
-
-                if (topContainer) {
-                    let topHtml = '';
-                    teamKeys.forEach(k => {
-                        const t = this.teams[k];
-                        const dotColor = (k === 'WHITE') ? 'bg-white' :
-                                         (k === 'BLUE') ? 'bg-[#1646f5]' :
-                                         (k === 'RED') ? 'bg-[#ef321f]' : 'bg-neutral-500';
-                        topHtml += `
-                        <div class="flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-[#181818] border border-[#333] font-mono text-xs shrink-0">
-                            <span class="w-2 h-2 rounded-full ${dotColor}"></span>
-                            <span class="font-bold text-[#f0eee7]">${t.name}</span>
-                            <span class="text-amber-400 font-bold ml-1">${t.jewels.toFixed(0)}💎</span>
-                            <span class="text-[#ef321f] font-bold">${t.life}❤️</span>
-                            <span class="text-emerald-400 font-bold">${t.credits.toFixed(0)}⚡</span>
-                        </div>`;
-                    });
-                    topContainer.innerHTML = topHtml;
-                }
-            }
-
             render() {
-                this.renderStockPills();
+                const circ = Object.values(this.teams).reduce((s, t) => s + t.jewels, 0);
+                const unitVal = circ > 0 ? Math.round(this.prizePool / circ) : 0;
 
-                const circ = this.teams.WHITE.jewels + this.teams.BLUE.jewels + this.teams.RED.jewels + this.teams.BLACK.jewels;
-                const unitVal = (circ > 0) ? Math.floor(this.prizePool / circ) : 0;
-                const unitBadge = document.getElementById('boardUnitValBadge');
-                if (unitBadge) unitBadge.innerText = `${unitVal.toLocaleString()} 원`;
+                // Update Header Badge
+                const badge = document.getElementById('boardUnitValBadge');
+                if (badge) {
+                    badge.innerText = `💎 보석 1개 = ${unitVal.toLocaleString()} 원`;
+                }
 
-                // Render Team Cards
-                const container = document.getElementById('viewTeamsContainer');
-                if (!container) return;
+                // Update Black Mart Card
+                const blackJewelsEl = document.getElementById('blackMartJewels');
+                if (blackJewelsEl) {
+                    const bJewels = this.teams.BLACK.jewels;
+                    blackJewelsEl.innerText = `${Number.isInteger(bJewels) ? bJewels : bJewels.toFixed(1)} 개`;
+                }
 
-                let cardsHtml = '';
-                const teamKeys = ['WHITE', 'BLUE', 'RED', 'BLACK'];
-                teamKeys.forEach(k => {
-                    const t = this.teams[k];
-                    const prizeShare = (t.jewels * unitVal / 1e6).toFixed(1);
-                    const jewelPct = (circ > 0) ? ((t.jewels / circ) * 100).toFixed(0) : '0';
+                // Render Sticky Top Stock Pills (3 teams + Black exception)
+                const topContainer = document.getElementById('topStockPillsContainer');
+                if (topContainer) {
+                    let pWhite = this.teams.WHITE;
+                    let pBlue = this.teams.BLUE;
+                    let pRed = this.teams.RED;
+                    let pBlack = this.teams.BLACK;
 
-                    // Visual mini life capsules
-                    let lifeIconsHtml = '';
-                    const dispLife = Math.min(20, t.life);
-                    for (let i = 0; i < dispLife; i++) {
-                        lifeIconsHtml += `
-                        <span title="라이프 #${i+1}">
-                            <svg viewBox="0 0 10 28" class="w-2.5 h-5 drop-shadow">
-                                <rect x="1" y="0.5" width="8" height="2.5" rx="0.5" fill="${k === 'BLUE' ? '#1646f5' : (k === 'WHITE' ? '#f0eee7' : '#ef321f')}" />
-                                <rect x="2" y="3" width="6" height="22" rx="0.5" fill="#3898ec" />
-                                <rect x="3" y="4" width="1.2" height="20" rx="0.3" fill="#ffffff" opacity="0.9" />
-                                <rect x="1" y="25" width="8" height="2.5" rx="0.5" fill="${k === 'BLUE' ? '#1646f5' : (k === 'WHITE' ? '#f0eee7' : '#ef321f')}" />
-                            </svg>
-                        </span>`;
-                    }
-                    if (t.life === 0) {
-                        lifeIconsHtml = '<span class="text-neutral-500 text-[10px] font-mono">남은 라이프 0개 (위험!)</span>';
-                    }
-
-                    cardsHtml += `
-                    <div class="brutalist-border bg-[#121212] p-4 flex flex-col justify-between relative hover:border-[#484848] transition-colors" style="border-top: 3px solid ${t.color}">
-                        <div>
-                            <div class="flex justify-between items-start">
-                                <div>
-                                    <span class="font-mono text-[10px] text-neutral-400 uppercase tracking-widest">${k}</span>
-                                    <h3 class="font-cafe24 text-2xl text-[#f0eee7]">${t.name}</h3>
-                                    <div class="text-xs text-neutral-400 mt-0.5">${t.leader}</div>
-                                    <div class="mt-1 px-1.5 py-0.5 bg-[#181818] border border-[#2a2a2a] inline-block font-mono text-[10px] text-amber-300 font-bold">${t.desc}</div>
-                                </div>
-                                <div class="flex flex-col items-end">
-                                    <img src="${t.avatar}" class="h-10 object-contain mb-1" alt="${t.name} 아바타">
-                                    <span class="px-1.5 py-0.5 bg-[#181818] border border-[#333] font-mono text-[10px] text-neutral-300 font-bold">
-                                        ${t.surv}/${t.initial}명 생존
-                                    </span>
-                                </div>
-                            </div>
-
-                            <!-- Resources Box -->
-                            <div class="mt-3.5 space-y-2 font-mono text-xs">
-                                <!-- Jewels -->
-                                <div class="p-2 bg-[#181818] border border-[#262626] flex justify-between items-center">
-                                    <div class="flex items-center space-x-1.5 font-bold text-amber-400">
-                                        <img src="./brand/icon-jewel.svg" class="w-3.5 h-3.5 object-contain" alt="보석">
-                                        <span>보석: ${t.jewels.toFixed(1)}개</span>
-                                    </div>
-                                    <span class="text-emerald-400 font-bold">${prizeShare}백만 원</span>
-                                </div>
-
-                                <!-- Life -->
-                                <div class="p-2 bg-[#181818] border border-[#262626]">
-                                    <div class="flex justify-between items-center font-bold text-[#ef321f]">
-                                        <div class="flex items-center space-x-1.5">
-                                            <img src="./brand/icon-life.svg" class="w-2 h-3.5 object-contain" alt="라이프">
-                                            <span>라이프: ${t.life}개</span>
-                                        </div>
-                                        <span class="text-[10px] text-neutral-400">매일 밤 -${t.surv}개 소모</span>
-                                    </div>
-                                    <div class="mt-2 p-1.5 bg-[#0a0a0a] border border-[#222] flex flex-wrap gap-1 items-center min-h-[28px]">
-                                        ${lifeIconsHtml}
-                                    </div>
-                                </div>
-
-                                <!-- Credits -->
-                                <div class="p-2 bg-[#181818] border border-[#262626] flex justify-between items-center">
-                                    <div class="flex items-center space-x-1.5 font-bold text-amber-400">
-                                        <img src="./brand/icon-credit.svg" class="w-2.5 h-3.5 object-contain" alt="크레딧">
-                                        <span>크레딧: ${t.credits.toFixed(1)}개</span>
-                                    </div>
-                                    <span class="text-neutral-500 text-[10px]">생산 연료</span>
-                                </div>
-                            </div>
+                    topContainer.innerHTML = `
+                        <div class="px-2.5 py-1 rounded-lg bg-slate-100 border border-slate-200 text-xs flex items-center space-x-2">
+                            <span class="w-2 h-2 rounded-full bg-slate-400"></span>
+                            <span class="font-bold text-slate-800">화이트:</span>
+                            <span class="text-amber-600 font-bold">💎${Number.isInteger(pWhite.jewels) ? pWhite.jewels : pWhite.jewels.toFixed(1)}</span>
+                            <span class="text-red-600 font-bold">❤️${pWhite.life}</span>
+                            <span class="text-slate-600">⚡${pWhite.credits.toFixed(1)}</span>
                         </div>
-                    </div>`;
-                });
-                container.innerHTML = cardsHtml;
+                        <div class="px-2.5 py-1 rounded-lg bg-blue-50 border border-blue-200 text-xs flex items-center space-x-2">
+                            <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+                            <span class="font-bold text-blue-900">블루:</span>
+                            <span class="text-amber-600 font-bold">💎${Number.isInteger(pBlue.jewels) ? pBlue.jewels : pBlue.jewels.toFixed(1)}</span>
+                            <span class="text-red-600 font-bold">❤️${pBlue.life}</span>
+                            <span class="text-slate-600">⚡${pBlue.credits.toFixed(1)}</span>
+                        </div>
+                        <div class="px-2.5 py-1 rounded-lg bg-red-50 border border-red-200 text-xs flex items-center space-x-2">
+                            <span class="w-2 h-2 rounded-full bg-red-600"></span>
+                            <span class="font-bold text-red-900">레드:</span>
+                            <span class="text-amber-600 font-bold">💎${Number.isInteger(pRed.jewels) ? pRed.jewels : pRed.jewels.toFixed(1)}</span>
+                            <span class="text-red-600 font-bold">❤️${pRed.life}</span>
+                            <span class="text-slate-600">⚡${pRed.credits.toFixed(1)}</span>
+                        </div>
+                        <div class="px-2.5 py-1 rounded-lg bg-zinc-800 text-white text-xs flex items-center space-x-2">
+                            <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+                            <span class="font-bold text-amber-300">블랙 상점:</span>
+                            <span class="text-amber-400 font-bold">💎${Number.isInteger(pBlack.jewels) ? pBlack.jewels : pBlack.jewels.toFixed(1)}</span>
+                        </div>
+                    `;
+                }
 
-                // Render 200 Jewels Map
+                // Render 3 PLAYER TEAMS CARDS (화이트, 블루, 레드)
+                const container = document.getElementById('viewTeamsContainer');
+                if (container) {
+                    const playerKeys = ['WHITE', 'BLUE', 'RED'];
+                    let cardsHtml = '';
+
+                    playerKeys.forEach(k => {
+                        const t = this.teams[k];
+                        const borderTopClass = (k === 'WHITE') ? 'team-card-white' : (k === 'BLUE' ? 'team-card-blue' : 'team-card-red');
+                        const badgeBg = (k === 'WHITE') ? 'bg-slate-100 text-slate-800 border-slate-300' :
+                                        (k === 'BLUE') ? 'bg-blue-50 text-blue-700 border-blue-200' : 'bg-red-50 text-red-700 border-red-200';
+                        
+                        // Life visual icons
+                        let lifeIconsHtml = '';
+                        for (let i = 0; i < Math.min(25, t.life); i++) {
+                            lifeIconsHtml += `<img src="./brand/icon-life.svg" class="w-2.5 h-3.5 object-contain inline-block" alt="라이프">`;
+                        }
+                        if (t.life > 25) {
+                            lifeIconsHtml += `<span class="text-[10px] text-slate-500 font-bold">+${t.life - 25}</span>`;
+                        } else if (t.life === 0) {
+                            lifeIconsHtml = `<span class="text-[11px] text-red-500 font-bold">라이프 0개 (최후 1인 예외 생존)</span>`;
+                        }
+
+                        // Surviving bar
+                        const survPct = Math.round((t.surv / t.initial) * 100);
+
+                        cardsHtml += `
+                        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-xs hover:shadow-md transition-all ${borderTopClass} flex flex-col justify-between">
+                            <div>
+                                <!-- Header -->
+                                <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                                    <div class="flex items-center space-x-3">
+                                        <img src="${t.avatar}" class="w-12 h-12 rounded-xl object-cover border border-slate-200 shadow-xs" alt="${t.leader}">
+                                        <div>
+                                            <div class="flex items-center space-x-1.5">
+                                                <span class="text-base font-bold text-slate-900">${t.name} 팀</span>
+                                                <span class="px-2 py-0.5 rounded-md border text-[11px] font-bold ${badgeBg}">
+                                                    ${t.surv}명 생존 (${t.initial}명 중)
+                                                </span>
+                                            </div>
+                                            <div class="text-xs text-slate-500 mt-0.5">리더: ${t.leader}</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Survival Progress -->
+                                <div class="mt-4">
+                                    <div class="flex justify-between text-xs text-slate-500 mb-1">
+                                        <span>생존율</span>
+                                        <span class="font-bold text-slate-800">${survPct}%</span>
+                                    </div>
+                                    <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+                                        <div class="h-full bg-blue-600 rounded-full" style="width: ${survPct}%"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Resources Grid -->
+                                <div class="mt-5 space-y-3">
+                                    <!-- Jewels -->
+                                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/80 flex justify-between items-center">
+                                        <div class="flex items-center space-x-2 font-bold text-slate-800 text-sm">
+                                            <img src="./brand/icon-jewel.svg" class="w-4 h-4 object-contain" alt="보석">
+                                            <span>보석: ${Number.isInteger(t.jewels) ? t.jewels : t.jewels.toFixed(1)}개</span>
+                                        </div>
+                                        <span class="text-xs text-emerald-600 font-bold">약 ${(Math.round(t.jewels * unitVal) / 10000).toLocaleString()}만 원</span>
+                                    </div>
+
+                                    <!-- Life -->
+                                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/80">
+                                        <div class="flex justify-between items-center text-xs font-bold text-red-600 mb-1.5">
+                                            <div class="flex items-center space-x-1.5">
+                                                <img src="./brand/icon-life.svg" class="w-2.5 h-3.5 object-contain" alt="라이프">
+                                                <span>라이프: ${t.life}개</span>
+                                            </div>
+                                            <span class="text-[11px] text-slate-500 font-normal">매일 밤 -${t.surv}개 소모</span>
+                                        </div>
+                                        <div class="flex flex-wrap gap-1 items-center min-h-[24px]">
+                                            ${lifeIconsHtml}
+                                        </div>
+                                    </div>
+
+                                    <!-- Credits -->
+                                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/80 flex justify-between items-center">
+                                        <div class="flex items-center space-x-2 font-bold text-amber-600 text-sm">
+                                            <img src="./brand/icon-credit.svg" class="w-3.5 h-4 object-contain" alt="크레딧">
+                                            <span>크레딧: ${t.credits.toFixed(1)}개</span>
+                                        </div>
+                                        <span class="text-xs text-slate-500">생산 에너지</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-4 pt-3 border-t border-slate-100 text-xs text-slate-500 font-medium">
+                                ${t.desc}
+                            </div>
+                        </div>`;
+                    });
+
+                    container.innerHTML = cardsHtml;
+                }
+
+                // Render 200 Jewels Token Matrix
                 const jewelGrid = document.getElementById('jewelTokenMatrix');
                 if (jewelGrid) {
                     const whiteCount = Math.round(this.teams.WHITE.jewels);
@@ -1666,19 +1424,19 @@
 
                     let jHtml = '';
                     for (let i = 1; i <= Math.max(200, Math.floor(circ)); i++) {
-                        let colorClass = 'bg-[#333] border-[#555]';
+                        let colorClass = 'bg-slate-200 border-slate-300';
                         let ownerName = '미발행';
                         if (i <= whiteCount) {
-                            colorClass = 'bg-[#f0eee7] border-white shadow-[0_0_4px_rgba(240,238,231,0.6)]';
+                            colorClass = 'bg-slate-400 border-slate-500';
                             ownerName = '화이트 팀 소유';
                         } else if (i <= whiteCount + blueCount) {
-                            colorClass = 'bg-[#1646f5] border-blue-400 shadow-[0_0_4px_rgba(22,70,245,0.7)]';
+                            colorClass = 'bg-blue-600 border-blue-700';
                             ownerName = '블루 팀 소유';
                         } else if (i <= whiteCount + blueCount + redCount) {
-                            colorClass = 'bg-[#ef321f] border-red-400 shadow-[0_0_4px_rgba(239,50,31,0.7)]';
+                            colorClass = 'bg-red-600 border-red-700';
                             ownerName = '레드 팀 소유';
                         } else if (i <= whiteCount + blueCount + redCount + blackCount) {
-                            colorClass = 'bg-amber-400 border-yellow-300 shadow-[0_0_4px_rgba(251,191,36,0.8)]';
+                            colorClass = 'bg-zinc-800 border-zinc-900';
                             ownerName = '블랙 마트 금고';
                         }
 
@@ -1687,7 +1445,7 @@
                     jewelGrid.innerHTML = jHtml;
                 }
 
-                // Render 50 Life Matrix
+                // Render 50 Life Capsule Grid
                 const lifeGrid = document.getElementById('lifeCapsuleMatrix');
                 if (lifeGrid) {
                     const bLife = this.teams.BLUE.life;
@@ -1700,38 +1458,37 @@
                     document.getElementById('lifeMapBlue').innerText = bLife;
                     document.getElementById('lifeMapWhite').innerText = wLife;
                     document.getElementById('lifeMapRed').innerText = rLife;
-                    document.getElementById('lifeMapUsed').innerText = consumed;
 
                     let lHtml = '';
                     for (let i = 1; i <= 50; i++) {
-                        let fill = '#3898ec';
-                        let capColor = '#1646f5';
+                        let capColor = '#2563eb';
+                        let fill = '#3b82f6';
                         let glow = 'capsule-glow';
                         let statusText = '';
 
                         if (i <= bLife) {
-                            capColor = '#1646f5';
-                            fill = '#3898ec';
+                            capColor = '#2563eb';
+                            fill = '#3b82f6';
                             glow = 'capsule-glow';
                             statusText = '블루 보유';
                         } else if (i <= bLife + wLife) {
-                            capColor = '#ffffff';
-                            fill = '#d8e5f2';
+                            capColor = '#64748b';
+                            fill = '#94a3b8';
                             glow = 'capsule-white-glow';
                             statusText = '화이트 보유';
                         } else if (i <= bLife + wLife + rLife) {
-                            capColor = '#ef321f';
-                            fill = '#ff7b6b';
+                            capColor = '#dc2626';
+                            fill = '#ef4444';
                             glow = 'capsule-red-glow';
                             statusText = '레드 보유';
                         } else if (i <= 50 - reserve) {
-                            capColor = '#333333';
-                            fill = '#222222';
-                            glow = 'opacity-25';
+                            capColor = '#cbd5e1';
+                            fill = '#e2e8f0';
+                            glow = 'opacity-40';
                             statusText = '소모/탈락';
                         } else {
-                            capColor = '#9da3a8';
-                            fill = '#5a7894';
+                            capColor = '#94a3b8';
+                            fill = '#cbd5e1';
                             glow = 'opacity-60';
                             statusText = '지하 미생산 매장량';
                         }
@@ -1754,11 +1511,11 @@
         // Initialize Board
         window.board = new InteractiveAssetBoard();
 
-        // Chart.js Configs
+        // Chart.js Configs (Light Theme)
         const days = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-        Chart.defaults.color = '#888888';
-        Chart.defaults.borderColor = '#222222';
-        Chart.defaults.font.family = "'IBM Plex Mono', monospace";
+        Chart.defaults.color = '#64748b';
+        Chart.defaults.borderColor = '#e2e8f0';
+        Chart.defaults.font.family = "'Pretendard', sans-serif";
 
         const ctxSurvival = document.getElementById('survivalChart')?.getContext('2d');
         if (ctxSurvival) {
@@ -1767,16 +1524,16 @@
                 data: {
                     labels: days.map(d => `Day ${d}`),
                     datasets: [
-                        { label: '화이트 (최종 1명)', data: [6.0, 6.0, 5.85, 5.85, 1.29, 1.0, 1.0, 1.0, 1.0], borderColor: '#f0eee7', borderWidth: 2.5, tension: 0.2 },
-                        { label: '블루 (최종 1명)', data: [3.0, 3.0, 3.0, 2.75, 1.20, 1.0, 1.0, 1.0, 1.0], borderColor: '#1646f5', borderWidth: 2, tension: 0.2 },
-                        { label: '레드 (최종 1명)', data: [3.0, 3.0, 3.0, 2.56, 1.11, 1.0, 1.0, 1.0, 1.0], borderColor: '#ef321f', borderWidth: 2, tension: 0.2 },
-                        { label: '블랙 (최종 1명)', data: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0], borderColor: '#f59e0b', borderDash: [4, 4], borderWidth: 2 }
+                        { label: '화이트 (최종 1명)', data: [6.0, 6.0, 5.85, 5.85, 1.29, 1.0, 1.0, 1.0, 1.0], borderColor: '#64748b', borderWidth: 2.5, tension: 0.2 },
+                        { label: '블루 (최종 1명)', data: [3.0, 3.0, 3.0, 2.75, 1.20, 1.0, 1.0, 1.0, 1.0], borderColor: '#2563eb', borderWidth: 2.5, tension: 0.2 },
+                        { label: '레드 (최종 1명)', data: [3.0, 3.0, 3.0, 2.56, 1.11, 1.0, 1.0, 1.0, 1.0], borderColor: '#dc2626', borderWidth: 2.5, tension: 0.2 },
+                        { label: '블랙 마트 (1명)', data: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0], borderColor: '#d97706', borderDash: [4, 4], borderWidth: 2 }
                     ]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } },
+                    plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11, weight: 'bold' } } } },
                     scales: { y: { min: 0, max: 7, ticks: { stepSize: 1 } } }
                 }
             });
@@ -1787,11 +1544,12 @@
             new Chart(ctxPrize, {
                 type: 'bar',
                 data: {
-                    labels: ['🥇 블랙 (1명)', '🥈 화이트 (1명)', '🥉 블루 (1명)', '💥 레드 (1명)'],
+                    labels: ['🥇 블랙 (마트)', '🥈 화이트 (거주팀)', '🥉 블루 (거주팀)', '💥 레드 (거주팀)'],
                     datasets: [{
                         label: '1인당 기대 상금 (만 원)',
                         data: [7625, 1184, 1068, 339],
-                        backgroundColor: ['#d97706', '#f0eee7', '#1646f5', '#ef321f'],
+                        backgroundColor: ['#d97706', '#64748b', '#2563eb', '#dc2626'],
+                        borderRadius: 6,
                         borderWidth: 0
                     }]
                 },
