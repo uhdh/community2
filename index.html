@@ -185,6 +185,19 @@
         </div>
     </nav>
 
+    <!-- Sticky Sub-Nav Live Stock Bar (Compact Broadcast HUD) -->
+    <div id="stickyStockBar" class="sticky top-16 z-40 bg-[#0c0c0c]/95 backdrop-blur border-b border-[#262626] py-2 px-4 shadow-md hidden sm:block">
+        <div class="max-w-7xl mx-auto flex items-center justify-between gap-3">
+            <div class="flex items-center space-x-2 font-mono text-xs text-neutral-400 shrink-0">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span class="font-bold text-[#f0eee7]">실시간 팀 재고:</span>
+            </div>
+            <div id="topStockPillsContainer" class="flex items-center space-x-2 sm:space-x-3 overflow-x-auto py-0.5">
+                <!-- Dynamically injected by JS -->
+            </div>
+        </div>
+    </div>
+
     <!-- Running Marquee Ribbon -->
     <div class="marquee">
         <div class="marquee__inner">
@@ -526,6 +539,27 @@
                 </div>
                 <div class="text-[11px] text-neutral-400 font-sans">
                     * 초기 타운 총량: 200💎 / 43❤️ / 36⚡ (1일차 거래로 각 진영 배분)
+                </div>
+            </div>
+
+            <!-- LIVE INVENTORY STATUS PILL BAR (공식 방송 송출 HUD 대시보드) -->
+            <div class="mt-6 p-4 bg-[#101010] brutalist-border">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-3 pb-2 border-b border-[#262626]">
+                    <div class="flex items-center space-x-2 font-mono text-xs font-bold text-[#f0eee7]">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span>실시간 팀별 현재 재고량 대시보드 (LIVE INVENTORY HUD)</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="font-mono text-[11px] text-neutral-400">HUD 테마:</span>
+                        <button id="btnHudThemeToggle" onclick="board.toggleHudTheme()" class="px-2.5 py-1 bg-[#1e1e1e] hover:bg-[#2a2a2a] border border-[#444] rounded text-[11px] font-mono text-neutral-200 transition-colors">
+                            📺 방송 송출형 (Light HUD)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 4 Team Stock Pills Grid (Matching screenshot layout) -->
+                <div id="teamStockPillsContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 transition-all">
+                    <!-- Dynamically injected by JS with official icons, pill shapes, and numbers -->
                 </div>
             </div>
 
@@ -996,6 +1030,7 @@
                 };
 
                 // Current working state (defaults to Day 2 verified)
+                this.hudTheme = 'light';
                 this.loadPreset(2);
                 this.bindControls();
             }
@@ -1193,13 +1228,121 @@
                 }
             }
 
+            toggleHudTheme() {
+                this.hudTheme = (this.hudTheme === 'light') ? 'dark' : 'light';
+                const btn = document.getElementById('btnHudThemeToggle');
+                if (btn) {
+                    btn.innerText = (this.hudTheme === 'light') 
+                        ? '📺 방송 송출형 (Light HUD)' 
+                        : '⬛ 다크 모드 (Dark HUD)';
+                }
+                this.renderStockPills();
+            }
+
+            renderStockPills() {
+                const container = document.getElementById('teamStockPillsContainer');
+                const topContainer = document.getElementById('topStockPillsContainer');
+                const teamKeys = ['WHITE', 'BLUE', 'RED', 'BLACK'];
+                const isLight = (this.hudTheme === 'light');
+
+                // 1. Render Main Section 02 HUD Pills (matching user reference screenshot)
+                if (container) {
+                    let html = '';
+                    teamKeys.forEach(k => {
+                        const t = this.teams[k];
+                        const dotColor = (k === 'WHITE') ? 'bg-[#d1d5db] border border-neutral-400' :
+                                         (k === 'BLUE') ? 'bg-[#1646f5]' :
+                                         (k === 'RED') ? 'bg-[#ef321f]' : 'bg-[#1a1a1a] border border-neutral-500';
+                        
+                        // Card styling
+                        const cardBg = isLight 
+                            ? 'bg-[#ebedf1] border border-[#d6dbe1] shadow-xs' 
+                            : 'bg-[#181818] border border-[#333] shadow-md';
+                        const labelColor = isLight ? 'text-neutral-500' : 'text-neutral-400';
+                        const teamNameColor = isLight ? 'text-[#1f2937]' : 'text-[#f0eee7]';
+
+                        // Numbers
+                        const jewelsDisp = Number.isInteger(t.jewels) ? t.jewels : t.jewels.toFixed(1);
+                        const lifeDisp = t.life;
+                        const creditsDisp = Number.isInteger(t.credits) ? t.credits : t.credits.toFixed(1);
+
+                        html += `
+                        <div class="px-3.5 py-3 rounded-2xl ${cardBg} flex items-center justify-between transition-all hover:scale-[1.02]">
+                            <!-- Team Bullet + Name -->
+                            <div class="flex items-center space-x-2 pl-0.5 pr-2 shrink-0">
+                                <span class="w-3 h-3 rounded-full ${dotColor} inline-block shrink-0"></span>
+                                <span class="${teamNameColor} font-bold text-sm tracking-tight">${t.name}</span>
+                            </div>
+
+                            <!-- 3 Resources Row (Exactly matching user screenshot) -->
+                            <div class="flex items-center space-x-3 sm:space-x-3.5 pr-0.5">
+                                <!-- Jewel -->
+                                <div class="flex items-center space-x-1">
+                                    <img src="./brand/icon-jewel.svg" class="w-4 h-4 object-contain" alt="보석">
+                                    <div class="flex flex-col items-center leading-none">
+                                        <span class="font-mono font-bold text-xs sm:text-sm text-[#e58a2d]">${jewelsDisp}</span>
+                                        <span class="text-[9px] ${labelColor} font-medium mt-0.5">보석</span>
+                                    </div>
+                                </div>
+
+                                <!-- Life -->
+                                <div class="flex items-center space-x-1">
+                                    <img src="./brand/icon-life.svg" class="w-2.5 h-4 object-contain" alt="라이프">
+                                    <div class="flex flex-col items-center leading-none">
+                                        <span class="font-mono font-bold text-xs sm:text-sm text-[#ef321f]">${lifeDisp}</span>
+                                        <span class="text-[9px] ${labelColor} font-medium mt-0.5">라이프</span>
+                                    </div>
+                                </div>
+
+                                <!-- Credit -->
+                                <div class="flex items-center space-x-1">
+                                    <img src="./brand/icon-credit.svg" class="w-2.5 h-4 object-contain" alt="크레딧">
+                                    <div class="flex flex-col items-center leading-none">
+                                        <span class="font-mono font-bold text-xs sm:text-sm text-[#16a34a]">${creditsDisp}</span>
+                                        <span class="text-[9px] ${labelColor} font-medium mt-0.5">크레딧</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
+                    });
+                    container.innerHTML = html;
+                }
+
+                // 2. Render Sticky Sub-Nav HUD Pills
+                if (topContainer) {
+                    let topHtml = '';
+                    teamKeys.forEach(k => {
+                        const t = this.teams[k];
+                        const dotColor = (k === 'WHITE') ? 'bg-white' :
+                                         (k === 'BLUE') ? 'bg-[#1646f5]' :
+                                         (k === 'RED') ? 'bg-[#ef321f]' : 'bg-neutral-500';
+                        const jewelsDisp = Number.isInteger(t.jewels) ? t.jewels : t.jewels.toFixed(1);
+                        const creditsDisp = Number.isInteger(t.credits) ? t.credits : t.credits.toFixed(1);
+
+                        topHtml += `
+                        <div class="flex items-center space-x-2 px-2.5 py-1 bg-[#181818] border border-[#333] rounded-full font-mono text-xs shrink-0">
+                            <span class="w-2 h-2 rounded-full ${dotColor}"></span>
+                            <span class="text-neutral-200 font-bold">${t.name}</span>
+                            <span class="text-neutral-600">|</span>
+                            <span class="text-[#e58a2d] font-bold">💎${jewelsDisp}</span>
+                            <span class="text-[#ef321f] font-bold">❤️${t.life}</span>
+                            <span class="text-[#16a34a] font-bold">⚡${creditsDisp}</span>
+                        </div>`;
+                    });
+                    topContainer.innerHTML = topHtml;
+                }
+            }
+
             render() {
-                // 1. Calculate circulating jewels and unit value
+                // 1. Render Live Stock Pills HUD
+                this.renderStockPills();
+
+                // 2. Calculate circulating jewels and unit value
                 const circ = this.teams.WHITE.jewels + this.teams.BLUE.jewels + this.teams.RED.jewels + this.teams.BLACK.jewels;
                 const unitVal = (circ > 0) ? Math.floor(this.prizePool / circ) : 0;
                 document.getElementById('boardUnitValBadge').innerText = `${unitVal.toLocaleString()} 원`;
 
-                // 2. Render Team Cards (with official figures!)
+                // 3. Render Team Cards (with official figures!)
                 const container = document.getElementById('viewTeamsContainer');
                 if (!container) return;
 
