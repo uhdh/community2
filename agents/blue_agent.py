@@ -70,7 +70,7 @@ class BluePolicy(BasePolicy):
             # Price scales with life reserve depletion and jewel inflation
             scarcity_ratio = max(0.0, (50 - global_state.life_reserve) / 50.0)
             inflation_ratio = (
-                global_state.total_circulating_jewels / 310.0
+                global_state.total_circulating_jewels / 200.0
                 if global_state.total_circulating_jewels > 0
                 else 1.0
             )

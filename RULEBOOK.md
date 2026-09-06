@@ -83,7 +83,7 @@
 
 1. **보이지 않는 손에 의한 동적 가격 결정 (Dynamic Market Clearing)**:
    * 라이프의 가격은 고정 상수가 아니며, **누적 매장량(50개 한도) 잔여 희소성**과 **화이트의 통화 발행(보석 인플레이션)**에 의해 시장에서 실시간으로 정해집니다:
-     $$\text{라이프 시장 호가} = \text{기준가(20.0)} \times \left(1.0 + 1.5 \times \frac{50 - \text{잔여 매장량}}{50}\right) \times \max\left(0.8, \frac{\text{전체 유통 보석량}}{310}\right)$$
+     $$\text{라이프 시장 호가} = \text{기준가(20.0)} \times \left(1.0 + 1.5 \times \frac{50 - \text{잔여 매장량}}{50}\right) \times \max\left(0.8, \frac{\text{전체 유통 보석량}}{200}\right)$$
    * 게임 초반(1~3일차)에는 약 20~24보석 수준에서 평화적 거래가 성사되지만, 매장량이 고갈되고 보석이 증발할수록 블루의 요구가는 35~45보석 이상으로 급등합니다.
 
 2. **구매자 수용 한계선 (Reservation Price: 35.0💎)과 가격 불만 (Price Discontent)**:
