@@ -13,6 +13,11 @@ class SimulationConfig:
     TOTAL_DAYS: int = 9
     TOTAL_PRIZE_POOL: float = 200_000_000.0  # 200 Million KRW
     
+    # Initial Town Macro Supply (초기 타운 총 재화 풀: 1일차 거래를 통해 각 팀에 분배됨)
+    TOWN_INITIAL_JEWELS: int = 200   # 초기 타운 총 보석 200개 (2억 원 상금 풀, 1개=100만 원)
+    TOWN_INITIAL_LIFE: int = 43     # 초기 타운 총 라이프 43개 (누적 상한 50개)
+    TOWN_INITIAL_CREDITS: int = 36  # 초기 타운 총 크레딧 36개
+    
     # Life & Malthusian Trap
     INITIAL_LIFE_RESERVE: int = 50  # Global hard cap for producible life (only known to Blue)
     DAILY_LIFE_REQUIREMENT: int = 1  # 1 Life per surviving member per day

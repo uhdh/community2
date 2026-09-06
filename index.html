@@ -188,8 +188,8 @@
     <!-- Running Marquee Ribbon -->
     <div class="marquee">
         <div class="marquee__inner">
-            <span>THE COMMUNITY 2 — INVISIBLE HAND • 총 상금 2억 원 • 초기 보석 200개 (1개 = 100만 원) • 생존 라이프 50개 한도 • 13인 참가자 공식 아이콘 • 전시 활동 & 무기 시스템 • </span>
-            <span>THE COMMUNITY 2 — INVISIBLE HAND • 총 상금 2억 원 • 초기 보석 200개 (1개 = 100만 원) • 생존 라이프 50개 한도 • 13인 참가자 공식 아이콘 • 전시 활동 & 무기 시스템 • </span>
+            <span>THE COMMUNITY 2 — INVISIBLE HAND • 총 상금 2억 원 • 초기 타운 재화: 200💎 / 43❤️ / 36⚡ (1일차 거래 배분) • 생존 라이프 50개 한도 • 13인 참가자 공식 아이콘 • 전시 활동 & 무기 시스템 • </span>
+            <span>THE COMMUNITY 2 — INVISIBLE HAND • 총 상금 2억 원 • 초기 타운 재화: 200💎 / 43❤️ / 36⚡ (1일차 거래 배분) • 생존 라이프 50개 한도 • 13인 참가자 공식 아이콘 • 전시 활동 & 무기 시스템 • </span>
         </div>
     </div>
 
@@ -222,36 +222,54 @@
                 </p>
             </div>
 
-            <!-- 3 Key Big Statistics Counters -->
-            <div class="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 font-mono">
+            <!-- 4 Key Big Statistics Counters: Initial Town Macro Supply -->
+            <div class="mt-12 grid grid-cols-2 lg:grid-cols-4 gap-4 font-mono">
                 <!-- Stat 1: Total Prize -->
                 <div class="p-5 bg-[#121212] brutalist-border border-t-2 !border-t-[#1646f5]">
                     <div class="flex items-center justify-between text-neutral-400 text-xs uppercase">
                         <span>총 상금 풀</span>
                         <i data-lucide="trophy" class="w-4 h-4 text-[#1646f5]"></i>
                     </div>
-                    <div class="font-cafe24 text-3xl sm:text-4xl text-[#f0eee7] mt-2">2억 원</div>
+                    <div class="font-cafe24 text-2xl sm:text-4xl text-[#f0eee7] mt-2">2억 원</div>
                     <div class="text-[11px] text-neutral-400 mt-1">200,000,000 KRW 확정</div>
                 </div>
 
                 <!-- Stat 2: Initial Jewels -->
                 <div class="p-5 bg-[#121212] brutalist-border border-t-2 !border-t-white">
                     <div class="flex items-center justify-between text-neutral-400 text-xs uppercase">
-                        <span>초기 보석 총량</span>
+                        <span>초기 타운 보석</span>
                         <img src="./brand/icon-jewel.svg" class="w-4 h-4 object-contain" alt="보석">
                     </div>
-                    <div class="font-cafe24 text-3xl sm:text-4xl text-[#f0eee7] mt-2">200개</div>
-                    <div class="text-[11px] text-emerald-400 mt-1 font-bold">1개당 가치 = 1,000,000 원 (100만원)</div>
+                    <div class="font-cafe24 text-2xl sm:text-4xl text-[#f0eee7] mt-2">200개</div>
+                    <div class="text-[11px] text-emerald-400 mt-1 font-bold">1개 = 1,000,000 원 (100만원)</div>
                 </div>
 
-                <!-- Stat 3: Life Hard Cap -->
+                <!-- Stat 3: Initial Life -->
                 <div class="p-5 bg-[#121212] brutalist-border border-t-2 !border-t-[#ef321f]">
                     <div class="flex items-center justify-between text-neutral-400 text-xs uppercase">
-                        <span>라이프 총 매장량</span>
+                        <span>초기 타운 라이프</span>
                         <img src="./brand/icon-life.svg" class="w-2.5 h-4 object-contain" alt="라이프">
                     </div>
-                    <div class="font-cafe24 text-3xl sm:text-4xl text-[#ef321f] mt-2">50개 한도</div>
-                    <div class="text-[11px] text-neutral-400 mt-1">전원 생존 불가 (멜서스 트랩)</div>
+                    <div class="font-cafe24 text-2xl sm:text-4xl text-[#ef321f] mt-2">43개</div>
+                    <div class="text-[11px] text-neutral-400 mt-1">총 50개 한도 (지하 잔여 7개)</div>
+                </div>
+
+                <!-- Stat 4: Initial Credits -->
+                <div class="p-5 bg-[#121212] brutalist-border border-t-2 !border-t-amber-400">
+                    <div class="flex items-center justify-between text-neutral-400 text-xs uppercase">
+                        <span>초기 타운 크레딧</span>
+                        <img src="./brand/icon-credit.svg" class="w-2.5 h-4 object-contain" alt="크레딧">
+                    </div>
+                    <div class="font-cafe24 text-2xl sm:text-4xl text-amber-400 mt-2">36개</div>
+                    <div class="text-[11px] text-neutral-400 mt-1">타운 전체 초기 활동 에너지</div>
+                </div>
+            </div>
+
+            <!-- Macro Supply Callout Banner -->
+            <div class="mt-4 p-4 bg-[#141414] border-l-4 border-[#1646f5] brutalist-border text-neutral-300 font-mono text-xs sm:text-sm flex items-start space-x-3">
+                <span class="text-xl">💡</span>
+                <div class="leading-relaxed">
+                    <strong class="text-[#f0eee7]">초기 타운 재화 분배 원리:</strong> 초기 타운의 총 재화(<strong>보석 200개, 라이프 43개, 크레딧 36개</strong>)는 1일차 진영 간 <strong>거래(Trade)</strong>와 활동을 거쳐 각 팀으로 배분되었습니다.
                 </div>
             </div>
         </div>
@@ -287,7 +305,7 @@
                                     <h3 class="font-cafe24 text-2xl text-[#f0eee7]">보석 (JEWEL)</h3>
                                 </div>
                             </div>
-                            <span class="px-2 py-0.5 bg-[#181818] border border-[#333] font-mono text-xs text-neutral-300 font-bold">초기 200개</span>
+                            <span class="px-2 py-0.5 bg-[#181818] border border-[#333] font-mono text-xs text-neutral-300 font-bold">초기 타운 200개</span>
                         </div>
                         <p class="font-mono text-xs text-[#1646f5] mt-3 font-semibold">"최종 상금 2억 원의 지분 티켓 & 전쟁 화폐"</p>
 
@@ -322,7 +340,7 @@
                                     <h3 class="font-cafe24 text-2xl text-[#ef321f]">라이프 (LIFE)</h3>
                                 </div>
                             </div>
-                            <span class="px-2 py-0.5 bg-[#251010] border border-[#ef321f]/50 font-mono text-xs text-[#ef321f] font-bold">누적 50개 한도</span>
+                            <span class="px-2 py-0.5 bg-[#251010] border border-[#ef321f]/50 font-mono text-xs text-[#ef321f] font-bold">초기 43개 (상한 50개)</span>
                         </div>
                         <p class="font-mono text-xs text-[#ef321f] mt-3 font-semibold">"매일 1인 1개 필수 제출, 미제출 시 즉시 영구 탈락"</p>
 
@@ -357,7 +375,7 @@
                                     <h3 class="font-cafe24 text-2xl text-[#f0eee7]">크레딧 (CREDIT)</h3>
                                 </div>
                             </div>
-                            <span class="px-2 py-0.5 bg-[#181818] border border-[#333] font-mono text-xs text-neutral-300 font-bold">생산재 & 에너지</span>
+                            <span class="px-2 py-0.5 bg-[#181818] border border-[#333] font-mono text-xs text-amber-400 font-bold">초기 36개 (생산재)</span>
                         </div>
                         <p class="font-mono text-xs text-neutral-300 mt-3 font-semibold">"라이프 생산 연료 & 타운 활동 수수료"</p>
 
@@ -457,7 +475,7 @@
                     </h2>
                     <p class="mt-3 text-neutral-400 text-sm sm:text-base leading-relaxed max-w-3xl">
                         어느 팀이 보석, 라이프, 크레딧을 얼마나 쥐고 있는지 그림(아이콘/캡슐/토큰)으로 직관적으로 확인하세요.<br>
-                        <strong>1일차(초기 200💎)</strong>와 <strong>2일차(현재 실측치)</strong>를 전환하거나, 원클릭으로 거래와 전쟁을 시험해볼 수 있습니다.
+                        <strong>타운 초기 공급량(200💎, 43❤️, 36⚡)</strong>, <strong>1일차(거래 후 배분)</strong>, <strong>2일차(현재 실측치)</strong>를 원클릭으로 비교하거나 거래와 전쟁을 직접 시험해볼 수 있습니다.
                     </p>
                 </div>
                 <div class="flex items-center space-x-2 font-mono text-xs">
@@ -471,8 +489,11 @@
                 <!-- Day Preset Switcher -->
                 <div class="flex flex-wrap items-center gap-2">
                     <span class="font-mono text-xs text-neutral-400 font-bold mr-1">일자 선택:</span>
+                    <button id="btnSetDay0" class="px-3 py-1.5 font-mono text-xs font-bold border border-[#333] bg-[#181818] hover:bg-[#252525] text-[#f0eee7] transition-all">
+                        🏛️ 타운 초기 총 재화 (200💎/43❤️/36⚡)
+                    </button>
                     <button id="btnSetDay1" class="px-3 py-1.5 font-mono text-xs font-bold border border-[#333] bg-[#181818] hover:bg-[#252525] text-[#f0eee7] transition-all">
-                        🟢 DAY 1 (초기 200💎)
+                        🟢 DAY 1 (거래 후 분배)
                     </button>
                     <button id="btnSetDay2" class="px-3 py-1.5 font-mono text-xs font-bold border border-[#1646f5] bg-[#1646f5] text-white transition-all shadow-[0_0_12px_rgba(22,70,245,0.4)]">
                         🔵 DAY 2 (현재 공식 실측)
@@ -494,6 +515,17 @@
                     <button id="tabModeLife" class="tab-btn px-3 py-1.5 border border-[#333] bg-[#181818] text-neutral-400 hover:text-white">
                         ❤️ 라이프 50개 캡슐
                     </button>
+                </div>
+            </div>
+
+            <!-- Preset Description & Context Banner -->
+            <div id="boardPresetNotice" class="mt-4 p-3.5 bg-[#0d0d0d] border border-[#262626] font-mono text-xs text-neutral-300 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+                <div class="flex items-center space-x-2">
+                    <span id="boardPresetBadge" class="px-2 py-0.5 text-[10px] font-bold bg-[#1646f5]/20 text-[#3898ec] border border-[#1646f5]/40 uppercase tracking-wider">DAY 2</span>
+                    <span id="boardPresetText" class="text-neutral-200">2일차 공식 실측 현황 (블루 라이프 21개 독점, 레드 크레딧 29개 급증, 블랙 마트 +1💎)</span>
+                </div>
+                <div class="text-[11px] text-neutral-400 font-sans">
+                    * 초기 타운 총량: 200💎 / 43❤️ / 36⚡ (1일차 거래로 각 진영 배분)
                 </div>
             </div>
 
@@ -919,28 +951,46 @@
         class InteractiveAssetBoard {
             constructor() {
                 this.dayPresets = {
-                    1: {
-                        dayTitle: 'DAY 1 (초기 세팅)',
+                    0: {
+                        dayTitle: '🏛️ 타운 초기 총 재화 풀 (200💎 / 43❤️ / 36⚡)',
+                        badgeText: 'TOWN INITIAL',
+                        presetNotice: '타운 입주 초기 총 재화 풀입니다. 이 자원이 1일차 상호 거래(Trade)와 생산을 거쳐 각 팀 금고로 배분되었습니다.',
                         prizePool: 200000000,
                         totalJewels: 200.0,
-                        lifeReserve: 8, // 50 - (14+19+9=42) = 8
+                        lifeReserve: 7, // 50 cap - 43 initial town life = 7 underground capsules
                         teams: {
-                            WHITE: { name: '화이트', leader: '루나 (박세승)', initial: 6, surv: 6, jewels: 90.0, life: 14, credits: 7.0, color: '#f0eee7', avatar: './brand/figure-white-team.png' },
-                            BLUE:  { name: '블루',   leader: '지니 (이지나)', initial: 3, surv: 3, jewels: 60.0, life: 19, credits: 8.0, color: '#1646f5', avatar: './brand/figure-blue-team.png' },
-                            RED:   { name: '레드',   leader: '마이야르 (승우아빠)', initial: 3, surv: 3, jewels: 50.0, life: 9,  credits: 18.0, cleanCredits: 0, color: '#ef321f', avatar: './brand/figure-red-team.png' },
-                            BLACK: { name: '블랙',   leader: '벡터 (정재호)', initial: 1, surv: 1, jewels: 0.0,  life: 0,  credits: 0.0, color: '#888888', avatar: './brand/figure-black-team.png' }
+                            WHITE: { name: '화이트', leader: '루나 (박세승)', initial: 6, surv: 6, jewels: 90.0, life: 14, credits: 7.0, color: '#f0eee7', avatar: './brand/figure-white-team.png', desc: '1일차 거래 배분: 90💎 | 14❤️ | 7⚡' },
+                            BLUE:  { name: '블루',   leader: '지니 (이지나)', initial: 3, surv: 3, jewels: 60.0, life: 19, credits: 8.0, color: '#1646f5', avatar: './brand/figure-blue-team.png', desc: '1일차 거래 배분: 60💎 | 19❤️ | 8⚡' },
+                            RED:   { name: '레드',   leader: '마이야르 (승우아빠)', initial: 3, surv: 3, jewels: 50.0, life: 10, credits: 21.0, cleanCredits: 0, color: '#ef321f', avatar: './brand/figure-red-team.png', desc: '1일차 거래 배분: 50💎 | 10❤️ | 21⚡' },
+                            BLACK: { name: '블랙',   leader: '벡터 (정재호)', initial: 1, surv: 1, jewels: 0.0,  life: 0,  credits: 0.0, color: '#888888', avatar: './brand/figure-black-team.png', desc: '초기 재화 0개 (마트 식료품 독점권)' }
+                        }
+                    },
+                    1: {
+                        dayTitle: '🟢 DAY 1 (거래 후 각 팀 배분 결과)',
+                        badgeText: 'DAY 1 TRADE',
+                        presetNotice: '초기 타운 재화(200💎, 43❤️, 36⚡)가 1일차 진영 간 거래(Trade)를 통해 나뉘어 각 진영에 배분된 확정 수량입니다.',
+                        prizePool: 200000000,
+                        totalJewels: 200.0,
+                        lifeReserve: 7,
+                        teams: {
+                            WHITE: { name: '화이트', leader: '루나 (박세승)', initial: 6, surv: 6, jewels: 90.0, life: 14, credits: 7.0, color: '#f0eee7', avatar: './brand/figure-white-team.png', desc: '보석 90개(45%), 라이프 14개, 크레딧 7개' },
+                            BLUE:  { name: '블루',   leader: '지니 (이지나)', initial: 3, surv: 3, jewels: 60.0, life: 19, credits: 8.0, color: '#1646f5', avatar: './brand/figure-blue-team.png', desc: '보석 60개(30%), 라이프 19개, 크레딧 8개' },
+                            RED:   { name: '레드',   leader: '마이야르 (승우아빠)', initial: 3, surv: 3, jewels: 50.0, life: 10, credits: 21.0, cleanCredits: 0, color: '#ef321f', avatar: './brand/figure-red-team.png', desc: '보석 50개(25%), 라이프 10개, 크레딧 21개' },
+                            BLACK: { name: '블랙',   leader: '벡터 (정재호)', initial: 1, surv: 1, jewels: 0.0,  life: 0,  credits: 0.0, color: '#888888', avatar: './brand/figure-black-team.png', desc: '마트 개점 (1일차 라이프 소모 면제)' }
                         }
                     },
                     2: {
-                        dayTitle: 'DAY 2 (공식 실측 현황)',
+                        dayTitle: '🔵 DAY 2 (공식 실측 현황)',
+                        badgeText: 'DAY 2 VERIFIED',
+                        presetNotice: '2일차 생산 및 정산 실측치: 블루 라이프 21개 독점 집중, 레드 크레딧 29개(일반13+무공해16) 급증, 블랙 마트 1보석 획득.',
                         prizePool: 200000000,
-                        totalJewels: 201.0, // Black gained 1 jewel from grocery
+                        totalJewels: 201.0, // Black gained 1 jewel from grocery sale
                         lifeReserve: 3, // 50 total: 10 + 21 + 6 = 37 active, 10 consumed, 3 in reserve
                         teams: {
-                            WHITE: { name: '화이트', leader: '루나 (박세승 연임)', initial: 6, surv: 6, jewels: 90.0, life: 10, credits: 6.0, color: '#f0eee7', avatar: './brand/figure-white-team.png' },
-                            BLUE:  { name: '블루',   leader: '소금 (임지은 신임)', initial: 3, surv: 3, jewels: 60.0, life: 21, credits: 5.0, color: '#1646f5', avatar: './brand/figure-blue-team.png' },
-                            RED:   { name: '레드',   leader: '마이야르 (승우아빠 연임)', initial: 3, surv: 3, jewels: 50.0, life: 6,  credits: 13.0, cleanCredits: 16.0, color: '#ef321f', avatar: './brand/figure-red-team.png' },
-                            BLACK: { name: '블랙',   leader: '벡터 (정재호 연임)', initial: 1, surv: 1, jewels: 1.0,  life: 0,  credits: 0.0, color: '#888888', avatar: './brand/figure-black-team.png' }
+                            WHITE: { name: '화이트', leader: '루나 (박세승 연임)', initial: 6, surv: 6, jewels: 90.0, life: 10, credits: 6.0, color: '#f0eee7', avatar: './brand/figure-white-team.png', desc: '6명 생존 소모로 라이프 10개로 감소' },
+                            BLUE:  { name: '블루',   leader: '소금 (임지은 신임)', initial: 3, surv: 3, jewels: 60.0, life: 21, credits: 5.0, color: '#1646f5', avatar: './brand/figure-blue-team.png', desc: '라이프 5개 추가 생산, 총 21개 독점' },
+                            RED:   { name: '레드',   leader: '마이야르 (승우아빠 연임)', initial: 3, surv: 3, jewels: 50.0, life: 6,  credits: 13.0, cleanCredits: 16.0, color: '#ef321f', avatar: './brand/figure-red-team.png', desc: '크레딧 24개 폭증 (공해 13 + 무공해 16)' },
+                            BLACK: { name: '블랙',   leader: '벡터 (정재호 연임)', initial: 1, surv: 1, jewels: 1.0,  life: 0,  credits: 0.0, color: '#888888', avatar: './brand/figure-black-team.png', desc: '식료품 키트 1회 판매로 +1💎 수익 획득' }
                         }
                     }
                 };
@@ -957,24 +1007,50 @@
                 this.prizePool = preset.prizePool;
                 this.lifeReserve = preset.lifeReserve;
                 this.teams = preset.teams;
+
+                const badgeEl = document.getElementById('boardPresetBadge');
+                const textEl = document.getElementById('boardPresetText');
+                if (badgeEl) badgeEl.innerText = preset.badgeText || `DAY ${dayNum}`;
+                if (textEl) textEl.innerText = preset.presetNotice || preset.dayTitle;
+
                 this.log(`[프리셋 로드] ${preset.dayTitle} 데이터가 적용되었습니다.`);
                 this.render();
             }
 
             bindControls() {
                 // Preset buttons
-                document.getElementById('btnSetDay1').onclick = () => {
-                    this.setActivePresetButton('btnSetDay1');
-                    this.loadPreset(1);
-                };
-                document.getElementById('btnSetDay2').onclick = () => {
-                    this.setActivePresetButton('btnSetDay2');
-                    this.loadPreset(2);
-                };
-                document.getElementById('btnSetCustom').onclick = () => {
-                    this.setActivePresetButton('btnSetCustom');
-                    this.log(`[자유 모드] 사용자가 재화 거래 및 전쟁을 직접 테스트할 수 있습니다.`);
-                };
+                const btnDay0 = document.getElementById('btnSetDay0');
+                if (btnDay0) {
+                    btnDay0.onclick = () => {
+                        this.setActivePresetButton('btnSetDay0');
+                        this.loadPreset(0);
+                    };
+                }
+                const btnDay1 = document.getElementById('btnSetDay1');
+                if (btnDay1) {
+                    btnDay1.onclick = () => {
+                        this.setActivePresetButton('btnSetDay1');
+                        this.loadPreset(1);
+                    };
+                }
+                const btnDay2 = document.getElementById('btnSetDay2');
+                if (btnDay2) {
+                    btnDay2.onclick = () => {
+                        this.setActivePresetButton('btnSetDay2');
+                        this.loadPreset(2);
+                    };
+                }
+                const btnCustom = document.getElementById('btnSetCustom');
+                if (btnCustom) {
+                    btnCustom.onclick = () => {
+                        this.setActivePresetButton('btnSetCustom');
+                        const badgeEl = document.getElementById('boardPresetBadge');
+                        const textEl = document.getElementById('boardPresetText');
+                        if (badgeEl) badgeEl.innerText = 'CUSTOM';
+                        if (textEl) textEl.innerText = '자유 시뮬레이션 모드 (아래 버튼으로 평화 거래와 가격 불만 전쟁을 실행해보세요)';
+                        this.log(`[자유 모드] 사용자가 재화 거래 및 전쟁을 직접 테스트할 수 있습니다.`);
+                    };
+                }
 
                 // View mode tabs
                 const tabs = [
@@ -1001,8 +1077,9 @@
             }
 
             setActivePresetButton(btnId) {
-                ['btnSetDay1', 'btnSetDay2', 'btnSetCustom'].forEach(id => {
+                ['btnSetDay0', 'btnSetDay1', 'btnSetDay2', 'btnSetCustom'].forEach(id => {
                     const el = document.getElementById(id);
+                    if (!el) return;
                     if (id === btnId) {
                         el.className = 'px-3 py-1.5 font-mono text-xs font-bold border border-[#1646f5] bg-[#1646f5] text-white transition-all shadow-[0_0_12px_rgba(22,70,245,0.4)]';
                     } else {
@@ -1177,6 +1254,7 @@
                                     <span class="font-mono text-[10px] text-neutral-400 uppercase tracking-widest">${k} FACTION</span>
                                     <h3 class="font-cafe24 text-2xl text-[#f0eee7]">${t.name}</h3>
                                     <div class="font-mono text-[11px] text-neutral-400 mt-0.5">${t.leader}</div>
+                                    <div class="font-mono text-[10px] text-[#3898ec] mt-1 bg-[#101a26] px-1.5 py-0.5 border border-[#1e324a] inline-block font-medium">${t.desc || ''}</div>
                                 </div>
                                 <div class="flex flex-col items-end">
                                     <img src="${t.avatar}" class="h-10 object-contain mb-1" alt="${t.name} 아바타">
