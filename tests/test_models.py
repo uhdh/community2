@@ -1,6 +1,7 @@
 """
 tests/test_models.py
 Unit tests for data models, resources, tech, war, and market mechanics.
+Reflects confirmed broadcast rules as of 2026-09-06.
 """
 
 import pytest
@@ -12,15 +13,14 @@ from models.market import TradeOffer, MarketEngine
 
 
 def test_resource_bundle_math():
-    r1 = ResourceBundle(jewels=100.0, life=10, credits=20.0, reclaim_pieces=1)
-    r2 = ResourceBundle(jewels=30.0, life=4, credits=5.0, reclaim_pieces=0)
+    r1 = ResourceBundle(jewels=100.0, life=10, credits=20.0)
+    r2 = ResourceBundle(jewels=30.0, life=4, credits=5.0)
 
     # Addition
     r_add = r1.add(r2)
     assert r_add.jewels == 130.0
     assert r_add.life == 14
     assert r_add.credits == 25.0
-    assert r_add.reclaim_pieces == 1
 
     # Subtraction
     r_sub = r1.subtract(r2)
@@ -34,13 +34,12 @@ def test_resource_bundle_math():
 
 
 def test_disaster_30_percent():
-    r = ResourceBundle(jewels=100.0, life=10, credits=20.0, reclaim_pieces=2)
+    r = ResourceBundle(jewels=100.0, life=10, credits=20.0)
     r_after = r.apply_disaster(0.30)
     # 70% remaining
     assert r_after.jewels == 70.0
     assert r_after.life == 7
     assert r_after.credits == 14.0
-    assert r_after.reclaim_pieces == 2  # Reclaim clues are not liquidated goods
 
 
 def test_tech_progression():
@@ -94,22 +93,18 @@ def test_market_trade_execution():
     assert receiver_res.life == 8
 
 
-def test_shield_blocks_bomb():
-    # If target has shield, bomb damage is absorbed and shield is removed
-    target = TeamState(
-        team_type=TeamType.BLUE,
-        initial_members=3,
-        surviving_members=3,
-        resources=ResourceBundle(life=10),
-        has_shield=True,
-    )
+def test_black_mart_confirmed_pricing():
+    """Verify confirmed Day 2 Black Mart pricing and weapon damages."""
+    catalog = get_default_black_catalog()
+    assert len(catalog) == 4
 
-    if target.has_shield:
-        target.has_shield = False
-        damage_dealt = 0
-    else:
-        damage_dealt = 3
-        target.resources.life -= 3
+    prices = {item.item_type: item.jewel_price for item in catalog}
+    assert prices[WeaponType.WAR_DECLARATION] == 15.0
+    assert prices[WeaponType.WEAPON_TIER_A] == 30.0
+    assert prices[WeaponType.WEAPON_TIER_B] == 20.0
+    assert prices[WeaponType.WEAPON_TIER_C] == 10.0
 
-    assert target.has_shield is False
-    assert target.resources.life == 10  # Undamaged
+    damages = {item.item_type: item.life_damage for item in catalog}
+    assert damages[WeaponType.WEAPON_TIER_A] == 4
+    assert damages[WeaponType.WEAPON_TIER_B] == 2
+    assert damages[WeaponType.WEAPON_TIER_C] == 1

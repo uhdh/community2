@@ -1,6 +1,7 @@
 """
 simulation/engine.py
 Daily 3-Phase Turn Loop Engine for 'The Community 2: Invisible Hand'.
+Reflects confirmed broadcast rules as of 2026-09-06.
 """
 
 import math
@@ -28,8 +29,6 @@ class GlobalState:
     life_reserve: int = 50
     pollution_index: float = 0.0
     disaster_occurred: bool = False
-    reclaim_pieces_collected: int = 0
-    black_confiscated: bool = False
     black_arms_revenue: float = 0.0
     jewel_unit_value: float = 0.0
     total_circulating_jewels: float = 0.0
@@ -120,123 +119,147 @@ class SimulationEngine:
             life_reserve=self.config.INITIAL_LIFE_RESERVE,
             pollution_index=0.0,
             disaster_occurred=False,
-            reclaim_pieces_collected=0,
-            black_confiscated=False,
             black_arms_revenue=0.0,
             jewel_unit_value=unit_val,
             total_circulating_jewels=circulating_jewels,
+            war_attacks_count=0,
             teams=teams,
         )
 
+    def run_simulation(self) -> GlobalState:
+        """Run full game session over TOTAL_DAYS."""
+        for day in range(1, self.config.TOTAL_DAYS + 1):
+            self.state.day = day
+            self.run_day_turn()
+        return self.state
+
+    def run_day_turn(self):
+        """Execute one full daily cycle: Phase 1, Phase 2, Phase 3."""
+        self.state.log(f"===== DAY {self.state.day} BEGINS =====")
+        self.run_phase_1_morning_production()
+        self.run_phase_2_afternoon()
+        self.run_phase_3_evening()
+
     def run_phase_1_morning_production(self):
-        """Phase 1: Morning Production and Resource Generation."""
+        """Phase 1: Morning Production & Pollution Check."""
         self.state.log("--- Phase 1: Morning Production Begins ---")
         
-        # 1. White Jewel Issuance
+        # 1. White: Minting Jewels
         white_team = self.state.teams["WHITE"]
         if white_team.is_alive:
-            white_dec = self.policies["WHITE"].decide_morning_production(
+            prod_decision = self.policies["WHITE"].decide_morning_production(
                 self.state, white_team
             )
-            mint_amount = max(0, min(self.config.WHITE_JEWEL_MINT_MAX, white_dec.get("mint_jewels", 0)))
+            mint_amount = float(prod_decision.get("mint_jewels", 0))
+            mint_amount = min(mint_amount, float(self.config.WHITE_JEWEL_MINT_MAX))
             white_team.resources.jewels += mint_amount
-            self.state.log(f"White minted {mint_amount} jewels. Total jewels: {white_team.resources.jewels:.1f}")
+            self.state.log(f"[MINT] White minted {mint_amount:.1f} jewels. Total White Jewels: {white_team.resources.jewels:.1f}")
 
-        # 2. Blue Life Production
+        # 2. Blue: Life Production from Global Reserve
         blue_team = self.state.teams["BLUE"]
         if blue_team.is_alive and self.state.life_reserve > 0:
-            blue_dec = self.policies["BLUE"].decide_morning_production(
+            prod_decision = self.policies["BLUE"].decide_morning_production(
                 self.state, blue_team
             )
-            desired_life = blue_dec.get("produce_life", 0)
-            cost_per_life = blue_team.tech.get_blue_credit_per_life()
-            max_possible = int(blue_team.resources.credits // cost_per_life)
-            producible = min(desired_life, max_possible, self.state.life_reserve)
+            desired_life = int(prod_decision.get("produce_life", 0))
+            credit_per_life = blue_team.tech.get_blue_credit_per_life()
             
-            if producible > 0:
-                credit_spent = producible * cost_per_life
-                blue_team.resources.credits -= credit_spent
-                blue_team.resources.life += producible
-                self.state.life_reserve -= producible
+            # Max possible by credits & available reserve
+            max_by_credits = int(blue_team.resources.credits // credit_per_life)
+            actual_life = min(desired_life, max_by_credits, self.state.life_reserve)
+            
+            if actual_life > 0:
+                cost = actual_life * credit_per_life
+                blue_team.resources.credits -= cost
+                blue_team.resources.life += actual_life
+                self.state.life_reserve -= actual_life
                 self.state.log(
-                    f"Blue produced {producible} Life (Spent {credit_spent:.1f} credits). "
-                    f"Remaining Life Reserve: {self.state.life_reserve}"
+                    f"[LIFE PRODUCTION] Blue produced {actual_life} Life using {cost:.1f} Credits. "
+                    f"Remaining Global Reserve: {self.state.life_reserve}"
                 )
 
-        # 3. Red Credit Production (Clean vs Polluting)
+        # 3. Red: Industrial Credit Production & Pollution Index
         red_team = self.state.teams["RED"]
         if red_team.is_alive:
-            red_dec = self.policies["RED"].decide_morning_production(
+            prod_decision = self.policies["RED"].decide_morning_production(
                 self.state, red_team
             )
-            use_polluting = red_dec.get("use_polluting_production", False)
+            use_polluting = prod_decision.get("use_polluting_production", False)
             mult = red_team.tech.get_production_multiplier()
-
+            
             if use_polluting:
-                yield_credits = self.config.RED_POLLUTING_CREDIT_YIELD * mult
-                red_team.resources.credits += yield_credits
+                produced_credits = self.config.RED_POLLUTING_CREDIT_YIELD * mult
                 self.state.pollution_index += self.config.RED_POLLUTION_INCREMENT
+                red_team.resources.credits += produced_credits
                 self.state.log(
-                    f"Red engaged in POLLUTING production: +{yield_credits:.1f} credits. "
-                    f"Pollution Index rose to {self.state.pollution_index:.1f}"
+                    f"[INDUSTRIAL PRODUCTION] Red chose POLLUTING production (+{produced_credits:.1f} Credits). "
+                    f"Current Pollution Index: {self.state.pollution_index:.1f}"
                 )
             else:
-                yield_credits = self.config.RED_CLEAN_CREDIT_YIELD * mult
-                red_team.resources.credits += yield_credits
+                produced_credits = self.config.RED_CLEAN_CREDIT_YIELD * mult
+                red_team.resources.credits += produced_credits
                 self.state.log(
-                    f"Red engaged in CLEAN production: +{yield_credits:.1f} credits. "
-                    f"Pollution Index remains {self.state.pollution_index:.1f}"
+                    f"[INDUSTRIAL PRODUCTION] Red chose CLEAN production (+{produced_credits:.1f} Credits). "
+                    f"Current Pollution Index: {self.state.pollution_index:.1f}"
                 )
 
-            # Check Pollution Disaster
-            if self.state.pollution_index > self.config.POLLUTION_DISASTER_THRESHOLD and not self.state.disaster_occurred:
-                self.state.disaster_occurred = True
-                self.state.log(
-                    f"[DISASTER] Pollution Index ({self.state.pollution_index:.1f}) > 50.0! "
-                    "30% of all goods across all teams are destroyed!"
-                )
-                for t_name, team in self.state.teams.items():
-                    team.resources = team.resources.apply_disaster(self.config.DISASTER_PENALTY_RATIO)
-
-        # 4. Black Mart adjustments
+        # 4. Black: Mart Preparation
         black_team = self.state.teams["BLACK"]
-        if black_team.is_alive:
-            black_dec = self.policies["BLACK"].decide_morning_production(
-                self.state, black_team
+        self.policies["BLACK"].decide_morning_production(self.state, black_team)
+
+        # 5. Pollution Threshold & Disaster Check
+        if (
+            self.state.pollution_index > self.config.POLLUTION_DISASTER_THRESHOLD
+            and not self.state.disaster_occurred
+        ):
+            self._trigger_pollution_disaster()
+
+    def _trigger_pollution_disaster(self):
+        """Pollution index exceeded threshold: 30% penalty applied to all teams."""
+        self.state.disaster_occurred = True
+        self.state.log(
+            f"[DISASTER TRIGGERED] Pollution Index reached {self.state.pollution_index:.1f} "
+            f"(> {self.config.POLLUTION_DISASTER_THRESHOLD})! 30% destruction of all assets!"
+        )
+        for t_name, team in self.state.teams.items():
+            team.resources = team.resources.apply_disaster(
+                self.config.DISASTER_PENALTY_RATIO
             )
-            mult = black_dec.get("price_multiplier", 1.0)
-            self.state.log(f"Black Mart catalog prepared with price index x{mult:.2f}")
+            self.state.log(
+                f"[DISASTER PENALTY] {t_name} resources reduced by 30%: {team.resources}"
+            )
 
     def run_phase_2_afternoon(self):
-        """Phase 2: Afternoon Trade, Tech Investment, and War Actions."""
-        self.state.log("--- Phase 2: Afternoon Market, Tech, and War Begins ---")
-        
-        # 1. Tech Upgrades
-        for t_name, team in self.state.teams.items():
-            if team.is_alive:
-                policy = self.policies[t_name]
-                if policy.decide_tech_upgrade(self.state, team):
-                    cost = team.tech.upgrade_cost
-                    if team.resources.credits >= cost:
-                        team.resources.credits -= cost
-                        team.tech.upgrade()
-                        self.state.log(f"{t_name} upgraded Tech to Level {team.tech.level} (Spent {cost} credits).")
+        """Phase 2: Afternoon Market, Technology Upgrades, and Black Mart Arms Deals."""
+        self.state.log("--- Phase 2: Afternoon Market & Arms Deals Begins ---")
 
-        # 2. Market Trading
-        offers_pool: List[TradeOffer] = []
+        # 1. Technology Upgrades
+        for t_name, team in self.state.teams.items():
+            if team.is_alive and self.policies[t_name].decide_tech_upgrade(
+                self.state, team
+            ):
+                cost = team.tech.upgrade_cost
+                if team.resources.credits >= cost and team.tech.upgrade():
+                    team.resources.credits -= cost
+                    self.state.log(f"[TECH UPGRADE] {t_name} upgraded to Tech Level {team.tech.level} (spent {cost} credits)!")
+
+        # 2. Market Trading & Bilateral Offers
+        all_offers: List[TradeOffer] = []
         for t_name, team in self.state.teams.items():
             if team.is_alive:
                 offers = self.policies[t_name].generate_trade_offers(self.state, team)
-                for off in offers:
-                    off.offer_id = f"{t_name}_{self.state.day}_{random.randint(100, 999)}"
-                    offers_pool.append(off)
+                all_offers.extend(offers)
 
-        # Shuffle offers to avoid turn order bias
-        random.shuffle(offers_pool)
-        for offer in offers_pool:
-            receiver_team = self.state.teams.get(offer.receiver)
+        # Execute market trades
+        for offer in all_offers:
             sender_team = self.state.teams.get(offer.sender)
-            if receiver_team and sender_team and receiver_team.is_alive and sender_team.is_alive:
+            receiver_team = self.state.teams.get(offer.receiver)
+            if not sender_team or not receiver_team:
+                continue
+            if not sender_team.is_alive or not receiver_team.is_alive:
+                continue
+
+            if sender_team.resources.can_afford(offer.offering):
                 receiver_policy = self.policies[offer.receiver]
                 if receiver_policy.evaluate_trade_offer(self.state, receiver_team, offer):
                     success = self.market_engine.execute_trade(
@@ -248,94 +271,40 @@ class SimulationEngine:
                             f"{offer.receiver} gave {offer.requesting}"
                         )
 
-        # 3. Black Mart Purchases (Shields, Sabotage)
+        # 3. War & Military Actions via Black Mart
+        # Factions purchase weapons (A/B/C tier) or declare war using jewels at Black Mart
         black_team = self.state.teams["BLACK"]
-        catalog = get_default_black_catalog()
-        for t_name, team in self.state.teams.items():
-            if t_name != "BLACK" and team.is_alive:
-                items_wanted = self.policies[t_name].decide_black_purchases(
-                    self.state, team, catalog
-                )
-                for item_name in items_wanted:
-                    if item_name == WeaponType.SHIELD.value:
-                        # Price check: prefer credits, else jewels
-                        if team.resources.credits >= self.config.SHIELD_CREDIT_PRICE:
-                            team.resources.credits -= self.config.SHIELD_CREDIT_PRICE
-                            black_team.resources.credits += self.config.SHIELD_CREDIT_PRICE
-                            self.state.black_arms_revenue += self.config.SHIELD_CREDIT_PRICE
-                            team.has_shield = True
-                            self.state.log(f"[SHIELD] {t_name} purchased Bomb Shield from Black for {self.config.SHIELD_CREDIT_PRICE} credits.")
-                        elif team.resources.jewels >= self.config.SHIELD_JEWEL_PRICE:
-                            team.resources.jewels -= self.config.SHIELD_JEWEL_PRICE
-                            black_team.resources.jewels += self.config.SHIELD_JEWEL_PRICE
-                            self.state.black_arms_revenue += self.config.SHIELD_JEWEL_PRICE
-                            team.has_shield = True
-                            self.state.log(f"[SHIELD] {t_name} purchased Bomb Shield from Black for {self.config.SHIELD_JEWEL_PRICE} jewels.")
+        damage_map = {
+            WeaponType.WEAPON_TIER_A: 4,
+            WeaponType.WEAPON_TIER_B: 2,
+            WeaponType.WEAPON_TIER_C: 1,
+            WeaponType.WAR_DECLARATION: 0,
+        }
 
-        # 4. War & Military Actions (Red Bomb)
         for t_name, team in self.state.teams.items():
-            if team.is_alive:
+            if team.is_alive and t_name != "BLACK":
                 attacks = self.policies[t_name].decide_war_actions(self.state, team)
                 for attack in attacks:
-                    if attack.weapon_type == WeaponType.RED_BOMB:
-                        target_team = self.state.teams.get(attack.target)
-                        cost = self.config.BOMB_CREDIT_COST
-                        if team.resources.credits >= cost and target_team and target_team.is_alive:
-                            team.resources.credits -= cost
-                            self.state.war_attacks_count += 1
-                            if target_team.has_shield:
-                                target_team.has_shield = False
-                                self.state.log(f"[BOMB] {t_name} bombed {attack.target}, but it was BLOCKED by Bomb Shield!")
-                            else:
-                                damage = min(self.config.BOMB_LIFE_DAMAGE, target_team.resources.life)
-                                target_team.resources.life -= damage
-                                self.state.log(f"[BOMB] {t_name} bombed {attack.target}! Dealt {damage} Life damage!")
-
-        # 5. Reclaim Pieces Search (Anti-Black Alliance)
-        if not self.state.black_confiscated:
-            for t_name, team in self.state.teams.items():
-                if t_name != "BLACK" and team.is_alive:
-                    if self.policies[t_name].decide_reclaim_search(self.state, team):
-                        cost = self.config.RECLAIM_SEARCH_CREDIT_COST
-                        if team.resources.credits >= cost:
-                            team.resources.credits -= cost
-                            team.search_attempts += 1
-                            if random.random() < self.config.RECLAIM_SEARCH_SUCCESS_PROB:
-                                self.state.reclaim_pieces_collected += 1
-                                self.state.log(
-                                    f"[RECLAIM] {t_name} uncovered a Reclaim Piece! "
-                                    f"Total Collected: {self.state.reclaim_pieces_collected}/{self.config.RECLAIM_PIECES_NEEDED}"
-                                )
-                                # Check 3 pieces confiscation
-                                if self.state.reclaim_pieces_collected >= self.config.RECLAIM_PIECES_NEEDED:
-                                    self._confiscate_black_assets()
-                                    break
-
-    def _confiscate_black_assets(self):
-        """Confiscate Black's assets and distribute among surviving mortal teams."""
-        self.state.black_confiscated = True
-        black_team = self.state.teams["BLACK"]
-        black_team.is_confiscated = True
-        seized_jewels = black_team.resources.jewels
-        seized_credits = black_team.resources.credits
-        black_team.resources.jewels = 0.0
-        black_team.resources.credits = 0.0
-
-        surviving_teams = [
-            t for name, t in self.state.teams.items() if name != "BLACK" and t.is_alive
-        ]
-        if surviving_teams:
-            j_share = seized_jewels / len(surviving_teams)
-            c_share = seized_credits / len(surviving_teams)
-            for t in surviving_teams:
-                t.resources.jewels += j_share
-                t.resources.credits += c_share
-            self.state.log(
-                f"[CONFISCATION] 3 RECLAIM PIECES COLLECTED! Black's assets seized! "
-                f"Distributed {j_share:.1f} jewels and {c_share:.1f} credits to each surviving team!"
-            )
-        else:
-            self.state.log("[CONFISCATION] Black assets confiscated, but no mortal teams remain.")
+                    cost = attack.jewels_spent
+                    target_team = self.state.teams.get(attack.target)
+                    if team.resources.jewels >= cost and target_team and target_team.is_alive:
+                        team.resources.jewels -= cost
+                        black_team.resources.jewels += cost  # Black Mart receives the jewels
+                        self.state.black_arms_revenue += cost
+                        self.state.war_attacks_count += 1
+                        
+                        dmg = damage_map.get(attack.weapon_type, 1)
+                        if dmg > 0:
+                            actual_dmg = min(dmg, target_team.resources.life)
+                            target_team.resources.life -= actual_dmg
+                            self.state.log(
+                                f"[ARMS STRIKE] {t_name} purchased {attack.weapon_type.value} from Black Mart "
+                                f"({cost} jewels) and struck {attack.target}! Dealt {actual_dmg} Life damage!"
+                            )
+                        else:
+                            self.state.log(
+                                f"[WAR DECLARATION] {t_name} purchased War Declaration from Black Mart ({cost} jewels)!"
+                            )
 
     def run_phase_3_evening(self):
         """Phase 3: Evening Life Submission and Survival Check."""
@@ -359,43 +328,15 @@ class SimulationEngine:
         else:
             black_team.submit_daily_life(self.config.BLACK_MART_DAILY_LIFE_COST)
 
-        # Exception Rule: Last 1 survivor guarantee
-        # "어떠한 상황에서도 최후의 1인 생존은 보장됩니다."
-        total_mortal_survivors = sum(
-            self.state.teams[t].surviving_members for t in ["WHITE", "BLUE", "RED"]
-        )
-        if total_mortal_survivors == 0:
-            # Pick the team with the highest remaining assets or White by default
-            fallback_team = max(
-                ["WHITE", "BLUE", "RED"],
-                key=lambda t: (self.state.teams[t].resources.jewels + self.state.teams[t].resources.credits),
-            )
-            self.state.teams[fallback_team].surviving_members = 1
-            self.state.log(
-                f"[EXCEPTION] EXCEPTION RULE ACTIVATED: Last 1 survivor guaranteed! "
-                f"1 member of {fallback_team} survives against all odds!"
-            )
-
         # Update circulating jewels & unit value
         circulating = sum(t.resources.jewels for t in self.state.teams.values())
         self.state.total_circulating_jewels = circulating
-        self.state.jewel_unit_value = (
-            self.config.TOTAL_PRIZE_POOL / circulating if circulating > 0 else 0.0
-        )
+        if circulating > 0:
+            self.state.jewel_unit_value = self.config.TOTAL_PRIZE_POOL / circulating
+        else:
+            self.state.jewel_unit_value = 0.0
+
         self.state.log(
-            f"[VALUE] Day {self.state.day} End: Total Jewels={circulating:.1f}, "
-            f"Jewel Value={self.state.jewel_unit_value:,.0f} KRW"
+            f"[END OF DAY {self.state.day}] Circulating Jewels: {circulating:.1f}, "
+            f"Jewel Unit Value: {self.state.jewel_unit_value:,.0f} KRW"
         )
-
-    def step_day(self):
-        """Execute all 3 phases of a single day."""
-        self.run_phase_1_morning_production()
-        self.run_phase_2_afternoon()
-        self.run_phase_3_evening()
-        self.state.day += 1
-
-    def run_simulation(self) -> GlobalState:
-        """Run the full 9-day simulation session."""
-        for _ in range(self.config.TOTAL_DAYS):
-            self.step_day()
-        return self.state

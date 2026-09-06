@@ -2,6 +2,7 @@
 main.py
 Main entry point and flow control for 'The Community 2: Invisible Hand'
 Autonomous Agent Monte Carlo Simulator.
+Reflects confirmed broadcast rules as of 2026-09-06.
 """
 
 import os
@@ -42,8 +43,8 @@ def run_single_simulation(verbose: bool = True):
     print(f"최종 총 보석 유통량: {final_state.total_circulating_jewels:.1f}")
     print(f"최종 보석 1개당 가치: {final_state.jewel_unit_value:,.0f} 원")
     print(f"공해 수치: {final_state.pollution_index:.1f} (재앙 발생 여부: {final_state.disaster_occurred})")
-    print(f"전쟁/폭탄 공격 횟수: {final_state.war_attacks_count} 회")
-    print(f"환수 조각 수집: {final_state.reclaim_pieces_collected}/3 (블랙 몰수: {final_state.black_confiscated})")
+    print(f"군사/무기 교전 횟수: {final_state.war_attacks_count} 회")
+    print(f"블랙 마트 무기 매출: {final_state.black_arms_revenue:.1f} 보석")
     print("-" * 70)
 
     for name, team in final_state.teams.items():

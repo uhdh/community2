@@ -1,7 +1,7 @@
 """
 config.py
 Global configuration and hyperparameters for 'The Community 2: Invisible Hand'
-Monte Carlo simulation.
+Monte Carlo simulation. Reflects confirmed broadcast rules as of 2026-09-06.
 """
 
 from dataclasses import dataclass
@@ -31,17 +31,6 @@ class SimulationConfig:
     WEAPON_TIER_A_JEWEL_PRICE: int = 30         # Tier A weapon (Heavy fire)
     WEAPON_TIER_B_JEWEL_PRICE: int = 20         # Tier B weapon (Medium fire)
     WEAPON_TIER_C_JEWEL_PRICE: int = 10         # Tier C weapon (Light fire)
-    BOMB_CREDIT_COST: int = 10                  # Red team bomb crafting cost
-    BOMB_LIFE_DAMAGE: int = 3                   # Damage dealt to target team's life
-    SHIELD_CREDIT_PRICE: int = 8                # Black mart shield price in credits
-    SHIELD_JEWEL_PRICE: int = 25                # Black mart shield price in jewels
-    SABOTAGE_CREDIT_PRICE: int = 12             # Black mart sabotage price in credits
-    SABOTAGE_CREDIT_DAMAGE: int = 15            # Sabotage drains credits from target
-    
-    # Black Reclaim Pieces (환수 조각)
-    RECLAIM_PIECES_NEEDED: int = 3              # 3 pieces needed to confiscate Black's assets
-    RECLAIM_SEARCH_CREDIT_COST: int = 6         # Cost to search for a reclaim piece
-    RECLAIM_SEARCH_SUCCESS_PROB: float = 0.35   # Probability of finding a piece per search
     
     # Initial Team Setup
     # Format: (initial_members, jewels, life, credits)

@@ -1,6 +1,7 @@
 """
 analysis/metrics.py
 Statistical analysis, metrics calculation, and publication-quality visualizations.
+Reflects confirmed broadcast rules as of 2026-09-06.
 """
 
 import os
@@ -79,8 +80,8 @@ class MetricsAnalyzer:
         disaster_rate = float(df["disaster_occurred"].mean() * 100)
         mean_pollution = float(df["pollution_final"].mean())
 
-        # 5. Black Confiscation Rate
-        confiscation_rate = float(df["black_confiscated"].mean() * 100)
+        # 5. Black Arms Revenue
+        mean_black_arms_revenue = float(df["black_arms_revenue"].mean()) if "black_arms_revenue" in df.columns else 0.0
 
         # 6. Economic & Malthusian Indicators
         mean_remaining_life_reserve = float(df["remaining_life_reserve"].mean())
@@ -96,9 +97,9 @@ class MetricsAnalyzer:
             "mean_attacks_per_session": mean_attacks,
             "pollution_disaster_rate_pct": disaster_rate,
             "mean_final_pollution_index": mean_pollution,
-            "black_confiscation_rate_pct": confiscation_rate,
+            "mean_black_arms_revenue": mean_black_arms_revenue,
             "mean_remaining_life_reserve": mean_remaining_life_reserve,
-            "mean_final_jewel_unit_value": mean_jewel_val if (mean_jewel_val := mean_jewel_unit_val) else 0.0,
+            "mean_final_jewel_unit_value": mean_jewel_unit_val,
         }
 
         return self.summary_stats
@@ -143,7 +144,7 @@ class MetricsAnalyzer:
 
 - **전쟁 발발률 (War Occurrence Rate)**: `{stats['war_occurrence_rate_pct']:.2f}%` (세션당 평균 공격 횟수: `{stats['mean_attacks_per_session']:.2f}` 회)
 - **공해 재앙 발생률 (Pollution Disaster Rate)**: `{stats['pollution_disaster_rate_pct']:.2f}%` (평균 최종 공해 수치: `{stats['mean_final_pollution_index']:.1f}`)
-- **블랙 자산 몰수율 (Confiscation Rate)**: `{stats['black_confiscation_rate_pct']:.2f}%` (3개 환수 조각 완성 빈도)
+- **블랙 마트 평균 무기 매출**: `{stats['mean_black_arms_revenue']:.1f}` 보석 (군비 지출 흡수)
 - **잔여 라이프 생산 가능량**: 평균 `{stats['mean_remaining_life_reserve']:.1f}` 개 (초기 50개 한도)
 - **최종 보석 1개당 평균 가치**: `{stats['mean_final_jewel_unit_value']:,.0f}` 원 (총 상금 2억 원 환산)
 
@@ -246,7 +247,7 @@ class MetricsAnalyzer:
             color="#c0392b",
             kde=False,
         )
-        axes[1].set_title("세션당 전쟁/폭탄 공격 횟수 분포", fontsize=12, fontweight="bold")
+        axes[1].set_title("세션당 군사/무기 교전 횟수 분포", fontsize=12, fontweight="bold")
         axes[1].set_xlabel("공격 발생 횟수 (Attacks)")
         axes[1].set_ylabel("세션 빈도 (Sessions)")
 

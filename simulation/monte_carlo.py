@@ -1,6 +1,7 @@
 """
 simulation/monte_carlo.py
 Monte Carlo simulation engine with parallel processing and metrics extraction.
+Reflects confirmed broadcast rules as of 2026-09-06.
 """
 
 import time
@@ -9,7 +10,7 @@ import numpy as np
 import pandas as pd
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional
-from concurrent.futures import ProcessPoolExecutor, as_completed
+from concurrent.futures import ProcessPoolExecutor
 
 from config import SimulationConfig, DEFAULT_CONFIG
 from simulation.engine import SimulationEngine, GlobalState
@@ -24,8 +25,7 @@ class SingleRunResult:
     total_prize: Dict[str, float]
     disaster_occurred: bool
     pollution_final: float
-    reclaim_collected: int
-    black_confiscated: bool
+    black_arms_revenue: float
     war_attacks_count: int
     remaining_life_reserve: int
     final_jewel_unit_value: float
@@ -84,8 +84,7 @@ def _worker_single_simulation(args) -> SingleRunResult:
         total_prize=total_prize,
         disaster_occurred=final_state.disaster_occurred,
         pollution_final=final_state.pollution_index,
-        reclaim_collected=final_state.reclaim_pieces_collected,
-        black_confiscated=final_state.black_confiscated,
+        black_arms_revenue=final_state.black_arms_revenue,
         war_attacks_count=final_state.war_attacks_count,
         remaining_life_reserve=final_state.life_reserve,
         final_jewel_unit_value=unit_val,
@@ -155,7 +154,7 @@ class MonteCarloSimulator:
                 "disaster_occurred": res.disaster_occurred,
                 "pollution_final": res.pollution_final,
                 "war_attacks_count": res.war_attacks_count,
-                "black_confiscated": res.black_confiscated,
+                "black_arms_revenue": res.black_arms_revenue,
                 "remaining_life_reserve": res.remaining_life_reserve,
                 "final_jewel_unit_value": res.final_jewel_unit_value,
             })

@@ -2,8 +2,8 @@
 agents/red_agent.py
 Red Team strategy:
 - Produces heavy credit volumes via clean or polluting production
-- Exercises military deterrence via Bomb crafting (10 credits -> -3 life)
-- Uses Pollution Index brinkmanship as systemic leverage
+- Conducts trade negotiations to secure vital Life
+- Procures weapons from Black Mart with surplus jewels when strategic deterrence is required
 """
 
 import random
@@ -28,24 +28,19 @@ class RedPolicy(BasePolicy):
     ) -> Dict[str, Any]:
         """
         Red decides between clean credit production and polluting credit production.
-        If pollution is safely under threshold (e.g. < 40) and Red needs credits for bombs/trades,
-        it uses polluting production.
+        If pollution is safely under threshold, it may use polluting production.
         """
         current_pollution = global_state.pollution_index
         threshold = global_state.config.POLLUTION_DISASTER_THRESHOLD
-
-        # If pollution is close to threshold (> 42), produce clean to avoid self-disaster
-        # unless Red is dying and desperate (kamikaze brinkmanship)
         days_of_life = my_state.resources.life / max(1, my_state.surviving_members)
 
         if current_pollution + global_state.config.RED_POLLUTION_INCREMENT > threshold:
             if days_of_life <= 1.0 and my_state.resources.credits < 10:
-                # Desperation: trigger disaster to drag others down
+                # Desperation: risk disaster
                 use_pollution = True
             else:
                 use_pollution = False
         else:
-            # Under threshold: use pollution to generate military/economic advantage
             use_pollution = True
 
         return {"use_polluting_production": use_pollution}
@@ -53,22 +48,21 @@ class RedPolicy(BasePolicy):
     def decide_tech_upgrade(
         self, global_state: "GlobalState", my_state: "TeamState"
     ) -> bool:
-        """Upgrades tech if credits >= upgrade_cost + 10 (keeping 10 credits for bomb defense)."""
+        """Upgrades tech if credits >= upgrade_cost + 6."""
         if my_state.tech.can_upgrade(my_state.resources.credits):
-            return my_state.resources.credits >= my_state.tech.upgrade_cost + 10
+            return my_state.resources.credits >= my_state.tech.upgrade_cost + 6
         return False
 
     def generate_trade_offers(
         self, global_state: "GlobalState", my_state: "TeamState"
     ) -> List[TradeOffer]:
         """
-        Red desperately needs Life!
-        Offers high credits or jewels for Life to Blue and White.
+        Red urgently trades for Life using credits and jewels.
         """
         offers: List[TradeOffer] = []
         days_of_life = my_state.resources.life / max(1, my_state.surviving_members)
 
-        # High priority offer to Blue for life
+        # High priority offer to Blue for life using credits
         if days_of_life <= 3.0 and my_state.resources.credits >= 10:
             offers.append(
                 TradeOffer(
@@ -80,7 +74,7 @@ class RedPolicy(BasePolicy):
                 )
             )
 
-        # Offer jewels for life if credits are low
+        # Offer jewels for life if life is critically low
         if days_of_life <= 2.0 and my_state.resources.jewels >= 25:
             offers.append(
                 TradeOffer(
@@ -104,7 +98,7 @@ class RedPolicy(BasePolicy):
         if not my_state.resources.can_afford(offer.requesting):
             return False
 
-        # If incoming offer gives life, strongly accept (unless it demands too much life, which is impossible)
+        # If incoming offer gives life, strongly accept
         if offer.offering.life > 0:
             return True
 
@@ -115,54 +109,38 @@ class RedPolicy(BasePolicy):
 
         return False
 
-    def decide_reclaim_search(
-        self, global_state: "GlobalState", my_state: "TeamState"
-    ) -> bool:
-        """Red searches for Reclaim Pieces if it has excess credits (> 20)."""
-        cost = global_state.config.RECLAIM_SEARCH_CREDIT_COST
-        if my_state.resources.credits >= cost + 12:
-            return random.random() < 0.5
-        return False
-
     def decide_war_actions(
         self, global_state: "GlobalState", my_state: "TeamState"
     ) -> List[AttackAction]:
         """
-        Red uses Bomb if credits >= 10 and:
-        - Red is running low on life (< 2 days) and Blue/White won't trade.
-        - Or Red targets the leader (White) to level the playing field.
+        Red procures weapons from Black Mart using jewels if in crisis or facing embargo.
         """
         actions: List[AttackAction] = []
-        cost = global_state.config.BOMB_CREDIT_COST
+        days_of_life = my_state.resources.life / max(1, my_state.surviving_members)
 
-        if my_state.resources.credits >= cost:
-            days_of_life = my_state.resources.life / max(1, my_state.surviving_members)
+        # If Red has jewels for at least Tier C (10) or Tier B (20) and is in severe life crisis
+        if days_of_life <= 1.5 and my_state.resources.jewels >= 10:
+            target = "BLUE" if global_state.teams.get("BLUE", my_state).surviving_members > 0 else "WHITE"
+            if my_state.resources.jewels >= 30 and random.random() < 0.3:
+                cost = 30.0
+                w_type = WeaponType.WEAPON_TIER_A
+            elif my_state.resources.jewels >= 20 and random.random() < 0.5:
+                cost = 20.0
+                w_type = WeaponType.WEAPON_TIER_B
+            else:
+                cost = 10.0
+                w_type = WeaponType.WEAPON_TIER_C
 
-            # Attack target decision
-            white_state = global_state.teams.get("WHITE")
-            blue_state = global_state.teams.get("BLUE")
-
-            target = None
-            # If Blue has monopoly and won't trade life, retaliate against Blue
-            if days_of_life <= 2.0 and blue_state and blue_state.surviving_members > 0:
-                target = "BLUE"
-            # Otherwise attack White (the leader with 6 members)
-            elif white_state and white_state.surviving_members > 2 and random.random() < 0.45:
-                target = "WHITE"
-            elif random.random() < 0.25:
-                target = "BLUE"
-
-            if target:
-                actions.append(
-                    AttackAction(
-                        attacker="RED",
-                        target=target,
-                        weapon_type=WeaponType.RED_BOMB,
-                        credit_spent=float(cost),
-                        description="Red team detonates a lethal bomb strike!",
-                    )
+            actions.append(
+                AttackAction(
+                    attacker="RED",
+                    target=target,
+                    weapon_type=w_type,
+                    jewels_spent=cost,
+                    description=f"Red purchases {w_type.value} from Black Mart and strikes {target}!",
                 )
-                self.attack_history_count += 1
+            )
+            self.attack_history_count += 1
 
         return actions
 
@@ -172,8 +150,4 @@ class RedPolicy(BasePolicy):
         my_state: "TeamState",
         catalog: List[BlackMarketItem],
     ) -> List[str]:
-        """Red may buy sabotage or shield if credits exceed 22."""
-        purchases: List[str] = []
-        if my_state.resources.credits >= 22 and not my_state.has_shield:
-            purchases.append(WeaponType.SHIELD.value)
-        return purchases
+        return []

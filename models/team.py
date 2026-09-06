@@ -1,6 +1,6 @@
 """
 models/team.py
-Team state and attributes definition.
+Team state and attributes definition for 'The Community 2: Invisible Hand'.
 """
 
 from dataclasses import dataclass, field
@@ -24,14 +24,11 @@ class TeamState:
     surviving_members: int
     resources: ResourceBundle
     tech: TechTree = field(default_factory=TechTree)
-    has_shield: bool = False
-    is_confiscated: bool = False  # For Black
-    search_attempts: int = 0      # Reclaim search count
 
     @property
     def is_alive(self) -> bool:
         if self.team_type == TeamType.BLACK:
-            return not self.is_confiscated
+            return True
         return self.surviving_members > 0
 
     def submit_daily_life(self, requirement: int = 1) -> int:
@@ -60,7 +57,7 @@ class TeamState:
 
     def calculate_prize(self, jewel_unit_value: float) -> float:
         """Calculates total team prize money based on jewel value."""
-        if not self.is_alive or self.is_confiscated:
+        if not self.is_alive:
             return 0.0
         return self.resources.jewels * jewel_unit_value
 
@@ -77,7 +74,4 @@ class TeamState:
             surviving_members=self.surviving_members,
             resources=self.resources.copy(),
             tech=self.tech.copy(),
-            has_shield=self.has_shield,
-            is_confiscated=self.is_confiscated,
-            search_attempts=self.search_attempts,
         )

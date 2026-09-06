@@ -54,17 +54,10 @@ class BasePolicy(ABC):
         pass
 
     @abstractmethod
-    def decide_reclaim_search(
-        self, global_state: "GlobalState", my_state: "TeamState"
-    ) -> bool:
-        """Decide whether to spend credits searching for a Reclaim Piece against Black."""
-        pass
-
-    @abstractmethod
     def decide_war_actions(
         self, global_state: "GlobalState", my_state: "TeamState"
     ) -> List["AttackAction"]:
-        """Decide military actions (e.g., Red bomb crafting and detonation)."""
+        """Decide military actions (e.g., weapon purchase and strike via Black Mart)."""
         pass
 
     @abstractmethod

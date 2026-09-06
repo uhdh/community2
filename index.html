@@ -499,7 +499,7 @@
                             </div>
                             <span class="font-mono text-xs text-neutral-400">초기 33개</span>
                         </div>
-                        <p class="font-mono text-xs text-[#1646f5] mt-2 font-semibold">"라이프 생산, 폭탄 제조, 특수 아이템 구매 연료"</p>
+                        <p class="font-mono text-xs text-[#1646f5] mt-2 font-semibold">"라이프 생산 설비 가동 및 산업·기술 에너지"</p>
 
                         <div class="mt-6 space-y-3 font-mono text-xs">
                             <div class="p-3 bg-[#181818] border border-[#2a2a2a]">
@@ -527,8 +527,8 @@
                                     실질적 행동 화폐
                                 </div>
                                 <div class="text-neutral-400 text-[11px] font-sans mt-1">
-                                    • 라이프 1개 = 10 크레딧 상당<br>
-                                    • 폭탄 1발 제작 = 10 크레딧 소모
+                                    • 블루의 라이프 생산 시 1개당 10 크레딧 소모<br>
+                                    • 기술 연구 및 생산 설비 가동의 핵심 연료
                                 </div>
                             </div>
                         </div>
@@ -1101,36 +1101,14 @@
                                 <td class="px-6 py-4">청정(+6) vs 공해(+12, 공해+8)</td>
                                 <td class="px-6 py-4 text-neutral-300">매일 지속 생성 (시작 33개)</td>
                                 <td class="px-6 py-4">1 크레딧 ≒ 0.1 라이프 가치</td>
-                                <td class="px-6 py-4 text-[#f0eee7]">생산·기술·폭탄 구매 에너지</td>
+                                <td class="px-6 py-4 text-[#f0eee7]">생산 및 기술 설비 가동 에너지</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- 4 Special Action Rules -->
-            <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 font-mono text-xs">
-                <div class="brutalist-border bg-[#101010] p-4">
-                    <div class="text-xl mb-2">💣</div>
-                    <div class="font-bold text-[#f0eee7] uppercase tracking-wider">레드의 폭탄 투하</div>
-                    <p class="font-sans text-neutral-400 text-xs mt-1">10크레딧 소모 ➔ 상대 진영 라이프 3개 즉시 소멸시켜 기근을 유도합니다.</p>
-                </div>
-                <div class="brutalist-border bg-[#101010] p-4">
-                    <div class="text-xl mb-2">🛡️</div>
-                    <div class="font-bold text-[#f0eee7] uppercase tracking-wider">블랙 마트의 방어 쉴드</div>
-                    <p class="font-sans text-neutral-400 text-xs mt-1">8크레딧/25보석으로 구매. 적의 폭탄 공격을 1회 100% 무효화합니다.</p>
-                </div>
-                <div class="brutalist-border bg-[#101010] p-4">
-                    <div class="text-xl mb-2">🧩</div>
-                    <div class="font-bold text-[#f0eee7] uppercase tracking-wider">비밀 환수 조각</div>
-                    <p class="font-sans text-neutral-400 text-xs mt-1">생존 팀들이 조각 3개를 모두 모으면 블랙의 은닉 자금을 전액 몰수합니다.</p>
-                </div>
-                <div class="brutalist-border bg-[#101010] p-4">
-                    <div class="text-xl mb-2">👑</div>
-                    <div class="font-bold text-[#f0eee7] uppercase tracking-wider">최후의 1인 생존 보장</div>
-                    <p class="font-sans text-neutral-400 text-xs mt-1">전원이 아사할 위기라도 사회의 마지막 1명은 시스템이 무조건 살려 상금을 지급합니다.</p>
-                </div>
-            </div>
+            
         </div>
     </section>
 
@@ -1380,7 +1358,7 @@
                         </div>
 
                         <ul class="mt-4 space-y-2 text-xs text-neutral-400 font-sans">
-                            <li class="flex items-start"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-400 mr-1.5 shrink-0 mt-0.5"></i><span><strong>폭탄 제조권:</strong> 10크레딧으로 타인 라이프 3개 파괴.</span></li>
+                            <li class="flex items-start"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-400 mr-1.5 shrink-0 mt-0.5"></i><span><strong>산업 독점 생산권:</strong> 청정/공해 방식을 선택하여 크레딧 독점 생산.</span></li>
                             <li class="flex items-start"><i data-lucide="alert-triangle" class="w-3.5 h-3.5 text-amber-400 mr-1.5 shrink-0 mt-0.5"></i><span><strong>공해 딜레마:</strong> 공해 생산 시 자산 30% 폭파 재앙 위험.</span></li>
                         </ul>
                     </div>
@@ -1407,8 +1385,8 @@
                         </div>
 
                         <ul class="mt-4 space-y-2 text-xs text-neutral-400 font-sans">
-                            <li class="flex items-start"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-400 mr-1.5 shrink-0 mt-0.5"></i><span><strong>방어 쉴드 판매:</strong> 폭탄 공격을 무효화하는 쉴드 고가 독점 판매.</span></li>
-                            <li class="flex items-start"><i data-lucide="alert-triangle" class="w-3.5 h-3.5 text-[#ef321f] mr-1.5 shrink-0 mt-0.5"></i><span><strong>환수 조각 3개 완성 시:</strong> 모든 비자금 전액 몰수 리스크.</span></li>
+                            <li class="flex items-start"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-400 mr-1.5 shrink-0 mt-0.5"></i><span><strong>그림자 마트 독점 운영:</strong> 전쟁 선포권(15보석) 및 A/B/C급 무기(10~30보석) 판매.</span></li>
+                            <li class="flex items-start"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-400 mr-1.5 shrink-0 mt-0.5"></i><span><strong>1일차 운영비 면제:</strong> 1일차 라이프 소모 0개 특권 (2일차부터 매일 1개 소모).</span></li>
                         </ul>
                     </div>
                 </div>
@@ -1486,7 +1464,7 @@
                 <div class="brutalist-border bg-[#121212] p-4">
                     <span class="text-neutral-500 uppercase text-[10px] tracking-wider">전쟁 발발률</span>
                     <div class="font-cafe24 text-2xl text-[#ef321f] mt-1">81.6%</div>
-                    <span class="text-neutral-400 text-[10px]">평균 1.65회 폭탄 투하</span>
+                    <span class="text-neutral-400 text-[10px]">평균 1.65회 무기 교전</span>
                 </div>
                 <div class="brutalist-border bg-[#121212] p-4">
                     <span class="text-neutral-500 uppercase text-[10px] tracking-wider">공해 재앙 발생률</span>
@@ -1494,9 +1472,9 @@
                     <span class="text-neutral-400 text-[10px]">공유지의 비극 실증</span>
                 </div>
                 <div class="brutalist-border bg-[#121212] p-4">
-                    <span class="text-neutral-500 uppercase text-[10px] tracking-wider">블랙 자산 몰수율</span>
-                    <div class="font-cafe24 text-2xl text-emerald-400 mt-1">6.3%</div>
-                    <span class="text-neutral-400 text-[10px]">환수 조각 3개 완성 빈도</span>
+                    <span class="text-neutral-500 uppercase text-[10px] tracking-wider">블랙 마트 무기 독점률</span>
+                    <div class="font-cafe24 text-2xl text-amber-400 mt-1">93.7%</div>
+                    <span class="text-neutral-400 text-[10px]">보석의 군비 흡수율</span>
                 </div>
                 <div class="brutalist-border bg-[#121212] p-4">
                     <span class="text-neutral-500 uppercase text-[10px] tracking-wider">보석 1개 평균 최종가치</span>
@@ -1591,8 +1569,8 @@
                         <input id="paramDisasterThreshold" type="number" value="50" min="20" max="100" class="w-full bg-[#181818] border border-[#2a2a2a] text-[#f0eee7] px-3 py-2 text-xs focus:border-[#1646f5] outline-none">
                     </div>
                     <div>
-                        <label class="block text-neutral-400 text-[11px] mb-1">폭탄 제조 비용 (크레딧)</label>
-                        <input id="paramBombCost" type="number" value="10" min="4" max="30" class="w-full bg-[#181818] border border-[#2a2a2a] text-[#f0eee7] px-3 py-2 text-xs focus:border-[#1646f5] outline-none">
+                        <label class="block text-neutral-400 text-[11px] mb-1">무기 구매 비용 (보석)</label>
+                        <input id="paramBombCost" type="number" value="20" min="10" max="30" class="w-full bg-[#181818] border border-[#2a2a2a] text-[#f0eee7] px-3 py-2 text-xs focus:border-[#1646f5] outline-none">
                     </div>
                     <div>
                         <label class="block text-neutral-400 text-[11px] mb-1">라이프 생산 비용 (크레딧)</label>
@@ -1747,8 +1725,8 @@
                 <div class="brutalist-border bg-[#101010] p-6">
                     <div class="text-neutral-300 font-bold text-sm uppercase">[03] 갈등의 최대 수혜자는 무기상</div>
                     <p class="font-sans text-neutral-400 text-xs mt-3 leading-relaxed">
-                        레드가 폭탄을 개발할수록 화이트와 블루는 공포에 질려 블랙 마트의 방어 쉴드를 찾습니다.
-                        진영 간 불신과 무력 갈등이 심화될수록 군수업자의 마진은 극대화됩니다.
+                        진영 간 군비 경쟁이 격화될수록 보석은 A/B/C급 무기 및 전쟁 선포권 구매를 위해 블랙 마트로 집중 흡수됩니다.
+                        진영 간 불신과 무력 갈등이 심화될수록 무기 중개상(블랙)의 부는 극대화됩니다.
                     </p>
                 </div>
             </div>
@@ -1938,20 +1916,18 @@
                 this.prizePool = 200000000;
                 this.lifeReserve = parseInt(document.getElementById('paramLifeReserve').value);
                 this.disasterThreshold = parseFloat(document.getElementById('paramDisasterThreshold').value);
-                this.bombCost = parseFloat(document.getElementById('paramBombCost').value);
+                this.weaponCost = parseFloat(document.getElementById('paramBombCost').value) || 20;
                 this.creditPerLife = parseFloat(document.getElementById('paramCreditPerLife').value);
 
                 this.pollutionIndex = 0.0;
                 this.disasterOccurred = false;
                 this.warAttacks = 0;
-                this.reclaimPieces = 0;
-                this.blackConfiscated = false;
 
                 this.teams = {
-                    WHITE: { name: 'White', initial: 6, surv: 6, jewels: 200, life: 14, credits: 7, shield: false },
-                    BLUE:  { name: 'Blue',  initial: 3, surv: 3, jewels: 60,  life: 19, credits: 8, shield: false },
-                    RED:   { name: 'Red',   initial: 3, surv: 3, jewels: 50,  life: 9,  credits: 18, shield: false },
-                    BLACK: { name: 'Black', initial: 1, surv: 1, jewels: 0,   life: 0,  credits: 0, shield: false }
+                    WHITE: { name: 'White', initial: 6, surv: 6, jewels: 200, life: 14, credits: 7 },
+                    BLUE:  { name: 'Blue',  initial: 3, surv: 3, jewels: 60,  life: 19, credits: 8 },
+                    RED:   { name: 'Red',   initial: 3, surv: 3, jewels: 50,  life: 9,  credits: 18 },
+                    BLACK: { name: 'Black', initial: 1, surv: 1, jewels: 0,   life: 0,  credits: 0 }
                 };
 
                 const logBox = document.getElementById('simEventLogs');
@@ -2037,28 +2013,24 @@
                     }
                 }
 
-                // Phase 2: Afternoon Market & Warfare
-                // Red Bomb Attack
-                if (this.teams.RED.surv > 0 && this.teams.RED.credits >= this.bombCost && Math.random() < 0.45) {
-                    this.teams.RED.credits -= this.bombCost;
-                    this.warAttacks++;
-                    const target = (this.teams.BLUE.surv > 0) ? 'BLUE' : 'WHITE';
-                    if (this.teams[target].shield) {
-                        this.teams[target].shield = false;
-                        this.log(`[레드] ${target}에 폭탄 투하! 그러나 상대 방어 쉴드에 막혀 불발!`, 'bomb');
-                    } else {
-                        const destroyed = Math.min(this.teams[target].life, 3);
-                        this.teams[target].life -= destroyed;
-                        this.log(`[레드] ${target}에 폭탄 명중! 라이프 ${destroyed}개 파괴!`, 'bomb');
+                // Phase 2: Afternoon Market & Arms Deals (Official Broadcast Rules)
+                // Black Mart Weapon Purchase: Factions buy A/B/C weapons with jewels
+                if (Math.random() < 0.40) {
+                    const buyerCandidates = ['WHITE', 'RED', 'BLUE'].filter(t => this.teams[t].surv > 0 && this.teams[t].jewels >= this.weaponCost);
+                    if (buyerCandidates.length > 0) {
+                        const buyer = buyerCandidates[Math.floor(Math.random() * buyerCandidates.length)];
+                        const targetCandidates = ['WHITE', 'RED', 'BLUE'].filter(t => t !== buyer && this.teams[t].surv > 0 && this.teams[t].life > 0);
+                        if (targetCandidates.length > 0) {
+                            const target = targetCandidates[Math.floor(Math.random() * targetCandidates.length)];
+                            this.teams[buyer].jewels -= this.weaponCost;
+                            this.teams.BLACK.jewels += this.weaponCost; // Black absorbs jewels
+                            this.warAttacks++;
+                            const dmg = (this.weaponCost >= 30) ? 4 : ((this.weaponCost >= 20) ? 2 : 1);
+                            const destroyed = Math.min(this.teams[target].life, dmg);
+                            this.teams[target].life -= destroyed;
+                            this.log(`⚔️ [무기 교전] ${buyer}가 블랙 마트에서 ${this.weaponCost}보석으로 무기 구매 ➔ ${target} 타격 (라이프 -${destroyed})`, 'bomb');
+                        }
                     }
-                }
-
-                // Blue / White buy Shield from Black
-                if (this.teams.BLUE.surv > 0 && !this.teams.BLUE.shield && this.teams.BLUE.credits >= 8) {
-                    this.teams.BLUE.credits -= 8;
-                    this.teams.BLUE.shield = true;
-                    this.teams.BLACK.credits += 8;
-                    this.log(`[블루] 블랙 마트에서 방어 쉴드 구매 완료 (8 크레딧)`, 'black');
                 }
 
                 // Trade: White & Red buy life from Blue
@@ -2082,21 +2054,20 @@
                     }
                 }
 
-                // Reclaim Piece Search
-                if (!this.blackConfiscated && Math.random() < 0.25) {
-                    this.reclaimPieces++;
-                    this.log(`[비밀 수색] 생존 팀들이 환수 조각 1개 발견! (현재: ${this.reclaimPieces}/3개)`, 'black');
-                    if (this.reclaimPieces >= 3) {
-                        this.blackConfiscated = true;
-                        this.teams.BLACK.credits = 0;
-                        this.teams.BLACK.jewels = 0;
-                        this.log(`⚖️ [환수 완료] 환수 조각 3개 달성! 블랙의 비자금 전액 몰수!`, 'black');
-                    }
-                }
-
                 // Phase 3: Evening Life Submission
                 for (let t in this.teams) {
-                    if (t === 'BLACK') continue;
+                    if (t === 'BLACK') {
+                        // Black Mart: Day 1 life exempt (0 life), Day 2+ consumes 1 life if available
+                        if (this.day >= 2) {
+                            if (this.teams.BLACK.life >= 1) {
+                                this.teams.BLACK.life -= 1;
+                                this.log(`[블랙 마트] 일일 마트 운영비 1 라이프 정상 차감`, 'black');
+                            }
+                        } else {
+                            this.log(`[블랙 마트] 1일차 특권: 마트 운영비(라이프) 소모 면제`, 'black');
+                        }
+                        continue;
+                    }
                     const team = this.teams[t];
                     if (team.surv <= 0) continue;
                     const needed = team.surv;
@@ -2108,13 +2079,6 @@
                         team.life = 0;
                         this.log(`💀 [기근 탈락] ${t} 팀 라이프 고갈로 ${casualties}명 탈락 (잔여 생존: ${team.surv}명)`, 'casualty');
                     }
-                }
-
-                // Last Person Standing Guarantee
-                const totalSurv = this.teams.WHITE.surv + this.teams.BLUE.surv + this.teams.RED.surv;
-                if (totalSurv === 0) {
-                    this.teams.WHITE.surv = 1;
-                    this.log(`👑 [최후 1인 규칙] 사회 전원 전멸 위기! 시스템에 의해 화이트 1인 생존 보장.`, 'mint');
                 }
 
                 this.day++;
