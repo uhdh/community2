@@ -122,14 +122,6 @@
             background: #cc2212;
             box-shadow: 0 0 16px rgba(239, 50, 31, 0.4);
         }
-        .btn-dark {
-            background: #141414;
-            color: var(--paper);
-            border: 1px solid var(--line);
-        }
-        .btn-dark:hover {
-            border-color: var(--paper);
-        }
 
         /* Interactive Board Tabs */
         .tab-btn.active {
@@ -178,7 +170,7 @@
                     <a href="#currencies" class="hover:text-[#f0eee7] transition-colors">[01] 3대 재화</a>
                     <a href="#liveboard" class="hover:text-[#f0eee7] transition-colors text-[#1646f5] font-bold">[02] 팀별 실시간 보드 🌟</a>
                     <a href="#factions" class="hover:text-[#f0eee7] transition-colors">[03] 4개 진영</a>
-                    <a href="#marketwar" class="hover:text-[#f0eee7] transition-colors text-[#ef321f] font-bold">[04] 시장과 전쟁</a>
+                    <a href="#marketwar" class="hover:text-[#f0eee7] transition-colors text-[#ef321f] font-bold">[04] 전시 활동 & 무기</a>
                     <a href="#rulebook" class="hover:text-[#f0eee7] transition-colors">[05] 룰북 요약</a>
                     <a href="#data" class="hover:text-[#f0eee7] transition-colors">[06] 데이터 분석</a>
                 </div>
@@ -196,8 +188,8 @@
     <!-- Running Marquee Ribbon -->
     <div class="marquee">
         <div class="marquee__inner">
-            <span>THE COMMUNITY 2 — INVISIBLE HAND • 총 상금 2억 원 • 초기 보석 200개 (1개 = 100만 원) • 생존 라이프 50개 한도 • 화이트 / 블루 / 레드 / 블랙 • 시장 가격과 전쟁 선포 • </span>
-            <span>THE COMMUNITY 2 — INVISIBLE HAND • 총 상금 2억 원 • 초기 보석 200개 (1개 = 100만 원) • 생존 라이프 50개 한도 • 화이트 / 블루 / 레드 / 블랙 • 시장 가격과 전쟁 선포 • </span>
+            <span>THE COMMUNITY 2 — INVISIBLE HAND • 총 상금 2억 원 • 초기 보석 200개 (1개 = 100만 원) • 생존 라이프 50개 한도 • 13인 참가자 공식 아이콘 • 전시 활동 & 무기 시스템 • </span>
+            <span>THE COMMUNITY 2 — INVISIBLE HAND • 총 상금 2억 원 • 초기 보석 200개 (1개 = 100만 원) • 생존 라이프 50개 한도 • 13인 참가자 공식 아이콘 • 전시 활동 & 무기 시스템 • </span>
         </div>
     </div>
 
@@ -390,17 +382,61 @@
                 </div>
             </div>
 
-            <!-- Black Mart Banner -->
-            <div class="mt-6 p-5 brutalist-border bg-[#101010] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                <div class="flex items-center space-x-3">
-                    <div class="w-9 h-9 bg-[#1a1a1a] border border-[#333] flex items-center justify-center font-bold text-lg">🛒</div>
-                    <div>
-                        <div class="font-mono text-xs text-emerald-400 font-bold uppercase">[군수업자 & 마트 독점] 정재호 (블랙)</div>
-                        <div class="text-neutral-300 font-sans text-xs mt-0.5">식료품 판매 (1💎 또는 2⚡) | 전쟁 선포(15💎) | A급 무기(30💎) · B급(20💎) · C급(10💎)</div>
+            <!-- Black Mart Banner with Official Weapons Cards -->
+            <div class="mt-8 p-6 brutalist-border bg-[#101010]">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-4 border-b border-[#262626]">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-[#1a1a1a] border border-[#333] flex items-center justify-center font-bold text-xl">🛒</div>
+                        <div>
+                            <div class="font-mono text-xs text-emerald-400 font-bold uppercase">[군수업자 & 마트 독점] 벡터 (정재호)</div>
+                            <div class="text-neutral-300 font-sans text-xs mt-0.5">식료품 판매 (1보석 또는 2크레딧) | 무기 및 전쟁 선포권 판매</div>
+                        </div>
+                    </div>
+                    <div class="font-mono text-[11px] text-neutral-400">
+                        * 1일차 운영비 면제 / 2일차부터 매일 1라이프 소모
                     </div>
                 </div>
-                <div class="font-mono text-[11px] text-neutral-400 shrink-0">
-                    * 1일차 운영비 면제 / 2일차부터 매일 1라이프 소모
+
+                <!-- 3 Official Weapon Cards Showcase -->
+                <div class="mt-6">
+                    <div class="font-mono text-[11px] text-neutral-400 uppercase font-bold mb-3 flex items-center">
+                        <img src="./brand/icon-war-warning.png" class="w-4 h-3 object-contain mr-1.5" alt="전쟁">
+                        <span>블랙 마트 독점 무기 3등급 체계 (공식 방송 카드 규격)</span>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <!-- A-Tier Weapon -->
+                        <div class="p-3.5 bg-[#141414] border border-amber-500/40 flex items-center space-x-4">
+                            <img src="./brand/weapon-tier-a.png" class="w-16 h-28 object-contain rounded-xs shadow-md" alt="A급 무기">
+                            <div class="font-mono text-xs">
+                                <div class="text-amber-400 font-bold text-sm">A급 무기 (수류탄)</div>
+                                <div class="text-[#f0eee7] font-bold mt-1">가격: 30 보석</div>
+                                <div class="text-neutral-400 text-[11px] mt-0.5">화력: 라이프 4개 타격</div>
+                                <div class="text-[10px] text-amber-300 mt-1">★★★ 최고 화력 결전 병기</div>
+                            </div>
+                        </div>
+
+                        <!-- B-Tier Weapon -->
+                        <div class="p-3.5 bg-[#141414] border border-neutral-400/40 flex items-center space-x-4">
+                            <img src="./brand/weapon-tier-b.png" class="w-16 h-28 object-contain rounded-xs shadow-md" alt="B급 무기">
+                            <div class="font-mono text-xs">
+                                <div class="text-neutral-300 font-bold text-sm">B급 무기 (소총)</div>
+                                <div class="text-[#f0eee7] font-bold mt-1">가격: 20 보석</div>
+                                <div class="text-neutral-400 text-[11px] mt-0.5">화력: 라이프 2개 타격</div>
+                                <div class="text-[10px] text-neutral-300 mt-1">★★ 중간 화력 표준 소총</div>
+                            </div>
+                        </div>
+
+                        <!-- C-Tier Weapon -->
+                        <div class="p-3.5 bg-[#141414] border border-amber-700/40 flex items-center space-x-4">
+                            <img src="./brand/weapon-tier-c.png" class="w-16 h-28 object-contain rounded-xs shadow-md" alt="C급 무기">
+                            <div class="font-mono text-xs">
+                                <div class="text-amber-600 font-bold text-sm">C급 무기 (권총)</div>
+                                <div class="text-[#f0eee7] font-bold mt-1">가격: 10 보석</div>
+                                <div class="text-neutral-400 text-[11px] mt-0.5">화력: 라이프 1개 타격</div>
+                                <div class="text-[10px] text-neutral-400 mt-1">★ 기본 화력 호신 권총</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -461,9 +497,9 @@
                 </div>
             </div>
 
-            <!-- VIEW CONTAINER 1: 4 TEAMS VISUAL VAULT CARDS -->
+            <!-- VIEW CONTAINER 1: 4 TEAMS VISUAL VAULT CARDS (WITH 13 PERSON FIGURES) -->
             <div id="viewTeamsContainer" class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Teams cards dynamically injected by JS with pictures! -->
+                <!-- Teams cards dynamically injected by JS with pictures and official human avatars! -->
             </div>
 
             <!-- VIEW CONTAINER 2: 200 JEWELS MAP (10x20 Grid) -->
@@ -519,7 +555,7 @@
                 </div>
             </div>
 
-            <!-- Interactive Quick Trade & War Simulation Actions -->
+            <!-- Interactive Quick Trade & War Simulation Actions (With Official WARNING Emblem) -->
             <div class="mt-8 p-5 brutalist-border bg-[#101010]">
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4 pb-3 border-b border-[#262626]">
                     <div class="flex items-center space-x-2 font-mono text-xs font-bold text-[#f0eee7]">
@@ -537,11 +573,14 @@
                         <div class="text-neutral-500 text-[10px] mt-0.5">화이트 생존 확보, 블루 보석 흡수</div>
                     </button>
 
-                    <!-- Action 2: Price Gouging War -->
+                    <!-- Action 2: Official WARNING Price Gouging War -->
                     <button onclick="board.declareWar('WHITE', 'BLUE')" class="p-3 bg-[#1e0e0e] hover:bg-[#2c1212] border border-[#ef321f]/50 hover:border-[#ef321f] text-left transition-all group">
-                        <div class="text-[#ef321f] font-bold group-hover:translate-x-1 transition-transform">⚔️ 가격 불만! 전쟁 선포 & 강탈</div>
-                        <div class="text-neutral-200 text-[11px] mt-1">화이트 ➔ 블루 (15💎 ➔ 50% 약탈)</div>
-                        <div class="text-neutral-400 text-[10px] mt-0.5">블루의 보석·라이프 50%를 강탈!</div>
+                        <div class="text-[#ef321f] font-bold flex items-center group-hover:translate-x-1 transition-transform">
+                            <img src="./brand/icon-war-warning.png" class="w-4 h-3 object-contain mr-1.5" alt="WARNING">
+                            <span>가격 불만! 전쟁 선포 (15💎)</span>
+                        </div>
+                        <div class="text-neutral-200 text-[11px] mt-1">화이트 ➔ 블루 (블루 자원 50% 약탈)</div>
+                        <div class="text-neutral-400 text-[10px] mt-0.5">총상금 차감 & 블루 자원 50% 강탈!</div>
                     </button>
 
                     <!-- Action 3: Red Credit to Blue -->
@@ -573,135 +612,193 @@
         </div>
     </section>
 
-    <!-- SECTION 03: 4 FACTIONS OVERVIEW -->
+    <!-- SECTION 03: 4 FACTIONS OVERVIEW (WITH OFFICIAL 13 MEMBERS GRAPHIC) -->
     <section id="factions" class="py-16 lg:py-24 bg-[#0a0a0a] border-b border-[#262626]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="section-label">
                 <span>SECTION 03</span>
-                <b>4 FACTIONS & LEADERS</b>
+                <b>4 FACTIONS & 13 MEMBERS</b>
             </div>
 
-            <div class="max-w-3xl">
-                <h2 class="font-cafe24 text-3xl sm:text-4xl text-[#f0eee7] tracking-tight">
-                    4대 진영 참가자 및 비대칭 히든 정보
-                </h2>
-                <p class="mt-3 text-neutral-400 text-sm sm:text-base leading-relaxed">
-                    총 13명의 참가자가 4개 색상의 방에서 출발했습니다.
-                </p>
+            <div class="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6 mb-10">
+                <div>
+                    <h2 class="font-cafe24 text-3xl sm:text-4xl text-[#f0eee7] tracking-tight">
+                        4대 진영 참가자 공식 배치도 & 히든 정보
+                    </h2>
+                    <p class="mt-3 text-neutral-400 text-sm sm:text-base leading-relaxed">
+                        총 13명의 참가자가 4개 색상의 방에서 출발했습니다. (화이트 6인, 블루 3인, 레드 3인, 블랙 1인)
+                    </p>
+                </div>
             </div>
 
-            <div class="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 font-mono text-xs">
+            <!-- Official 13 Members Infographic Card -->
+            <div class="mb-10 p-6 brutalist-border bg-[#101010] flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="w-full md:w-1/2 flex justify-center">
+                    <img src="./brand/factions-13-members.png" class="max-h-56 object-contain rounded-xs shadow-lg border border-[#222]" alt="13인의 참가자 공식 배치도">
+                </div>
+                <div class="w-full md:w-1/2 font-mono text-xs space-y-2.5">
+                    <div class="text-xs font-bold text-[#f0eee7] uppercase tracking-wider flex items-center">
+                        <span class="w-2 h-2 bg-[#1646f5] inline-block mr-2"></span>
+                        <span>[공식 방송 규격] 13인 참가자 진영 구조</span>
+                    </div>
+                    <p class="font-sans text-xs text-neutral-300 leading-relaxed">
+                        중앙 점선 원 안의 <strong>블랙(정재호)</strong>은 고립된 중립 군수업자로 시작하며, 
+                        <strong>화이트 6인(자본 독점)</strong>, <strong>블루 3인(생존 독점)</strong>, <strong>레드 3인(에너지 독점)</strong>이 비대칭 권력 구조를 형성합니다.
+                    </p>
+                    <div class="pt-2 text-[11px] text-neutral-400 border-t border-[#222]">
+                        각 팀의 전면에 선 인물(나비넥타이)은 매일 투표로 선출된 공식 리더입니다.
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 font-mono text-xs">
                 <!-- White Team -->
-                <div class="brutalist-border bg-[#121212] p-6 border-t-4 !border-t-white">
-                    <div class="flex justify-between items-start">
-                        <h3 class="font-cafe24 text-2xl text-[#f0eee7]">화이트 (WHITE)</h3>
-                        <span class="px-2 py-0.5 bg-[#222] text-white font-bold">6인</span>
+                <div class="brutalist-border bg-[#121212] p-6 border-t-4 !border-t-white flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-cafe24 text-2xl text-[#f0eee7]">화이트 (WHITE)</h3>
+                                <div class="text-neutral-400 text-xs mt-0.5">리더: <strong>루나 (박세승)</strong></div>
+                            </div>
+                            <img src="./brand/figure-white-team.png" class="h-12 object-contain" alt="화이트 6인">
+                        </div>
+                        <div class="mt-4 p-2.5 bg-[#181818] border border-[#262626] text-neutral-300">
+                            • <strong>특권:</strong> 보석 단독 발행권 (초기 90개, 1일 최대 200개)<br>
+                            • <strong>약점:</strong> 매일 저녁 6라이프 대량 소모 (식량 결손)
+                        </div>
                     </div>
-                    <div class="text-neutral-400 text-xs mt-1">리더: <strong>루나 (박세승)</strong></div>
-                    <div class="mt-4 p-2.5 bg-[#181818] border border-[#262626] text-neutral-300">
-                        • <strong>특권:</strong> 보석 단독 발행권 (초기 90개, 1일 최대 200개)<br>
-                        • <strong>약점:</strong> 매일 저녁 6라이프 대량 소모 (식량 결손)
-                    </div>
-                    <div class="mt-3 text-[11px] text-neutral-400 leading-relaxed">
-                        참가자: 게리킴, 넉스, 박세승, 신혜원, 이한, 이현선
+                    <div class="mt-4 pt-3 border-t border-[#222] text-[11px] text-neutral-400 leading-relaxed">
+                        게리킴, 넉스, 박세승, 신혜원, 이한, 이현선
                     </div>
                 </div>
 
                 <!-- Blue Team -->
-                <div class="brutalist-border bg-[#121212] p-6 border-t-4 !border-t-[#1646f5]">
-                    <div class="flex justify-between items-start">
-                        <h3 class="font-cafe24 text-2xl text-[#1646f5]">블루 (BLUE)</h3>
-                        <span class="px-2 py-0.5 bg-[#1646f5] text-white font-bold">3인</span>
+                <div class="brutalist-border bg-[#121212] p-6 border-t-4 !border-t-[#1646f5] flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-cafe24 text-2xl text-[#1646f5]">블루 (BLUE)</h3>
+                                <div class="text-neutral-400 text-xs mt-0.5">리더: <strong>소금 (임지은)</strong></div>
+                            </div>
+                            <img src="./brand/figure-blue-team.png" class="h-12 object-contain" alt="블루 3인">
+                        </div>
+                        <div class="mt-4 p-2.5 bg-[#181818] border border-[#262626] text-neutral-300">
+                            • <strong>특권:</strong> 라이프 독점 생산 (1일 최대 10개)<br>
+                            • <strong>독점 정보:</strong> 라이프 50개 총 매장량 한계 유일 인지
+                        </div>
                     </div>
-                    <div class="text-neutral-400 text-xs mt-1">리더: <strong>소금 (임지은)</strong> <span class="text-neutral-500">(2일차 교체)</span></div>
-                    <div class="mt-4 p-2.5 bg-[#181818] border border-[#262626] text-neutral-300">
-                        • <strong>특권:</strong> 라이프 독점 생산 (1일 최대 10개)<br>
-                        • <strong>독점 정보:</strong> 라이프 50개 총 매장량 한계 유일 인지
-                    </div>
-                    <div class="mt-3 text-[11px] text-neutral-400 leading-relaxed">
-                        참가자: 이수민 (피트), 이지나 (지니), 임지은 (소금)
+                    <div class="mt-4 pt-3 border-t border-[#222] text-[11px] text-neutral-400 leading-relaxed">
+                        이수민 (피트), 이지나 (지니), 임지은 (소금)
                     </div>
                 </div>
 
                 <!-- Red Team -->
-                <div class="brutalist-border bg-[#121212] p-6 border-t-4 !border-t-[#ef321f]">
-                    <div class="flex justify-between items-start">
-                        <h3 class="font-cafe24 text-2xl text-[#ef321f]">레드 (RED)</h3>
-                        <span class="px-2 py-0.5 bg-[#ef321f] text-white font-bold">3인</span>
+                <div class="brutalist-border bg-[#121212] p-6 border-t-4 !border-t-[#ef321f] flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-cafe24 text-2xl text-[#ef321f]">레드 (RED)</h3>
+                                <div class="text-neutral-400 text-xs mt-0.5">리더: <strong>마이야르 (승우아빠)</strong></div>
+                            </div>
+                            <img src="./brand/figure-red-team.png" class="h-12 object-contain" alt="레드 3인">
+                        </div>
+                        <div class="mt-4 p-2.5 bg-[#181818] border border-[#262626] text-neutral-300">
+                            • <strong>특권:</strong> 크레딧 대량 생산 (일반 12 vs 무공해 6)<br>
+                            • <strong>독점 정보:</strong> 공해 크레딧 임계점 초과 시 대재앙 인지
+                        </div>
                     </div>
-                    <div class="text-neutral-400 text-xs mt-1">리더: <strong>마이야르 (승우아빠)</strong></div>
-                    <div class="mt-4 p-2.5 bg-[#181818] border border-[#262626] text-neutral-300">
-                        • <strong>특권:</strong> 크레딧 대량 생산 (일반 12 vs 무공해 6)<br>
-                        • <strong>독점 정보:</strong> 공해 크레딧 임계점 초과 시 대재앙 인지
-                    </div>
-                    <div class="mt-3 text-[11px] text-neutral-400 leading-relaxed">
-                        참가자: 박철현 (동키), 목진화 (마이야르), 이재용 (이자하)
+                    <div class="mt-4 pt-3 border-t border-[#222] text-[11px] text-neutral-400 leading-relaxed">
+                        박철현 (동키), 목진화 (마이야르), 이재용 (이자하)
                     </div>
                 </div>
 
                 <!-- Black Mart -->
-                <div class="brutalist-border bg-[#121212] p-6 border-t-4 !border-t-neutral-500">
-                    <div class="flex justify-between items-start">
-                        <h3 class="font-cafe24 text-2xl text-neutral-200">블랙 (BLACK)</h3>
-                        <span class="px-2 py-0.5 bg-neutral-800 text-neutral-300 font-bold">1인</span>
+                <div class="brutalist-border bg-[#121212] p-6 border-t-4 !border-t-neutral-500 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-cafe24 text-2xl text-neutral-200">블랙 (BLACK)</h3>
+                                <div class="text-neutral-400 text-xs mt-0.5">운영자: <strong>벡터 (정재호)</strong></div>
+                            </div>
+                            <img src="./brand/figure-black-team.png" class="h-12 object-contain" alt="블랙 1인">
+                        </div>
+                        <div class="mt-4 p-2.5 bg-[#181818] border border-[#262626] text-neutral-300">
+                            • <strong>특권:</strong> 마트 식료품 & 무기 독점 판매 / 전 팀 감청<br>
+                            • <strong>약점:</strong> 퀴즈 조각 3개 모이면 정체 탄로 및 자금 몰수
+                        </div>
                     </div>
-                    <div class="text-neutral-400 text-xs mt-1">운영자: <strong>벡터 (정재호)</strong></div>
-                    <div class="mt-4 p-2.5 bg-[#181818] border border-[#262626] text-neutral-300">
-                        • <strong>특권:</strong> 마트 식료품 & 무기 독점 판매 / 전 팀 감청<br>
-                        • <strong>약점:</strong> 퀴즈 조각 3개 모이면 정체 탄로 및 자금 몰수
-                    </div>
-                    <div class="mt-3 text-[11px] text-neutral-400 leading-relaxed">
-                        참가자: 정재호 (벡터 / 군수업자)
+                    <div class="mt-4 pt-3 border-t border-[#222] text-[11px] text-neutral-400 leading-relaxed">
+                        정재호 (벡터 / 군수업자)
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 04: MARKET AND WAR -->
+    <!-- SECTION 04: WARTIME ACTIVITY & WEAPONS SYSTEM -->
     <section id="marketwar" class="py-16 lg:py-24 bg-[#080808] border-b border-[#262626]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="section-label">
                 <span>SECTION 04</span>
-                <b>THE INVISIBLE HAND & WAR ON GOUGING</b>
+                <b>WARTIME ACTIVITIES & ALLIANCE RULES</b>
             </div>
 
             <div class="max-w-3xl">
-                <div class="p-3 bg-[#1e0e0e] border border-[#ef321f]/40 font-mono text-xs text-[#ef321f] font-bold mb-4 inline-block">
-                    🗣️ "가격은 시장에서 정해지는 거야. 그래서 보이지 않는 손인 거지. 그런데 가격이 맘에 안 들면 전쟁을 선포할 거야."
+                <!-- Official WARNING Banner -->
+                <div class="p-4 bg-[#1a0c0c] border border-[#ef321f]/50 flex items-center space-x-3 mb-6">
+                    <img src="./brand/icon-war-warning.png" class="w-10 h-7 object-contain" alt="WARNING">
+                    <div class="font-mono text-xs text-[#ef321f] font-bold">
+                        [공식 전쟁 발발 경보] "가격이 맘에 안 들면 전쟁을 선포할 거야!"
+                    </div>
                 </div>
+
                 <h2 class="font-cafe24 text-3xl sm:text-5xl text-[#f0eee7] tracking-tight">
-                    보이지 않는 손과 전쟁의 경제학
+                    전시 활동 룰 & 동맹·전리품 시스템
                 </h2>
                 <p class="mt-3 text-neutral-400 text-sm sm:text-base leading-relaxed">
-                    독점자가 가격을 마음대로 올릴 수 없는 이유: <strong>전쟁이 더 싸기 때문입니다.</strong>
+                    독점자의 가격 폭리를 응징하고 생존권을 강탈하는 전시 활동의 3대 공식 규칙입니다.
                 </p>
             </div>
 
+            <!-- 3 Wartime Rules from Official Screenshot -->
             <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6 font-mono text-xs">
-                <!-- Step 1 -->
-                <div class="brutalist-border bg-[#101010] p-6">
-                    <div class="text-[#3898ec] font-bold text-sm uppercase">[01] 시장 균형가 형성</div>
+                <!-- Rule 1: Alliance -->
+                <div class="brutalist-border bg-[#101010] p-6 border-t-4 !border-t-[#1646f5]">
+                    <div class="text-[#3898ec] font-bold text-sm uppercase">전시 활동 1: 동맹 결성</div>
                     <p class="font-sans text-neutral-300 text-xs mt-3 leading-relaxed">
-                        라이프는 잔여 매장량이 줄어들고 보석 발행량이 늘어날수록 가치가 폭등합니다.<br>
-                        초반 20~22보석에서 시작하지만 후반부에는 40보석 이상으로 치솟습니다.
+                        <strong>"참전 그룹은 다른 1개 그룹과 동맹 맺고 함께 출전 가능"</strong><br><br>
+                        전쟁 선포 시 단독 출전뿐 아니라, 군사력이나 자금이 부족할 경우 타 그룹 1곳과 연합군을 구성하여 공동 작전을 펼칠 수 있습니다.
                     </p>
                 </div>
 
-                <!-- Step 2 -->
-                <div class="brutalist-border bg-[#101010] p-6">
-                    <div class="text-amber-400 font-bold text-sm uppercase">[02] 구매자 수용 한계 (35💎)</div>
+                <!-- Rule 2: Loot Distribution -->
+                <div class="brutalist-border bg-[#101010] p-6 border-t-4 !border-t-[#ef321f]">
+                    <div class="text-[#ef321f] font-bold text-sm uppercase">전시 활동 2: 전리품 협의 분배</div>
                     <p class="font-sans text-neutral-300 text-xs mt-3 leading-relaxed">
-                        화이트와 레드는 무조건 굴종하지 않습니다. 블루의 요구가가 <strong>35보석</strong>을 넘어가면 협상을 파기하고 전쟁 카드를 만지작거립니다.
+                        <strong>"최초 참전 그룹 기준으로 전리품 결정"</strong><br>
+                        <strong>"전리품 획득 및 지불은 동맹 그룹과 협의 분배"</strong><br><br>
+                        승리 시 적의 모든 자원(보석, 라이프, 크레딧)의 50%를 강탈하며, 획득한 전리품은 동맹 간 사전 계약에 따라 자유 분배합니다.
                     </p>
                 </div>
 
-                <!-- Step 3 -->
-                <div class="brutalist-border bg-[#101010] p-6">
-                    <div class="text-[#ef321f] font-bold text-sm uppercase">[03] 전쟁 선포 (15💎) & 50% 약탈</div>
+                <!-- Rule 3: Black Exclusion -->
+                <div class="brutalist-border bg-[#101010] p-6 border-t-4 !border-t-neutral-500">
+                    <div class="text-neutral-300 font-bold text-sm uppercase">전시 활동 3: 블랙 참전·동맹 불가</div>
                     <p class="font-sans text-neutral-300 text-xs mt-3 leading-relaxed">
-                        비싼 돈을 주고 라이프 1개를 사는 것보다, <strong>15보석으로 전쟁을 선포해 블루의 모든 자원 50%를 뺏는 것</strong>이 훨씬 이득입니다. 전쟁은 독점 폭리를 응징하는 최후의 시장 교정 기제입니다.
+                        <strong>"블랙 참여 / 동맹 불가"</strong><br><br>
+                        무기상이자 마트 독점자인 블랙(정재호)은 중립 지대를 유지해야 하므로, 어떤 전쟁에도 직접 참전하거나 동맹을 맺을 수 없습니다. 오직 무기 판매로만 이익을 취합니다.
                     </p>
+                </div>
+            </div>
+
+            <!-- Weapon Showcase in Wartime -->
+            <div class="mt-10 p-6 brutalist-border bg-[#121212]">
+                <div class="flex items-center space-x-2 font-mono text-xs font-bold text-[#f0eee7] mb-4">
+                    <img src="./brand/icon-war-warning.png" class="w-4 h-3 object-contain" alt="전쟁">
+                    <span>전쟁 참전 무기 카드 (A / B / C 등급)</span>
+                </div>
+                <div class="flex justify-center">
+                    <img src="./brand/weapons-official-all.png" class="max-h-72 object-contain rounded-xs shadow-lg border border-[#333]" alt="공식 3대 무기 카드">
                 </div>
             </div>
         </div>
@@ -745,13 +842,14 @@
 
                 <details class="brutalist-border bg-[#121212] p-5 cursor-pointer group">
                     <summary class="flex justify-between items-center font-bold text-[#f0eee7] text-sm select-none">
-                        <span>Q3. 무기 가격표 및 전쟁 선포 비용</span>
+                        <span>Q3. 전시 활동 및 동맹·전리품 분배 규칙</span>
                         <span class="text-neutral-500 group-open:rotate-180 transition-transform">▼</span>
                     </summary>
                     <div class="mt-4 pt-3 border-t border-[#262626] font-sans text-xs text-neutral-300 leading-relaxed space-y-2">
-                        <p>• <strong>전쟁 선포 비용:</strong> 보석 15개 (선포 즉시 전시 체제 전환, 취소 불가, 총상금 풀에서 15개 가치 영구 차감).</p>
-                        <p>• <strong>무기 등급 단가:</strong> A급 무기(30보석 / 최고 화력), B급 무기(20보석 / 중간 화력), C급 무기(10보석 / 기본 화력).</p>
-                        <p>• <strong>약탈 규칙:</strong> 승리 진영은 패배 진영 보유 모든 재화(보석, 라이프, 크레딧)의 50%를 강탈합니다.</p>
+                        <p>• <strong>전쟁 선포:</strong> 보석 15개 지불 (총상금에서 영구 차감, 전시 체제 전환).</p>
+                        <p>• <strong>동맹:</strong> 참전 그룹은 타 1개 그룹과 동맹 체결 가능 (단, 블랙은 참전/동맹 절대 불가).</p>
+                        <p>• <strong>전리품:</strong> 패배 그룹 보유 모든 재화의 50%를 강탈하며, 동맹 그룹과 협의 분배.</p>
+                        <p>• <strong>무기 단가:</strong> A급(30보석 / 수류탄), B급(20보석 / 소총), C급(10보석 / 권총).</p>
                     </div>
                 </details>
             </div>
@@ -808,7 +906,7 @@
                 <span>보이지 않는 손 // WAVVE ORIGINAL</span>
             </div>
             <div class="text-[11px] text-neutral-600">
-                INITIAL JEWELS 200 • 50 LIFE CAP • PYTHON 3.12 & ANTIGRAVITY
+                INITIAL JEWELS 200 • 50 LIFE CAP • 13 MEMBERS • PYTHON 3.12 & ANTIGRAVITY
             </div>
         </div>
     </footer>
@@ -827,10 +925,10 @@
                         totalJewels: 200.0,
                         lifeReserve: 8, // 50 - (14+19+9=42) = 8
                         teams: {
-                            WHITE: { name: '화이트', leader: '루나 (박세승)', initial: 6, surv: 6, jewels: 90.0, life: 14, credits: 7.0, color: '#f0eee7' },
-                            BLUE:  { name: '블루',   leader: '지니 (이지나)', initial: 3, surv: 3, jewels: 60.0, life: 19, credits: 8.0, color: '#1646f5' },
-                            RED:   { name: '레드',   leader: '마이야르 (승우아빠)', initial: 3, surv: 3, jewels: 50.0, life: 9,  credits: 18.0, cleanCredits: 0, color: '#ef321f' },
-                            BLACK: { name: '블랙',   leader: '벡터 (정재호)', initial: 1, surv: 1, jewels: 0.0,  life: 0,  credits: 0.0, color: '#888888' }
+                            WHITE: { name: '화이트', leader: '루나 (박세승)', initial: 6, surv: 6, jewels: 90.0, life: 14, credits: 7.0, color: '#f0eee7', avatar: './brand/figure-white-team.png' },
+                            BLUE:  { name: '블루',   leader: '지니 (이지나)', initial: 3, surv: 3, jewels: 60.0, life: 19, credits: 8.0, color: '#1646f5', avatar: './brand/figure-blue-team.png' },
+                            RED:   { name: '레드',   leader: '마이야르 (승우아빠)', initial: 3, surv: 3, jewels: 50.0, life: 9,  credits: 18.0, cleanCredits: 0, color: '#ef321f', avatar: './brand/figure-red-team.png' },
+                            BLACK: { name: '블랙',   leader: '벡터 (정재호)', initial: 1, surv: 1, jewels: 0.0,  life: 0,  credits: 0.0, color: '#888888', avatar: './brand/figure-black-team.png' }
                         }
                     },
                     2: {
@@ -839,10 +937,10 @@
                         totalJewels: 201.0, // Black gained 1 jewel from grocery
                         lifeReserve: 3, // 50 total: 10 + 21 + 6 = 37 active, 10 consumed, 3 in reserve
                         teams: {
-                            WHITE: { name: '화이트', leader: '루나 (박세승 연임)', initial: 6, surv: 6, jewels: 90.0, life: 10, credits: 6.0, color: '#f0eee7' },
-                            BLUE:  { name: '블루',   leader: '소금 (임지은 신임)', initial: 3, surv: 3, jewels: 60.0, life: 21, credits: 5.0, color: '#1646f5' },
-                            RED:   { name: '레드',   leader: '마이야르 (승우아빠 연임)', initial: 3, surv: 3, jewels: 50.0, life: 6,  credits: 13.0, cleanCredits: 16.0, color: '#ef321f' },
-                            BLACK: { name: '블랙',   leader: '벡터 (정재호 연임)', initial: 1, surv: 1, jewels: 1.0,  life: 0,  credits: 0.0, color: '#888888' }
+                            WHITE: { name: '화이트', leader: '루나 (박세승 연임)', initial: 6, surv: 6, jewels: 90.0, life: 10, credits: 6.0, color: '#f0eee7', avatar: './brand/figure-white-team.png' },
+                            BLUE:  { name: '블루',   leader: '소금 (임지은 신임)', initial: 3, surv: 3, jewels: 60.0, life: 21, credits: 5.0, color: '#1646f5', avatar: './brand/figure-blue-team.png' },
+                            RED:   { name: '레드',   leader: '마이야르 (승우아빠 연임)', initial: 3, surv: 3, jewels: 50.0, life: 6,  credits: 13.0, cleanCredits: 16.0, color: '#ef321f', avatar: './brand/figure-red-team.png' },
+                            BLACK: { name: '블랙',   leader: '벡터 (정재호 연임)', initial: 1, surv: 1, jewels: 1.0,  life: 0,  credits: 0.0, color: '#888888', avatar: './brand/figure-black-team.png' }
                         }
                     }
                 };
@@ -1024,7 +1122,7 @@
                 const unitVal = (circ > 0) ? Math.floor(this.prizePool / circ) : 0;
                 document.getElementById('boardUnitValBadge').innerText = `${unitVal.toLocaleString()} 원`;
 
-                // 2. Render Team Cards
+                // 2. Render Team Cards (with official figures!)
                 const container = document.getElementById('viewTeamsContainer');
                 if (!container) return;
 
@@ -1073,17 +1171,20 @@
                     cardsHtml += `
                     <div class="brutalist-border bg-[#121212] p-5 flex flex-col justify-between relative hover:border-[#484848] transition-colors" style="border-top: 3px solid ${t.color}">
                         <div>
-                            <!-- Header -->
+                            <!-- Header with Official Figures -->
                             <div class="flex justify-between items-start">
                                 <div>
                                     <span class="font-mono text-[10px] text-neutral-400 uppercase tracking-widest">${k} FACTION</span>
                                     <h3 class="font-cafe24 text-2xl text-[#f0eee7]">${t.name}</h3>
+                                    <div class="font-mono text-[11px] text-neutral-400 mt-0.5">${t.leader}</div>
                                 </div>
-                                <span class="px-2 py-0.5 bg-[#181818] border border-[#333] font-mono text-[10px] text-neutral-300 font-bold">
-                                    ${t.surv}/${t.initial}명
-                                </span>
+                                <div class="flex flex-col items-end">
+                                    <img src="${t.avatar}" class="h-10 object-contain mb-1" alt="${t.name} 아바타">
+                                    <span class="px-2 py-0.5 bg-[#181818] border border-[#333] font-mono text-[10px] text-neutral-300 font-bold">
+                                        ${t.surv}/${t.initial}명
+                                    </span>
+                                </div>
                             </div>
-                            <div class="font-mono text-[11px] text-neutral-400 mt-0.5">${t.leader}</div>
 
                             <!-- 1. JEWELS SECTION -->
                             <div class="mt-4 p-3 bg-[#181818] border border-[#262626]">
