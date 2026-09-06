@@ -17,6 +17,7 @@ class SimulationConfig:
     INITIAL_LIFE_RESERVE: int = 50  # Global hard cap for producible life (only known to Blue)
     DAILY_LIFE_REQUIREMENT: int = 1  # 1 Life per surviving member per day
     BLACK_MART_DAILY_LIFE_COST: int = 1  # Mart operating cost per day for Black
+    BLACK_MART_DAY1_LIFE_EXEMPT: bool = True  # Day 1 exemption: Mart operates with 0 life cost on Day 1
     
     # Pollution & Disaster
     POLLUTION_DISASTER_THRESHOLD: float = 50.0  # Threshold > 50 triggers disaster
@@ -25,7 +26,11 @@ class SimulationConfig:
     RED_POLLUTING_CREDIT_YIELD: int = 12        # Polluting credit production
     RED_POLLUTION_INCREMENT: float = 8.0        # Pollution added per polluting production
     
-    # War & Arms
+    # War & Arms (Confirmed Day 2 Black Mart pricing)
+    WAR_DECLARATION_JEWEL_COST: int = 15        # War declaration fee in jewels
+    WEAPON_TIER_A_JEWEL_PRICE: int = 30         # Tier A weapon (Heavy fire)
+    WEAPON_TIER_B_JEWEL_PRICE: int = 20         # Tier B weapon (Medium fire)
+    WEAPON_TIER_C_JEWEL_PRICE: int = 10         # Tier C weapon (Light fire)
     BOMB_CREDIT_COST: int = 10                  # Red team bomb crafting cost
     BOMB_LIFE_DAMAGE: int = 3                   # Damage dealt to target team's life
     SHIELD_CREDIT_PRICE: int = 8                # Black mart shield price in credits

@@ -352,9 +352,12 @@ class SimulationEngine:
                 else:
                     self.state.log(f"[SURVIVAL] {t_name} all {team.surviving_members} members survived. Life left: {team.resources.life}")
 
-        # Black Mart daily life cost
+        # Black Mart daily life cost (Day 1 exemption confirmed on 2026.09.06)
         black_team = self.state.teams["BLACK"]
-        black_team.submit_daily_life(self.config.BLACK_MART_DAILY_LIFE_COST)
+        if self.state.day == 1 and self.config.BLACK_MART_DAY1_LIFE_EXEMPT:
+            self.state.log("[BLACK MART] Day 1 special exemption: Mart opened without life deduction (0 life spent).")
+        else:
+            black_team.submit_daily_life(self.config.BLACK_MART_DAILY_LIFE_COST)
 
         # Exception Rule: Last 1 survivor guarantee
         # "어떠한 상황에서도 최후의 1인 생존은 보장됩니다."
