@@ -110,8 +110,13 @@ class RedPolicy(BasePolicy):
         if not my_state.resources.can_afford(offer.requesting):
             return False
 
-        # If incoming offer gives life, strongly accept
+        # If incoming offer gives life, evaluate price tolerance
         if offer.offering.life > 0:
+            credit_per_life = offer.requesting.credits / max(1, offer.offering.life)
+            jewel_per_life = offer.requesting.jewels / max(1, offer.offering.life)
+            if credit_per_life > 16.0 or jewel_per_life > 35.0:
+                self.price_discontent = True
+                return False
             return True
 
         # If trading surplus credits for jewels
@@ -125,10 +130,25 @@ class RedPolicy(BasePolicy):
         self, global_state: "GlobalState", my_state: "TeamState"
     ) -> List[AttackAction]:
         """
-        Red procures weapons from Black Mart using jewels if in crisis or facing embargo.
+        Red procures weapons or declares war via Black Mart if in crisis or prices are unacceptable.
         """
         actions: List[AttackAction] = []
         days_of_life = my_state.resources.life / max(1, my_state.surviving_members)
+
+        # Economic War Trigger: If Blue demanded an exorbitant price for Life, Red declares war (15 jewels)!
+        if getattr(self, "price_discontent", False) and my_state.resources.jewels >= 15.0:
+            blue_team = global_state.teams.get("BLUE")
+            if blue_team and blue_team.resources.life >= 2:
+                self.price_discontent = False
+                return [
+                    AttackAction(
+                        attacker="RED",
+                        target="BLUE",
+                        weapon_type=WeaponType.WAR_DECLARATION,
+                        jewels_spent=15.0,
+                        description="레드가 블루의 라이프 독점 폭리(가격 불만)에 반발하여 공식 전쟁 선포! (15보석 지불)",
+                    )
+                ]
 
         # If Red has jewels for at least Tier C (10) or Tier B (20) and is in severe life crisis
         if days_of_life <= 1.5 and my_state.resources.jewels >= 10:

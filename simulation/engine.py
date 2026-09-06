@@ -26,6 +26,7 @@ from agents.black_agent import BlackPolicy
 class GlobalState:
     day: int = 1
     config: SimulationConfig = field(default_factory=SimulationConfig)
+    prize_pool: float = 200000000.0
     life_reserve: int = 50
     pollution_index: float = 0.0
     disaster_occurred: bool = False
@@ -117,6 +118,7 @@ class SimulationEngine:
         return GlobalState(
             day=1,
             config=self.config,
+            prize_pool=float(self.config.TOTAL_PRIZE_POOL),
             life_reserve=self.config.INITIAL_LIFE_RESERVE,
             pollution_index=0.0,
             disaster_occurred=False,
@@ -319,8 +321,29 @@ class SimulationEngine:
                                 f"({cost} jewels) and struck {attack.target}! Dealt {actual_dmg} Life damage!"
                             )
                         else:
+                            # WAR DECLARATION (15 jewels to Black Mart)
+                            # 1. Total prize pool deduction rule
+                            war_cost_krw = cost * self.state.jewel_unit_value
+                            self.state.prize_pool = max(0.0, self.state.prize_pool - war_cost_krw)
+
+                            # 2. 50% Resource Looting Rule (50% of all target resources looted)
+                            loot_pct = self.config.WAR_LOOT_PERCENTAGE
+                            looted_jewels = round(target_team.resources.jewels * loot_pct, 1)
+                            looted_life = math.floor(target_team.resources.life * loot_pct)
+                            looted_credits = round(target_team.resources.credits * loot_pct, 1)
+
+                            target_team.resources.jewels -= looted_jewels
+                            target_team.resources.life -= looted_life
+                            target_team.resources.credits -= looted_credits
+
+                            team.resources.jewels += looted_jewels
+                            team.resources.life += looted_life
+                            team.resources.credits += looted_credits
+
                             self.state.log(
-                                f"[WAR DECLARATION] {t_name} purchased War Declaration from Black Mart ({cost} jewels)!"
+                                f"[WAR DECLARATION & 50% LOOT] {t_name} declared war on {attack.target} "
+                                f"({cost} jewels to Black Mart, 총상금 {war_cost_krw:,.0f}원 영구 차감)! "
+                                f"Looted 50% of resources: +{looted_jewels} Jewels, +{looted_life} Life, +{looted_credits} Credits!"
                             )
 
     def run_phase_3_evening(self):
@@ -349,7 +372,7 @@ class SimulationEngine:
         circulating = sum(t.resources.jewels for t in self.state.teams.values())
         self.state.total_circulating_jewels = circulating
         if circulating > 0:
-            self.state.jewel_unit_value = self.config.TOTAL_PRIZE_POOL / circulating
+            self.state.jewel_unit_value = self.state.prize_pool / circulating
         else:
             self.state.jewel_unit_value = 0.0
 

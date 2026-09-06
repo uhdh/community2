@@ -104,6 +104,12 @@ class WhitePolicy(BasePolicy):
                 return False
 
         if offer.offering.life > 0:
+            # Check price per life (The Invisible Hand tolerance)
+            # If Blue demands exorbitant price (> 35.0 jewels/life), reject offer due to price discontent!
+            price_per_life = offer.requesting.jewels / max(1, offer.offering.life)
+            if price_per_life > 35.0:
+                self.price_discontent = True
+                return False
             return True
 
         if offer.offering.credits >= 6 and offer.requesting.jewels <= 22:
@@ -115,8 +121,32 @@ class WhitePolicy(BasePolicy):
     def decide_war_actions(
         self, global_state: "GlobalState", my_state: "TeamState"
     ) -> List[AttackAction]:
-        """White is generally defensive, but may purchase weapons to retaliate if attacked."""
+        """White declares war on Blue if price gouging is detected, or retaliates defensively."""
         actions: List[AttackAction] = []
+
+        # Economic War Trigger: If Blue demanded an exorbitant price for Life (price discontent)
+        # Declaring war (15 jewels) and looting 50% of Blue's resources is cheaper than paying extortionate prices!
+        if getattr(self, "price_discontent", False) and my_state.resources.jewels >= 35.0:
+            blue_team = global_state.teams.get("BLUE")
+            if blue_team and blue_team.resources.life >= 3:
+                self.price_discontent = False
+                return [
+                    AttackAction(
+                        attacker="WHITE",
+                        target="BLUE",
+                        weapon_type=WeaponType.WAR_DECLARATION,
+                        jewels_spent=15.0,
+                        description="화이트가 블루의 라이프 독점 폭리(가격 불만)에 반발하여 공식 전쟁 선포! (15보석)",
+                    ),
+                    AttackAction(
+                        attacker="WHITE",
+                        target="BLUE",
+                        weapon_type=WeaponType.WEAPON_TIER_B,
+                        jewels_spent=20.0,
+                        description="화이트가 B급 무기로 블루를 타격하여 전리품 50% 강탈!",
+                    ),
+                ]
+
         if global_state.war_attacks_count > 0 and my_state.resources.jewels >= 40 and random.random() < 0.25:
             actions.append(
                 AttackAction(

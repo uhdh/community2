@@ -9,6 +9,8 @@ from simulation.engine import SimulationEngine
 from simulation.monte_carlo import MonteCarloSimulator
 from analysis.metrics import MetricsAnalyzer
 from models.war import WeaponType, AttackAction
+from models.market import TradeOffer
+from models.resources import ResourceBundle
 
 
 def test_single_session_reaches_day_9():
@@ -147,4 +149,52 @@ def test_inter_currency_bilateral_trading():
     red_res = engine.state.teams["RED"].resources
     # Verify trade occurred: credits decreased and/or jewels/life increased
     assert red_res.credits < initial_red_credits or red_res.jewels > initial_red_jewels or red_res.life > 9
+
+
+def test_war_declaration_price_discontent_looting():
+    """Verify war declaration triggered by price discontent, 50% looting rule, and prize pool deduction."""
+    config = SimulationConfig(TOTAL_DAYS=1)
+    engine = SimulationEngine(config=config)
+
+    # Initial state setup:
+    # Blue hoards 60 jewels, 10 life, 8 credits
+    engine.state.teams["BLUE"].resources.jewels = 60.0
+    engine.state.teams["BLUE"].resources.life = 10
+    engine.state.teams["BLUE"].resources.credits = 8.0
+
+    # White has 50 jewels, 0 life
+    engine.state.teams["WHITE"].resources.jewels = 50.0
+    engine.state.teams["WHITE"].resources.life = 0
+    engine.state.teams["WHITE"].resources.credits = 5.0
+
+    # Blue demands an exorbitant price of 50 jewels for 1 life (monopoly price gouging)
+    engine.policies["BLUE"].generate_trade_offers = lambda s, m: [
+        TradeOffer(
+            offer_id="gouging_offer",
+            sender="BLUE",
+            receiver="WHITE",
+            offering=ResourceBundle(life=1),
+            requesting=ResourceBundle(jewels=50.0),
+        )
+    ]
+    engine.policies["WHITE"].generate_trade_offers = lambda s, m: []
+
+    # Disable Red's war/trade to isolate White's action
+    engine.policies["RED"].generate_trade_offers = lambda s, m: []
+    engine.policies["RED"].decide_war_actions = lambda s, m: []
+
+    initial_prize_pool = engine.state.prize_pool
+    engine.run_phase_2_afternoon()
+
+    # Blue had 60 jewels -> lost 30 jewels -> 30 left
+    assert engine.state.teams["BLUE"].resources.jewels == 30.0
+    # Blue had 10 life -> lost 5 life to 50% loot, then 2 destroyed by Tier B weapon -> 3 left
+    assert engine.state.teams["BLUE"].resources.life == 3
+    # White gained at least 5 life from 50% loot
+    assert engine.state.teams["WHITE"].resources.life >= 5
+    # Black received at least 15 jewels from war declaration
+    assert engine.state.teams["BLACK"].resources.jewels >= 15.0
+    # Prize pool decreased by war declaration cost
+    assert engine.state.prize_pool < initial_prize_pool
+
 

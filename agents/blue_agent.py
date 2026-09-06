@@ -66,6 +66,18 @@ class BluePolicy(BasePolicy):
             tradable_life = 1
 
         if tradable_life >= 1:
+            # Dynamic Market Pricing (The Invisible Hand):
+            # Price scales with life reserve depletion and jewel inflation
+            scarcity_ratio = max(0.0, (50 - global_state.life_reserve) / 50.0)
+            inflation_ratio = (
+                global_state.total_circulating_jewels / 310.0
+                if global_state.total_circulating_jewels > 0
+                else 1.0
+            )
+            # Baseline 22.0 jewels, rising up to 45+ jewels as scarcity worsens
+            asking_jewels = round(22.0 * (1.0 + scarcity_ratio * 1.0) * max(1.0, inflation_ratio), 1)
+            asking_credits = round(10.0 * (1.0 + scarcity_ratio * 0.8), 1)
+
             # High price offer to White
             offers.append(
                 TradeOffer(
@@ -73,7 +85,7 @@ class BluePolicy(BasePolicy):
                     sender="BLUE",
                     receiver="WHITE",
                     offering=ResourceBundle(life=1),
-                    requesting=ResourceBundle(jewels=22.0),
+                    requesting=ResourceBundle(jewels=asking_jewels),
                 )
             )
             if not self.embargo_red and tradable_life >= 2:
@@ -83,7 +95,7 @@ class BluePolicy(BasePolicy):
                         sender="BLUE",
                         receiver="RED",
                         offering=ResourceBundle(life=1),
-                        requesting=ResourceBundle(credits=10.0),
+                        requesting=ResourceBundle(credits=asking_credits),
                     )
                 )
 

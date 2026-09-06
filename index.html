@@ -1977,22 +1977,38 @@
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4 pb-3 border-b border-[#222]">
                     <div class="flex items-center space-x-2">
                         <i data-lucide="arrow-left-right" class="w-4 h-4 text-[#3898ec]"></i>
-                        <span class="font-bold text-[#f0eee7] tracking-wider uppercase">[MARKET CONSOLE] 진영 간 재화 교환 및 자유 거래 (INTER-CURRENCY EXCHANGE)</span>
+                        <span class="font-bold text-[#f0eee7] tracking-wider uppercase">[MARKET CONSOLE] 보이지 않는 손: 시장 균형 거래 & 전쟁 선포 콘솔</span>
                     </div>
                     <div class="flex items-center space-x-2 text-[11px] text-neutral-400">
                         <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                        <span class="text-emerald-400 font-semibold">자유 교환 시스템 가동 중 (BILATERAL TRADE ACTIVE)</span>
+                        <span class="text-emerald-400 font-semibold">시장 자율 교환 시스템 가동 중 (INVISIBLE HAND ACTIVE)</span>
+                    </div>
+                </div>
+
+                <!-- The Invisible Hand Dynamic Pricing & War Risk Telemetry -->
+                <div class="mb-4 p-3.5 bg-[#140c0c] border border-[#ef321f]/30 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 font-mono text-xs">
+                    <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+                        <span class="text-[#ef321f] font-bold flex items-center"><span class="text-sm mr-1">⚖️</span> [보이지 않는 손]</span>
+                        <span>라이프 실시간 시장가: <strong id="simDynamicLifePrice" class="text-[#f0eee7] text-sm">22.0</strong> 보석</span>
+                        <span class="text-neutral-500">|</span>
+                        <span class="text-neutral-400">구매자 수용 한계선: <strong class="text-amber-400">35.0</strong> 보석</span>
+                    </div>
+                    <div class="flex items-center space-x-2 shrink-0">
+                        <span class="text-neutral-400 text-[11px]">시장 상태:</span>
+                        <span id="simMarketStatusBadge" class="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 font-bold text-[10px]">
+                            🟢 평화적 시장 균형 구간
+                        </span>
                     </div>
                 </div>
 
                 <!-- Trade Explanation Bar -->
                 <div class="mb-4 p-3 bg-[#080808] border border-[#262626] text-neutral-400 text-[11px] flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
                     <div>
-                        <span class="text-[#f0eee7] font-bold">💡 재화 간 거래 규칙:</span>
-                        진영들은 커뮤니티 센터에서 <strong>보석·라이프·크레딧</strong>을 원하는 수량과 비율로 맞교환하거나 블랙 마트에서 식료품을 구매할 수 있습니다.
+                        <span class="text-[#f0eee7] font-bold">💡 보이지 않는 손과 시장 교환:</span>
+                        가격은 고정되어 있지 않으며 잔여 매장량(50개 한도)과 인플레이션에 의해 자율 결정됩니다. <strong>단, 가격이 맘에 안 들면 15보석으로 전쟁을 선포하여 50%를 강탈할 수 있습니다.</strong>
                     </div>
                     <div class="flex items-center space-x-3 text-neutral-300 shrink-0">
-                        <span>표준 교환비:</span>
+                        <span>기준 교환비:</span>
                         <span class="text-[#3898ec] font-bold">💎 22 $\approx$ ❤️ 1</span>
                         <span class="text-[#ef321f] font-bold">⚡ 10 $\approx$ ❤️ 1</span>
                         <span class="text-purple-400 font-bold">💎 20 $\approx$ ⚡ 8</span>
@@ -2072,20 +2088,51 @@
                     </div>
                 </div>
 
+                <!-- War Declaration on Price Gouging (가격 불만 시 전쟁 선포 & 50% 약탈 모듈) -->
+                <div class="mt-4 pt-4 border-t border-[#262626] bg-[#140808] p-4 border border-[#ef321f]/40">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
+                        <div>
+                            <div class="flex items-center space-x-2">
+                                <span class="px-2 py-0.5 bg-[#ef321f] text-white text-[9px] font-bold uppercase tracking-wider">WAR DECLARATION</span>
+                                <span class="text-[#ef321f] font-bold text-xs">⚔️ 가격 불만 시 전쟁 선포 & 전리품 50% 강탈</span>
+                            </div>
+                            <p class="text-neutral-300 font-sans text-xs mt-1">
+                                "가격이 맘에 안 들면 전쟁을 선포할 거야. 가격은 시장에서 정해지지만, 폭리는 응징한다!"<br>
+                                <span class="text-neutral-400 text-[11px]">선포 비용 <strong>15보석</strong> (총상금 2억원에서 영구 차감) ➔ 피선포 진영의 <strong>보석·라이프·크레딧 50%를 전격 강탈</strong>합니다.</span>
+                            </p>
+                        </div>
+                        <div class="flex items-center space-x-2 shrink-0">
+                            <select id="warAttackerSelect" class="bg-[#080808] border border-[#ef321f]/60 text-[#f0eee7] px-2.5 py-1.5 text-xs font-mono">
+                                <option value="WHITE">화이트 (선포자)</option>
+                                <option value="RED">레드 (선포자)</option>
+                            </select>
+                            <span class="text-neutral-400">➔</span>
+                            <select id="warTargetSelect" class="bg-[#080808] border border-[#ef321f]/60 text-[#f0eee7] px-2.5 py-1.5 text-xs font-mono">
+                                <option value="BLUE">블루 (약탈 대상)</option>
+                                <option value="RED">레드 (약탈 대상)</option>
+                                <option value="WHITE">화이트 (약탈 대상)</option>
+                            </select>
+                            <button id="btnDeclareWarGouging" class="bg-[#ef321f] hover:bg-red-700 active:translate-y-0.5 text-white font-bold px-3 py-1.5 text-xs uppercase tracking-wider brutalist-border transition-all">
+                                ⚔️ 전쟁 선포 (15💎)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Quick Preset Buttons -->
                 <div class="mt-3 flex flex-wrap items-center gap-2 text-[10px]">
-                    <span class="text-neutral-500 mr-1 font-bold">빠른 거래 프리셋:</span>
+                    <span class="text-neutral-500 mr-1 font-bold">빠른 시나리오 프리셋:</span>
+                    <button onclick="simulator.presetTrade('WHITE','jewels',22,'BLUE','life',1)" class="px-2.5 py-1 bg-[#181818] hover:bg-[#252525] text-[#3898ec] border border-[#333] transition-colors">
+                        💎 22 평화적 적정가 체결 (화이트 ➔ 블루)
+                    </button>
+                    <button onclick="simulator.triggerGougingWar('WHITE','BLUE')" class="px-2.5 py-1 bg-[#251010] hover:bg-[#351515] text-[#ef321f] font-bold border border-[#ef321f]/60 transition-colors">
+                        💥 [가격 불만] 화이트의 전쟁 선포 & 블루 50% 강탈!
+                    </button>
+                    <button onclick="simulator.triggerGougingWar('RED','BLUE')" class="px-2.5 py-1 bg-[#251010] hover:bg-[#351515] text-[#ef321f] font-bold border border-[#ef321f]/60 transition-colors">
+                        💥 [크레딧 폭리 거부] 레드의 전쟁 선포 & 블루 50% 강탈!
+                    </button>
                     <button onclick="simulator.presetTrade('WHITE','jewels',20,'RED','credits',8)" class="px-2.5 py-1 bg-[#181818] hover:bg-[#252525] text-neutral-200 border border-[#333] transition-colors">
-                        💎 20 화이트 ⇄ ⚡ 8 레드 (기술 자금 조달)
-                    </button>
-                    <button onclick="simulator.presetTrade('RED','credits',10,'WHITE','jewels',20)" class="px-2.5 py-1 bg-[#181818] hover:bg-[#252525] text-neutral-200 border border-[#333] transition-colors">
-                        ⚡ 10 레드 ⇄ 💎 20 화이트 (군비·상금 환전)
-                    </button>
-                    <button onclick="simulator.presetTrade('WHITE','jewels',22,'BLUE','life',1)" class="px-2.5 py-1 bg-[#181818] hover:bg-[#252525] text-neutral-200 border border-[#333] transition-colors">
-                        💎 22 화이트 ⇄ ❤️ 1 블루 (생존권 매입)
-                    </button>
-                    <button onclick="simulator.presetTrade('RED','credits',10,'BLUE','life',1)" class="px-2.5 py-1 bg-[#181818] hover:bg-[#252525] text-neutral-200 border border-[#333] transition-colors">
-                        ⚡ 10 레드 ⇄ ❤️ 1 블루 (산업재-생명 교환)
+                        💎 20 화이트 ⇄ ⚡ 8 레드 (기술/군비 환전)
                     </button>
                     <button onclick="simulator.buyBlackGrocery('WHITE')" class="px-2.5 py-1 bg-[#181818] hover:bg-[#252525] text-emerald-400 border border-[#333] transition-colors">
                         🛒 화이트 ➔ 블랙 마트 식료품 구매 (1보석)
@@ -2371,6 +2418,15 @@
                     };
                 }
 
+                const btnDeclareWar = document.getElementById('btnDeclareWarGouging');
+                if (btnDeclareWar) {
+                    btnDeclareWar.onclick = () => {
+                        const attacker = document.getElementById('warAttackerSelect')?.value || 'WHITE';
+                        const target = document.getElementById('warTargetSelect')?.value || 'BLUE';
+                        this.executeWarDeclaration(attacker, target, '사용자 명령 전쟁 선포 (15보석)');
+                    };
+                }
+
                 ['tradePartyA', 'tradeResA', 'tradePartyB', 'tradeResB'].forEach(id => {
                     const el = document.getElementById(id);
                     if (el) el.onchange = () => this.updateBalancePreviews();
@@ -2486,6 +2542,75 @@
                 }
             }
 
+            getDynamicLifePrice() {
+                const basePrice = 20.0;
+                const scarcityRatio = (50 - Math.max(0, this.lifeReserve)) / 50.0;
+                const scarcityMultiplier = 1.0 + (scarcityRatio * 1.5);
+                const circ = this.teams.WHITE.jewels + this.teams.BLUE.jewels + this.teams.RED.jewels + this.teams.BLACK.jewels;
+                const inflationMultiplier = Math.max(0.8, circ / 310.0);
+                return Math.round(basePrice * scarcityMultiplier * inflationMultiplier * 10) / 10;
+            }
+
+            executeWarDeclaration(attackerKey, targetKey, reason = '') {
+                if (attackerKey === targetKey) {
+                    alert('자기 자신을 대상으로는 전쟁을 선포할 수 없습니다.');
+                    return false;
+                }
+                const attacker = this.teams[attackerKey];
+                const target = this.teams[targetKey];
+                if (!attacker || !target) return false;
+
+                if (attacker.surv <= 0) {
+                    alert(`${attackerKey} 진영은 전원 탈락하여 전쟁을 선포할 수 없습니다.`);
+                    return false;
+                }
+                if (target.surv <= 0) {
+                    alert(`${targetKey} 진영은 이미 전원 탈락한 상태입니다.`);
+                    return false;
+                }
+
+                const warCost = 15.0;
+                if (attacker.jewels < warCost) {
+                    alert(`${attackerKey} 진영의 보석이 부족합니다. (선포 비용: 15보석, 보유: ${attacker.jewels.toFixed(1)}개)`);
+                    return false;
+                }
+
+                // 1. Pay 15 jewels to Black Mart
+                attacker.jewels -= warCost;
+                this.teams.BLACK.jewels += warCost;
+
+                // 2. Permanently deduct KRW value from total prize pool (200,000,000 KRW)
+                const circ = this.teams.WHITE.jewels + this.teams.BLUE.jewels + this.teams.RED.jewels + this.teams.BLACK.jewels;
+                const unitVal = (circ > 0) ? (this.prizePool / circ) : 0;
+                const prizeDeduction = warCost * unitVal;
+                this.prizePool = Math.max(0, this.prizePool - prizeDeduction);
+
+                // 3. Loot 50% of target's all resources (Official Rule)
+                const lootedJewels = Math.round(target.jewels * 0.50 * 10) / 10;
+                const lootedCredits = Math.round(target.credits * 0.50 * 10) / 10;
+                const lootedLife = Math.floor(target.life * 0.50);
+
+                target.jewels -= lootedJewels;
+                attacker.jewels += lootedJewels;
+                target.credits -= lootedCredits;
+                attacker.credits += lootedCredits;
+                target.life -= lootedLife;
+                attacker.life += lootedLife;
+
+                this.warAttacks++;
+
+                this.log(`⚔️ [전쟁 선포] ${attackerKey}가 ${targetKey}에게 15보석 지불하고 공식 전쟁 선포! (총상금 -${Math.round(prizeDeduction/10000).toLocaleString()}만원 영구 차감)`, 'disaster');
+                this.log(`💥 [전리품 50% 전격 강탈] ${attackerKey}가 ${targetKey}의 자원을 50% 약탈: 💎+${lootedJewels.toFixed(1)}, ⚡+${lootedCredits.toFixed(1)}, ❤️+${lootedLife}개 획득! (${reason})`, 'bomb');
+
+                this.updateUI();
+                return true;
+            }
+
+            triggerGougingWar(attackerKey, targetKey) {
+                this.log(`🗣️ [가격 불만 선언] ${attackerKey}: "가격이 맘에 안 들면 전쟁을 선포할 거야! 가격은 시장에서 정해지지만 독점 폭리는 응징한다!"`, 'disaster');
+                return this.executeWarDeclaration(attackerKey, targetKey, '독점 폭리에 대한 전쟁 응징');
+            }
+
             log(msg, type='info') {
                 const box = document.getElementById('simEventLogs');
                 const line = document.createElement('div');
@@ -2497,6 +2622,7 @@
                 if (type === 'trade') colorClass = 'text-[#3898ec] font-semibold';
                 if (type === 'tech') colorClass = 'text-purple-400';
                 if (type === 'black') colorClass = 'text-emerald-400 font-bold';
+                if (type === 'war') colorClass = 'text-[#ef321f] font-bold uppercase';
 
                 line.className = `${colorClass} text-[11px]`;
                 line.innerText = `[Day ${this.day}] ${msg}`;
@@ -2576,39 +2702,62 @@
                     }
                 }
 
-                // 2. Bilateral Resource Trading: Jewels <-> Life & Credits <-> Life with Blue
+                // 2. Bilateral Resource Trading: The Invisible Hand (Market Pricing & Price Discontent War)
+                const dynamicLifePrice = this.getDynamicLifePrice();
                 if (this.teams.BLUE.surv > 0 && this.teams.BLUE.life > this.teams.BLUE.surv) {
                     let surplus = this.teams.BLUE.life - this.teams.BLUE.surv;
 
-                    // White buys 1 life with jewels (critical survival)
-                    if (this.teams.WHITE.surv > 0 && this.teams.WHITE.life < this.teams.WHITE.surv * 2 && this.teams.WHITE.jewels >= 22 && surplus >= 1) {
-                        this.teams.WHITE.jewels -= 22;
-                        this.teams.WHITE.life += 1;
-                        this.teams.BLUE.jewels += 22;
-                        this.teams.BLUE.life -= 1;
-                        surplus -= 1;
-                        this.log(`[재화거래: 보석↔라이프] 화이트가 블루에게 22보석을 지급하고 라이프 1개 매입`, 'trade');
+                    // White Evaluation (보이지 않는 손: 가격이 맘에 안 들면 전쟁 선포!)
+                    if (this.teams.WHITE.surv > 0 && this.teams.WHITE.life < this.teams.WHITE.surv * 2 && surplus >= 1) {
+                        if (dynamicLifePrice <= 35.0 && this.teams.WHITE.jewels >= dynamicLifePrice) {
+                            this.teams.WHITE.jewels -= dynamicLifePrice;
+                            this.teams.WHITE.life += 1;
+                            this.teams.BLUE.jewels += dynamicLifePrice;
+                            this.teams.BLUE.life -= 1;
+                            surplus -= 1;
+                            this.log(`[보이지 않는 손] 화이트가 블루에게 시장 균형가 ${dynamicLifePrice}보석을 지급하고 라이프 1개 평화 매입`, 'trade');
+                        } else if (dynamicLifePrice > 35.0) {
+                            // Price discontent triggered!
+                            if (this.teams.WHITE.jewels >= 15.0) {
+                                this.log(`🗣️ [가격 불만 폭발] 블루의 요구가(${dynamicLifePrice}💎)가 수용 한계선(35💎)을 초과! 화이트: "가격이 맘에 안 들면 전쟁을 선포할 거야!"`, 'disaster');
+                                this.executeWarDeclaration('WHITE', 'BLUE', '블루의 독점 폭리 거부 및 50% 자원 강탈');
+                            } else {
+                                this.log(`⚠️ [거래 결렬] 블루의 라이프 폭리(${dynamicLifePrice}💎) 거부 (화이트 전쟁 자금 15보석 부족)`, 'casualty');
+                            }
+                        }
                     }
 
-                    // Red buys 1 life with credits (industrial credit for life)
-                    if (this.teams.RED.surv > 0 && this.teams.RED.life < this.teams.RED.surv * 2 && this.teams.RED.credits >= 10 && surplus >= 1) {
-                        this.teams.RED.credits -= 10;
-                        this.teams.RED.life += 1;
-                        this.teams.BLUE.credits += 10;
-                        this.teams.BLUE.life -= 1;
-                        surplus -= 1;
-                        this.log(`[재화거래: 크레딧↔라이프] 레드가 블루에게 10크레딧을 지급하고 라이프 1개 매입 (블루 채굴 연료 충당)`, 'trade');
+                    // Red buys 1 life with credits (industrial credit for life) or jewels
+                    if (this.teams.RED.surv > 0 && this.teams.RED.life < this.teams.RED.surv * 2 && surplus >= 1) {
+                        if (this.teams.RED.credits >= 10) {
+                            this.teams.RED.credits -= 10;
+                            this.teams.RED.life += 1;
+                            this.teams.BLUE.credits += 10;
+                            this.teams.BLUE.life -= 1;
+                            surplus -= 1;
+                            this.log(`[재화거래: 크레딧↔라이프] 레드가 블루에게 10크레딧을 지급하고 라이프 1개 매입`, 'trade');
+                        } else if (dynamicLifePrice <= 35.0 && this.teams.RED.jewels >= dynamicLifePrice) {
+                            this.teams.RED.jewels -= dynamicLifePrice;
+                            this.teams.RED.life += 1;
+                            this.teams.BLUE.jewels += dynamicLifePrice;
+                            this.teams.BLUE.life -= 1;
+                            surplus -= 1;
+                            this.log(`[보이지 않는 손] 레드가 블루에게 시장 균형가 ${dynamicLifePrice}보석을 지급하고 라이프 1개 매입`, 'trade');
+                        } else if (dynamicLifePrice > 35.0 && this.teams.RED.jewels >= 15.0) {
+                            this.log(`🗣️ [가격 불만] 레드가 블루의 폭리(${dynamicLifePrice}💎)에 반발하여 전쟁 선포!`, 'disaster');
+                            this.executeWarDeclaration('RED', 'BLUE', '레드의 생존권 확보 전쟁 및 50% 약탈');
+                        }
                     }
 
                     // Black buys 1 life from Blue for Mart Maintenance on Day 2+
                     if (this.day >= 2 && this.teams.BLACK.life < 1 && surplus >= 1) {
-                        if (this.teams.BLACK.jewels >= 25) {
-                            this.teams.BLACK.jewels -= 25;
+                        if (this.teams.BLACK.jewels >= dynamicLifePrice) {
+                            this.teams.BLACK.jewels -= dynamicLifePrice;
                             this.teams.BLACK.life += 1;
-                            this.teams.BLUE.jewels += 25;
+                            this.teams.BLUE.jewels += dynamicLifePrice;
                             this.teams.BLUE.life -= 1;
                             surplus -= 1;
-                            this.log(`🛡️ [마트거래: 운영비 조달] 블랙이 마트 유지를 위해 블루에게 25보석 지급 ➔ 라이프 1개 매입`, 'black');
+                            this.log(`🛡️ [마트거래: 운영비 조달] 블랙이 마트 유지를 위해 블루에게 ${dynamicLifePrice}보석 지급 ➔ 라이프 1개 매입`, 'black');
                         } else if (this.teams.BLACK.credits >= 10) {
                             this.teams.BLACK.credits -= 10;
                             this.teams.BLACK.life += 1;
@@ -2763,6 +2912,22 @@
 
                 // Update trade preview indicators
                 this.updateBalancePreviews();
+
+                // Invisible Hand Telemetry update
+                const dynamicPrice = this.getDynamicLifePrice();
+                const priceEl = document.getElementById('simDynamicLifePrice');
+                if (priceEl) priceEl.innerText = dynamicPrice.toFixed(1);
+
+                const badgeEl = document.getElementById('simMarketStatusBadge');
+                if (badgeEl) {
+                    if (dynamicPrice <= 35.0) {
+                        badgeEl.className = 'px-2 py-0.5 bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 font-bold text-[10px]';
+                        badgeEl.innerText = '🟢 평화적 시장 균형 구간';
+                    } else {
+                        badgeEl.className = 'px-2 py-0.5 bg-[#ef321f]/20 text-[#ef321f] border border-[#ef321f]/40 font-bold text-[10px] animate-pulse';
+                        badgeEl.innerText = '🚨 독점 폭리 경보 (전쟁 발발 임계치 초과)';
+                    }
+                }
             }
         }
 
