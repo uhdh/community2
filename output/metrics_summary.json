@@ -1,45 +1,45 @@
 {
-    "total_runs": 1000,
-    "elapsed_time_sec": 3.692797899246216,
+    "total_runs": 5,
+    "elapsed_time_sec": 0.0025551319122314453,
     "survival_rates_pct": {
-        "WHITE": 3.6166666666666667,
-        "BLUE": 87.26666666666667,
-        "RED": 30.133333333333333,
+        "WHITE": 16.666666666666664,
+        "BLUE": 93.33333333333333,
+        "RED": 33.33333333333333,
         "BLACK": 100.0
     },
     "mean_survivors": {
-        "WHITE": 0.217,
-        "BLUE": 2.618,
-        "RED": 0.904,
+        "WHITE": 1.0,
+        "BLUE": 2.8,
+        "RED": 1.0,
         "BLACK": 1.0
     },
     "prize_per_capita_krw": {
         "WHITE": {
-            "mean": 2419836.971892767,
-            "std": 5009944.355908306,
-            "median": 0.0
+            "mean": 2245212.547850766,
+            "std": 737547.3808581529,
+            "median": 2268111.0358835473
         },
         "BLUE": {
-            "mean": 34256615.84711323,
-            "std": 12167868.331238387,
-            "median": 36896606.443667635
+            "mean": 52188025.4768662,
+            "std": 1562955.910040073,
+            "median": 52087564.88377342
         },
         "RED": {
-            "mean": 1731150.232460684,
-            "std": 1828777.392179348,
-            "median": 1909438.0796508454
+            "mean": 2813836.6636712034,
+            "std": 2462655.875447565,
+            "median": 1636125.6544502617
         },
         "BLACK": {
-            "mean": 2704804.502413518,
-            "std": 6315839.3942205915,
-            "median": 0.0
+            "mean": 21523138.2912832,
+            "std": 10728778.726164723,
+            "median": 16075016.744809108
         }
     },
-    "war_occurrence_rate_pct": 81.6,
-    "mean_attacks_per_session": 1.649,
-    "pollution_disaster_rate_pct": 95.3,
-    "mean_final_pollution_index": 67.2,
-    "black_confiscation_rate_pct": 6.3,
-    "mean_remaining_life_reserve": 16.869,
-    "mean_final_jewel_unit_value": 551931.3582152565
+    "war_occurrence_rate_pct": 100.0,
+    "mean_attacks_per_session": 2.2,
+    "pollution_disaster_rate_pct": 100.0,
+    "mean_final_pollution_index": 72.0,
+    "mean_black_arms_revenue": 38.0,
+    "mean_remaining_life_reserve": 12.0,
+    "mean_final_jewel_unit_value": 678353.8840147252
 }

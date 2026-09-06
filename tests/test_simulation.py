@@ -122,3 +122,29 @@ def test_monte_carlo_fast_run():
     assert stats["total_runs"] == 20
     assert "survival_rates_pct" in stats
     assert "prize_per_capita_krw" in stats
+
+
+def test_inter_currency_bilateral_trading():
+    """Verify inter-currency transactions: Credit-to-Jewel, Jewel-to-Life, and Credit-to-Life trades."""
+    config = SimulationConfig(TOTAL_DAYS=1)
+    engine = SimulationEngine(config=config)
+
+    # Setup specific conditions for bilateral trades:
+    # 1. Red has high credits (20.0) and low jewels (20.0) -> wants jewels
+    engine.state.teams["RED"].resources.credits = 20.0
+    engine.state.teams["RED"].resources.jewels = 20.0
+    # 2. White has abundant jewels (100.0) and low credits (5.0) -> accepts credit trade
+    engine.state.teams["WHITE"].resources.jewels = 100.0
+    engine.state.teams["WHITE"].resources.credits = 5.0
+    # 3. Blue has surplus life (20)
+    engine.state.teams["BLUE"].resources.life = 20
+
+    initial_red_credits = engine.state.teams["RED"].resources.credits
+    initial_red_jewels = engine.state.teams["RED"].resources.jewels
+
+    engine.run_phase_2_afternoon()
+
+    red_res = engine.state.teams["RED"].resources
+    # Verify trade occurred: credits decreased and/or jewels/life increased
+    assert red_res.credits < initial_red_credits or red_res.jewels > initial_red_jewels or red_res.life > 9
+

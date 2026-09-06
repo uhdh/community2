@@ -106,8 +106,9 @@ class WhitePolicy(BasePolicy):
         if offer.offering.life > 0:
             return True
 
-        if offer.offering.credits >= 6 and offer.requesting.jewels <= 15:
-            return True
+        if offer.offering.credits >= 6 and offer.requesting.jewels <= 22:
+            if my_state.resources.jewels >= 30:
+                return True
 
         return False
 

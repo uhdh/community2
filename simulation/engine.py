@@ -49,6 +49,7 @@ class SimulationEngine:
     ):
         self.config = config
         self.market_engine = MarketEngine()
+        self.black_catalog = get_default_black_catalog()
         self.state = self._initialize_state()
         
         # Assign agent policies
@@ -271,9 +272,25 @@ class SimulationEngine:
                             f"{offer.receiver} gave {offer.requesting}"
                         )
 
-        # 3. War & Military Actions via Black Mart
-        # Factions purchase weapons (A/B/C tier) or declare war using jewels at Black Mart
+        # 3. Black Mart Catalog Purchases (Groceries/Supplies)
         black_team = self.state.teams["BLACK"]
+        for t_name, team in self.state.teams.items():
+            if team.is_alive and t_name != "BLACK":
+                purchases = self.policies[t_name].decide_black_purchases(
+                    self.state, team, self.black_catalog
+                )
+                if "GROCERY" in purchases:
+                    if team.resources.jewels >= 1.0:
+                        team.resources.jewels -= 1.0
+                        black_team.resources.jewels += 1.0
+                        self.state.log(f"[MART GROCERY] {t_name} purchased daily supplies from Black Mart (paid 1.0 jewel).")
+                    elif team.resources.credits >= 2.0:
+                        team.resources.credits -= 2.0
+                        black_team.resources.credits += 2.0
+                        self.state.log(f"[MART GROCERY] {t_name} purchased daily supplies from Black Mart (paid 2.0 credits).")
+
+        # 4. War & Military Actions via Black Mart
+        # Factions purchase weapons (A/B/C tier) or declare war using jewels at Black Mart
         damage_map = {
             WeaponType.WEAPON_TIER_A: 4,
             WeaponType.WEAPON_TIER_B: 2,

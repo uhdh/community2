@@ -86,6 +86,18 @@ class RedPolicy(BasePolicy):
                 )
             )
 
+        # Offer surplus credits to White in exchange for jewels (arms funding & prize pool conversion)
+        if my_state.resources.credits >= 16.0 and my_state.resources.jewels < 40.0:
+            offers.append(
+                TradeOffer(
+                    offer_id="",
+                    sender="RED",
+                    receiver="WHITE",
+                    offering=ResourceBundle(credits=10.0),
+                    requesting=ResourceBundle(jewels=20.0),
+                )
+            )
+
         return offers
 
     def evaluate_trade_offer(
