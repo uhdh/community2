@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="inline-block align-middle">
+    <!-- 8-faceted octagonal ring icon from The Community Season 2 -->
+    <!-- Top & Bottom light facets -->
+    <path d="M25,0 L75,0 L68,18 L32,18 Z" fill="#cdd2d6"/>
+    <path d="M25,100 L75,100 L68,82 L32,82 Z" fill="#cdd2d6"/>
+    <!-- Left & Right medium facets -->
+    <path d="M0,25 L0,75 L18,68 L18,32 Z" fill="#b8bdc2"/>
+    <path d="M100,25 L100,75 L82,68 L82,32 Z" fill="#b8bdc2"/>
+    <!-- 4 Corner dark contrast facets -->
+    <path d="M0,25 L25,0 L32,18 L18,32 Z" fill="#848b92"/>
+    <path d="M75,0 L100,25 L82,32 L68,18 Z" fill="#848b92"/>
+    <path d="M0,75 L25,100 L32,82 L18,68 Z" fill="#848b92"/>
+    <path d="M100,75 L75,100 L68,82 L82,68 Z" fill="#848b92"/>
+</svg>

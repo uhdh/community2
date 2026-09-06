@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34 54" class="inline-block align-middle">
+    <!-- Credit card icon from The Community Season 2 -->
+    <!-- Red Card -->
+    <rect x="0" y="0" width="34" height="54" rx="2" fill="#b9251c"/>
+    <!-- Inner Dark Monolith/House Symbol -->
+    <polygon points="17,11 27,20 27,37 7,37 7,20" fill="#4a110d"/>
+    <!-- Bottom Bar -->
+    <rect x="7" y="41.5" width="20" height="3" fill="#4a110d"/>
+</svg>

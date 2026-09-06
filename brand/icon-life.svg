@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 52" class="inline-block align-middle">
+    <!-- Life capsule icon from The Community Season 2 -->
+    <!-- Top Cap -->
+    <rect x="2" y="1" width="16" height="5.5" rx="1.2" fill="#9da3a8"/>
+    <!-- Blue Tube Core -->
+    <rect x="3.5" y="8" width="13" height="36" rx="1.5" fill="#5c9fe3"/>
+    <rect x="5.5" y="9.5" width="2.5" height="33" rx="0.8" fill="#c2e6ff" opacity="0.6"/>
+    <!-- Bottom Cap -->
+    <rect x="2" y="45.5" width="16" height="5.5" rx="1.2" fill="#9da3a8"/>
+</svg>
