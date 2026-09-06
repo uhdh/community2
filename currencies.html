@@ -105,7 +105,7 @@
                 </button>
                 <button onclick="currencyPage.selectCurrency('LIFE')" id="tab-c-LIFE" class="tab-currency px-4 py-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 transition-all flex items-center space-x-2">
                     <img src="./brand/icon-life.svg" class="w-2.5 h-4 object-contain" alt="라이프">
-                    <span>❤️ 라이프 (LIFE) — 절대 상한 50개 & 생존권</span>
+                    <span>❤️ 라이프 (LIFE) — 초기 43 + 추가 50개 (총 93개 풀)</span>
                 </button>
                 <button onclick="currencyPage.selectCurrency('CREDIT')" id="tab-c-CREDIT" class="tab-currency px-4 py-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 transition-all flex items-center space-x-2">
                     <img src="./brand/icon-credit.svg" class="w-2.5 h-4 object-contain" alt="크레딧">
@@ -170,9 +170,9 @@
                         <i data-lucide="flame" class="w-4 h-4"></i>
                         <span>전쟁 소모 & 국고 영구 차감</span>
                     </div>
-                    <h3 class="text-lg font-bold text-red-700 mt-2">1회 선포 시 15보석 소멸</h3>
+                    <h3 class="text-lg font-bold text-red-700 mt-2">매일 밤 블랙이 가격 결정 (D-5 기준 15💎 소멸)</h3>
                     <ul class="mt-3 space-y-2 text-xs text-slate-600 leading-relaxed">
-                        <li>• <strong>전쟁 선포 비용:</strong> 15보석을 지불하면 전시 체제로 돌입합니다.</li>
+                        <li>• <strong>전쟁 선포 비용:</strong> 전쟁 선포 가격은 고정되어 있지 않고, <strong>매일 밤 블랙(정재호)이 시장 상황과 군비 수요에 따라 독점 결정</strong>합니다 (D-5 기준 15보석).</li>
                         <li>• <strong>총상금 영구 감액:</strong> $15 	imes 	ext{당시 보석 가치}$ (약 1,500만 원)가 총상금 2억 원에서 <strong>영구 차감</strong>됩니다.</li>
                         <li>• <strong>무기 구매비 (이전):</strong> A급(30💎), B급(20💎), C급(10💎)은 소멸되지 않고 <strong>블랙 마트 금고로 이전</strong>되어 블랙의 상금이 됩니다.</li>
                     </ul>
@@ -280,14 +280,14 @@
                     <div class="text-slate-500 mt-1">타운 입주 초기 공급</div>
                 </div>
                 <div class="p-4 bg-white rounded-2xl border border-slate-200 shadow-xs border-t-4 !border-t-purple-600">
-                    <div class="text-slate-500 font-medium">지하 잔여 매장량</div>
-                    <div class="text-2xl font-extrabold text-purple-600 mt-1">7 개</div>
-                    <div class="text-slate-500 mt-1">블루가 채굴 가능</div>
+                    <div class="text-slate-500 font-medium">추가 생산 가능 매장량</div>
+                    <div class="text-2xl font-extrabold text-purple-600 mt-1">50 개</div>
+                    <div class="text-slate-500 mt-1">블루만 알고 있는 지하 자원</div>
                 </div>
                 <div class="p-4 bg-white rounded-2xl border border-slate-200 shadow-xs border-t-4 !border-t-rose-500">
-                    <div class="text-slate-500 font-medium">절대 총 한도</div>
-                    <div class="text-2xl font-extrabold text-rose-600 mt-1">50 개</div>
-                    <div class="text-slate-500 mt-1">세상에 50개 초과 불가 (히든)</div>
+                    <div class="text-slate-500 font-medium">총 가용 라이프 풀</div>
+                    <div class="text-2xl font-extrabold text-rose-600 mt-1">93 개</div>
+                    <div class="text-slate-500 mt-1">초기 43 + 추가생산 50개</div>
                 </div>
                 <div class="p-4 bg-white rounded-2xl border border-slate-200 shadow-xs border-t-4 !border-t-amber-500">
                     <div class="text-slate-500 font-medium">1개 채굴 연료</div>
@@ -307,7 +307,7 @@
                     <h3 class="text-lg font-bold text-slate-900 mt-2">1일 최대 10개 한도</h3>
                     <ul class="mt-3 space-y-2 text-xs text-slate-600 leading-relaxed">
                         <li>• <strong>채굴 조건:</strong> 1라이프 생산 시 <strong>2크레딧</strong> 소모 (레드와 협력 필수).</li>
-                        <li>• <strong>총량 비밀:</strong> 블루 팀만 '세상에 50개밖에 없다'는 사실을 알고 시작하여 시장 가격을 조작합니다.</li>
+                        <li>• <strong>총량 비밀:</strong> 주민들이 나눠 가진 초기 43개 외에, 블루 팀만 '지하에 추가 매장량 50개가 더 있다'는 비밀을 독점하여 시장 가격을 조작합니다.</li>
                         <li>• <strong>비축 전략:</strong> 2일차에 5개를 생산하여 <strong>총 21개</strong>를 독점, 타 팀의 생명줄을 쥡니다.</li>
                     </ul>
                 </div>
@@ -507,7 +507,7 @@
                 this.ledgerData = {
                     0: {
                         title: 'D-0 입주 첫날: 초기 자원 배분',
-                        summary: '마을 전체 초기 공급: 보석 200개, 라이프 43개, 크레딧 36개. 각 팀은 정해진 자원을 받고 거주를 시작했습니다.',
+                        summary: '마을 전체 초기 공급: 보석 200개, 초기 자본 라이프 43개, 크레딧 36개. (블루만 알고 있는 지하 추가 매장량 50개 별도 매장)',
                         prizePool: 200000000,
                         unitValue: 1000000,
                         teams: {
@@ -531,7 +531,7 @@
                     },
                     2: {
                         title: 'D-2 방송 공식 실측 현황: 블루 소금 선출 & 라이프 독점',
-                        summary: '블루 팀의 새 리더로 소금이 선출되었습니다! 블루가 라이프를 21개로 독점 비축하고, 레드는 청정 발전으로 크레딧 29개를 확보했습니다.',
+                        summary: '블루 팀의 새 리더로 소금이 선출되었습니다! 블루가 지하 매장량에서 5개를 추가 채굴하여 라이프 21개를 독점 비축하고, 레드는 청정 발전으로 크레딧 29개를 확보했습니다.',
                         prizePool: 200000000,
                         unitValue: 995024,
                         teams: {
@@ -566,8 +566,8 @@
                         }
                     },
                     5: {
-                        title: 'D-5 쾅! 공식 전쟁 발발 (15💎 국고 소멸 & 50% 약탈)',
-                        summary: '화이트와 레드가 블루를 향해 전쟁을 선포! 15보석이 국고에서 영구 소각되고 블루 창고 자원의 절반을 약탈했습니다.',
+                        title: 'D-5 쾅! 공식 전쟁 발발 (블랙 책정가 15💎 소각 & 50% 약탈)',
+                        summary: '블랙이 책정한 전쟁 가격 15보석을 지불하고 화이트·레드가 블루에 전쟁 선포! 15💎가 국고에서 영구 소각되고 블루 창고 자원의 절반을 약탈했습니다.',
                         prizePool: 185000000,
                         unitValue: 958549,
                         teams: {
