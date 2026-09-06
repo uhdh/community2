@@ -867,90 +867,180 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="section-label">
                 <span>SECTION 04</span>
-                <b>컴퓨터 시뮬레이션 1,000회 대결 결과</b>
+                <b>컴퓨터 시뮬레이션 1,000회 대결 결과 (전쟁 & 거래 전면 재계산)</b>
             </div>
 
             <h2 class="font-cafe24 text-3xl sm:text-4xl text-[#f0eee7] tracking-tight mb-2">
-                🏆 마지막에 누가 제일 부자가 될까?
+                🏆 실전 거래와 전쟁을 반영하면 누가 1등일까?
             </h2>
             <p class="text-neutral-400 text-xs sm:text-sm mb-6">
-                컴퓨터로 게임을 1,000번 반복해서 플레이해본 결과입니다!
+                컴퓨터 알고리즘으로 시장 거래(Trade)와 가격 불만 전쟁(Warfare)을 완전 적용하여 1,000회 반복 시뮬레이션한 최종 실전 결과입니다!
             </p>
+
+            <!-- Recalculation Notice Banner -->
+            <div class="mb-6 p-4 sm:p-5 bg-gradient-to-r from-red-950/40 via-[#181818] to-blue-950/30 border-2 border-[#ef321f]/80 shadow-[0_0_25px_rgba(239,50,31,0.15)]">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 pb-2 border-b border-[#333]">
+                    <div class="flex items-center space-x-3">
+                        <span class="px-2.5 py-1 bg-[#ef321f] text-white font-mono font-bold text-xs uppercase tracking-wider animate-pulse">
+                            🔥 몬테카를로 재계산 완료
+                        </span>
+                        <span class="font-cafe24 text-lg sm:text-xl text-[#f0eee7]">
+                            시장 거래(Trade) & 가격 불만 전쟁(Warfare) 1,000회 실전 반영
+                        </span>
+                    </div>
+                    <span class="text-xs text-neutral-400 font-mono">2026.09.06 확정 룰 전면 반영</span>
+                </div>
+                <p class="mt-2 text-xs sm:text-sm font-sans text-neutral-300 leading-relaxed">
+                    기존의 단순 계산(전쟁·거래 제외 모델)을 완전히 폐기하고, <strong>화이트의 보석 추가 발행 및 라이프 매입</strong>, <strong>블루의 라이프 독점 폭리</strong>, 이에 반발하여 폭발하는 <strong>가격 불만 전쟁 선포 (15보석 국고 소각 & 50% 자원 강탈)</strong>, 그리고 <strong>블랙 마트 무기 독점 수익</strong>을 1,000회 시뮬레이션으로 정밀 재계산했습니다.
+                </p>
+            </div>
+
+            <!-- Model Comparison Bar: Old vs Recalculated -->
+            <div class="mb-6 p-4 bg-[#121212] border border-[#262626]">
+                <div class="font-mono text-xs font-bold text-neutral-400 mb-3 flex items-center space-x-2">
+                    <i data-lucide="arrow-right-left" class="w-4 h-4 text-[#3898ec]"></i>
+                    <span>시뮬레이션 모델 전격 비교: 기존 단순 모델 vs 재계산 실전 모델</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono">
+                    <div class="p-3 bg-[#0d0d0d] border border-[#222]">
+                        <div class="text-neutral-500 font-bold mb-1.5 flex items-center gap-1">
+                            <span class="line-through">❌ 이전 단순 모델 (전쟁·거래 제외)</span>
+                        </div>
+                        <ul class="space-y-1 text-neutral-400 font-sans text-[11px]">
+                            <li>• <strong>블랙:</strong> 9,736만 원 (무기 거래 없는 단순 가정)</li>
+                            <li>• <strong>블루:</strong> 5,842만 원 (라이프 독점으로 보석 축적)</li>
+                            <li>• <strong>레드:</strong> 2,921만 원 (단순 크레딧 생산)</li>
+                            <li>• <strong>화이트:</strong> 0원 (라이프 조기 고갈로 6명 전멸 가정)</li>
+                        </ul>
+                    </div>
+                    <div class="p-3 bg-[#161616] border border-emerald-500/50 shadow-[0_0_15px_rgba(16,185,129,0.1)]">
+                        <div class="text-emerald-400 font-bold mb-1.5 flex items-center gap-1">
+                            <span>✅ 재계산 실전 모델 (전쟁 9.3회 & 양자 거래 반영)</span>
+                        </div>
+                        <ul class="space-y-1 text-[#f0eee7] font-sans text-[11px]">
+                            <li>• 🥇 <strong>블랙:</strong> <span class="text-amber-400 font-bold">약 7,625만 원</span> (무기·전쟁세 176.7💎 흡수, 76.2% 독식)</li>
+                            <li>• 🥈 <strong>화이트:</strong> <span class="text-emerald-300 font-bold">약 1,184만 원</span> (최후 1인 생존 + 전쟁 50% 약탈로 2위 대반전!)</li>
+                            <li>• 🥉 <strong>블루:</strong> <span class="text-[#3898ec] font-bold">약 1,068만 원</span> (폭리 취하다 가격 불만 전쟁으로 50% 피탈)</li>
+                            <li>• 💥 <strong>레드:</strong> <span class="text-[#ef321f] font-bold">약 339만 원</span> (크레딧 생산 선방했으나 라이프·무기 지출 과다)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
             <!-- Leaderboard Cards -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 font-mono">
                 <!-- 1st: Black -->
-                <div class="p-5 bg-[#141414] border-2 border-amber-400 flex flex-col justify-between">
+                <div class="p-5 bg-[#141414] border-2 border-amber-400 flex flex-col justify-between shadow-[0_0_20px_rgba(245,158,11,0.15)]">
                     <div>
-                        <div class="text-amber-400 font-bold text-xs">🥇 최종 1등 (최고 부자)</div>
-                        <h3 class="font-cafe24 text-2xl text-[#f0eee7] mt-1">블랙 (정재호)</h3>
-                        <div class="text-amber-300 font-bold text-lg mt-1">약 9,736만 원</div>
-                        <p class="font-sans text-xs text-neutral-300 mt-2 leading-relaxed">
-                            "싸움은 안 하고 뒤에서 밥과 무기만 팔았는데 상금 절반을 쓸어담았어요!"
+                        <div class="flex justify-between items-center">
+                            <span class="text-amber-400 font-bold text-xs">🥇 최종 1등 (최고 부자)</span>
+                            <span class="text-[10px] px-1.5 py-0.5 bg-amber-400/20 text-amber-300 border border-amber-400/30">1명 생존</span>
+                        </div>
+                        <h3 class="font-cafe24 text-2xl text-[#f0eee7] mt-1.5">블랙 (정재호)</h3>
+                        <div class="text-amber-300 font-bold text-xl mt-1">약 7,625만 원</div>
+                        <div class="text-[11px] text-neutral-400 mt-0.5">평균 보유 보석: 176.7개</div>
+                        <p class="font-sans text-xs text-neutral-300 mt-2.5 leading-relaxed">
+                            "싸움은 안 하고 뒤에서 전쟁 선포세(15💎)와 A·B·C급 무기만 팔았는데 국고와 보석 절반을 쓸어담았어요!"
                         </p>
                     </div>
-                    <div class="mt-3 pt-2 border-t border-[#333] text-[11px] text-amber-400 font-bold">
-                        👉 무기 상인의 대승리!
+                    <div class="mt-3 pt-2.5 border-t border-[#333] text-[11px] text-amber-400 font-bold">
+                        👉 무기 상인의 압도적 대승리!
                     </div>
                 </div>
 
-                <!-- 2nd: Blue -->
+                <!-- 2nd: White -->
+                <div class="p-5 bg-[#141414] border-2 border-white/60 flex flex-col justify-between shadow-[0_0_15px_rgba(255,255,255,0.08)]">
+                    <div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-white font-bold text-xs">🥈 최종 2등 (대반전!)</span>
+                            <span class="text-[10px] px-1.5 py-0.5 bg-white/20 text-white border border-white/30">최후 1인 생존</span>
+                        </div>
+                        <h3 class="font-cafe24 text-2xl text-[#f0eee7] mt-1.5">화이트 (루나 팀)</h3>
+                        <div class="text-white font-bold text-xl mt-1">약 1,184만 원</div>
+                        <div class="text-[11px] text-neutral-400 mt-0.5">평균 보유 보석: 165.2개</div>
+                        <p class="font-sans text-xs text-neutral-300 mt-2.5 leading-relaxed">
+                            "블루가 폭리를 취하자 15보석으로 전쟁을 선포해 50%를 털어왔고, 최후 1인(루나) 생존 룰로 전멸을 피하며 2위 탈환!"
+                        </p>
+                    </div>
+                    <div class="mt-3 pt-2.5 border-t border-[#333] text-[11px] text-emerald-400 font-bold">
+                        👉 전쟁 약탈 & 최후 1인의 대역전!
+                    </div>
+                </div>
+
+                <!-- 3rd: Blue -->
                 <div class="p-5 bg-[#141414] border border-[#1646f5] flex flex-col justify-between">
                     <div>
-                        <div class="text-[#3898ec] font-bold text-xs">🥈 최종 2등</div>
-                        <h3 class="font-cafe24 text-2xl text-[#f0eee7] mt-1">블루 (소금 팀)</h3>
-                        <div class="text-[#3898ec] font-bold text-lg mt-1">약 5,842만 원</div>
-                        <p class="font-sans text-xs text-neutral-300 mt-2 leading-relaxed">
-                            "라이프를 독점해서 다른 팀한테 비싸게 팔아 큰돈을 벌었어요!"
+                        <div class="flex justify-between items-center">
+                            <span class="text-[#3898ec] font-bold text-xs">🥉 최종 3등</span>
+                            <span class="text-[10px] px-1.5 py-0.5 bg-[#1646f5]/20 text-[#3898ec] border border-[#1646f5]/30">최후 1인 생존</span>
+                        </div>
+                        <h3 class="font-cafe24 text-2xl text-[#f0eee7] mt-1.5">블루 (소금 팀)</h3>
+                        <div class="text-[#3898ec] font-bold text-xl mt-1">약 1,068만 원</div>
+                        <div class="text-[11px] text-neutral-400 mt-0.5">평균 보유 보석: 74.3개</div>
+                        <p class="font-sans text-xs text-neutral-300 mt-2.5 leading-relaxed">
+                            "라이프 독점으로 보석을 많이 벌었지만, 가격을 너무 올리자 타 팀들이 가격 불만 전쟁을 걸어와 50%를 털렸어요!"
                         </p>
                     </div>
-                    <div class="mt-3 pt-2 border-t border-[#333] text-[11px] text-[#3898ec] font-bold">
-                        👉 생명줄 쥔 팀의 여유!
+                    <div class="mt-3 pt-2.5 border-t border-[#333] text-[11px] text-[#3898ec] font-bold">
+                        👉 보이지 않는 손(시장 보복)의 대가!
                     </div>
                 </div>
 
-                <!-- 3rd: Red -->
+                <!-- 4th: Red -->
                 <div class="p-5 bg-[#141414] border border-[#ef321f] flex flex-col justify-between">
                     <div>
-                        <div class="text-[#ef321f] font-bold text-xs">🥉 최종 3등</div>
-                        <h3 class="font-cafe24 text-2xl text-[#f0eee7] mt-1">레드 (마이야르 팀)</h3>
-                        <div class="text-[#ef321f] font-bold text-lg mt-1">약 2,921만 원</div>
-                        <p class="font-sans text-xs text-neutral-300 mt-2 leading-relaxed">
-                            "크레딧을 부지런히 만들고 전쟁에서 이겨서 쏠쏠하게 챙겼어요!"
+                        <div class="flex justify-between items-center">
+                            <span class="text-[#ef321f] font-bold text-xs">💥 최종 4등</span>
+                            <span class="text-[10px] px-1.5 py-0.5 bg-[#ef321f]/20 text-[#ef321f] border border-[#ef321f]/30">최후 1인 생존</span>
+                        </div>
+                        <h3 class="font-cafe24 text-2xl text-[#f0eee7] mt-1.5">레드 (마이야르 팀)</h3>
+                        <div class="text-[#ef321f] font-bold text-xl mt-1">약 339만 원</div>
+                        <div class="text-[11px] text-neutral-400 mt-0.5">평균 보유 보석: 23.6개</div>
+                        <p class="font-sans text-xs text-neutral-300 mt-2.5 leading-relaxed">
+                            "크레딧을 부지런히 만들었으나, 생존을 위한 라이프 매입과 자위적 무기 구입비로 보석을 많이 소모했어요!"
                         </p>
                     </div>
-                    <div class="mt-3 pt-2 border-t border-[#333] text-[11px] text-[#ef321f] font-bold">
-                        👉 기술력과 전투로 선방!
+                    <div class="mt-3 pt-2.5 border-t border-[#333] text-[11px] text-[#ef321f] font-bold">
+                        👉 기술력 선방 & 끈질긴 생존!
                     </div>
                 </div>
+            </div>
 
-                <!-- 4th: White -->
-                <div class="p-5 bg-[#141414] border border-neutral-600 flex flex-col justify-between">
-                    <div>
-                        <div class="text-neutral-400 font-bold text-xs">💥 최종 4등</div>
-                        <h3 class="font-cafe24 text-2xl text-[#f0eee7] mt-1">화이트 (루나 팀)</h3>
-                        <div class="text-neutral-400 font-bold text-lg mt-1">약 0원 ~ 소액</div>
-                        <p class="font-sans text-xs text-neutral-400 mt-2 leading-relaxed">
-                            "인원이 6명이라 매일 라이프 사느라 보석을 전부 다 써버렸어요..."
-                        </p>
-                    </div>
-                    <div class="mt-3 pt-2 border-t border-[#333] text-[11px] text-neutral-500 font-bold">
-                        👉 머릿수 많은 팀의 비극...
-                    </div>
+            <!-- Key Empirical Simulation Highlights (4 Macro Stats) -->
+            <div class="mt-6 grid grid-cols-2 lg:grid-cols-4 gap-3 font-mono text-xs">
+                <div class="p-3 bg-[#101010] border border-[#222]">
+                    <div class="text-neutral-500">💣 9일간 평균 전쟁 횟수</div>
+                    <div class="font-cafe24 text-xl text-[#ef321f] mt-1">9.32 회</div>
+                    <div class="text-[10px] text-neutral-400 mt-0.5">가격 불만 전쟁 & 보복전</div>
+                </div>
+                <div class="p-3 bg-[#101010] border border-[#222]">
+                    <div class="text-neutral-500">💰 블랙 무기/전쟁세 수익</div>
+                    <div class="font-cafe24 text-xl text-amber-400 mt-1">176.7 개 보석</div>
+                    <div class="text-[10px] text-neutral-400 mt-0.5">무기 상인의 독점적 부</div>
+                </div>
+                <div class="p-3 bg-[#101010] border border-[#222]">
+                    <div class="text-neutral-500">💎 최종 보석 1개 가치</div>
+                    <div class="font-cafe24 text-xl text-emerald-400 mt-1">약 431,373 원</div>
+                    <div class="text-[10px] text-neutral-400 mt-0.5">추가발행 및 전쟁세 소각 반영</div>
+                </div>
+                <div class="p-3 bg-[#101010] border border-[#222]">
+                    <div class="text-neutral-500">🩸 지하 라이프 미채굴 잔량</div>
+                    <div class="font-cafe24 text-xl text-[#3898ec] mt-1">38.3 개</div>
+                    <div class="text-[10px] text-neutral-400 mt-0.5">크레딧 부족으로 미생산</div>
                 </div>
             </div>
 
             <!-- Accordion: Adult Detailed Charts & Rulebook -->
             <details class="mt-8 brutalist-border bg-[#101010] p-4 cursor-pointer group">
                 <summary class="flex justify-between items-center font-bold text-neutral-300 text-xs font-mono select-none">
-                    <span>📊 어른들을 위한 정밀 몬테카를로 차트 및 공식 룰북 보기 (클릭하여 펼치기)</span>
+                    <span>📊 정밀 몬테카를로 차트 및 실전 알고리즘 분석 (클릭하여 펼치기)</span>
                     <span class="text-neutral-500 group-open:rotate-180 transition-transform">▼</span>
                 </summary>
                 
                 <div class="mt-6 pt-4 border-t border-[#262626] space-y-6">
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                         <div class="p-4 bg-[#141414] border border-[#222]">
-                            <div class="font-mono text-xs font-bold text-[#f0eee7] mb-2">일자별 평균 생존 인원 추이</div>
+                            <div class="font-mono text-xs font-bold text-[#f0eee7] mb-2">일자별 평균 생존 인원 추이 (1,000회 실전)</div>
                             <div class="h-56">
                                 <canvas id="survivalChart"></canvas>
                             </div>
@@ -960,6 +1050,45 @@
                             <div class="h-56">
                                 <canvas id="prizeChart"></canvas>
                             </div>
+                        </div>
+                    </div>
+
+                    <!-- 4 Major Simulation Takeaways -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 font-mono text-xs text-neutral-300">
+                        <div class="p-3.5 bg-[#141414] border border-[#222] space-y-1.5">
+                            <div class="text-emerald-400 font-bold flex items-center gap-1.5">
+                                <span>💡 1. 화이트가 0원에서 2위(1,184만 원)로 올라선 이유</span>
+                            </div>
+                            <p class="font-sans text-[11px] text-neutral-400 leading-relaxed">
+                                기존 모델에선 6명의 라이프 소모를 못 버티고 전멸(0원)한다고 보았으나, 실전에서는 화이트가 추가 보석을 발행해 라이프를 사고, 블루의 폭리에 맞서 <strong>15보석으로 전쟁을 선포해 블루 자원의 50%를 강탈</strong>했습니다. 여기에 <strong>'최후 1인 생존 룰'</strong>이 작동하여 루나가 끝까지 살아남아 팀 보석 지분을 분배받았습니다.
+                            </p>
+                        </div>
+
+                        <div class="p-3.5 bg-[#141414] border border-[#222] space-y-1.5">
+                            <div class="text-[#3898ec] font-bold flex items-center gap-1.5">
+                                <span>💡 2. 블루가 5,842만 원에서 1,068만 원으로 떨어진 이유</span>
+                            </div>
+                            <p class="font-sans text-[11px] text-neutral-400 leading-relaxed">
+                                라이프를 독점하고 개당 35보석 이상의 폭리를 취하자, 시장의 '보이지 않는 손'이 작동했습니다. 화이트와 레드가 터무니없는 가격을 감당하기보다 <strong>전쟁을 선포하는 것이 경제적으로 이득</strong>이라 판단하여 연쇄 공격을 가했고, 블루는 보유 보석과 자원의 절반을 약탈당했습니다.
+                            </p>
+                        </div>
+
+                        <div class="p-3.5 bg-[#141414] border border-[#222] space-y-1.5">
+                            <div class="text-amber-400 font-bold flex items-center gap-1.5">
+                                <span>💡 3. 블랙이 7,625만 원으로 여전히 압도적 1등인 이유</span>
+                            </div>
+                            <p class="font-sans text-[11px] text-neutral-400 leading-relaxed">
+                                9일간 총 9.32회의 전쟁이 터지면서, 각 팀이 전쟁 선포세(15💎)와 B급(20💎)/A급(30💎) 무기를 사기 위해 지불한 보석이 무려 <strong>평균 176.7개</strong>에 달했습니다. 이 보석들은 블랙 마트 금고로 직행했고, 1인 팀인 블랙이 혼자서 전체 상금의 76.2%를 독식했습니다.
+                            </p>
+                        </div>
+
+                        <div class="p-3.5 bg-[#141414] border border-[#222] space-y-1.5">
+                            <div class="text-[#ef321f] font-bold flex items-center gap-1.5">
+                                <span>💡 4. '최후 1인 생존 룰'과 5일차 맬서스 트랩</span>
+                            </div>
+                            <p class="font-sans text-[11px] text-neutral-400 leading-relaxed">
+                                1~4일차까지는 라이프가 유지되지만 5일차에 라이프 결핍이 폭발하며 팀원들이 줄어듭니다. 그러나 규칙상 각 팀의 최후 1명은 라이프가 없어도 영구 생존하므로, 4개 팀 모두 1명씩 최종 결승까지 진출하여 상금을 나누어 가졌습니다.
+                            </p>
                         </div>
                     </div>
 
@@ -1638,17 +1767,17 @@
                 data: {
                     labels: days.map(d => `Day ${d}`),
                     datasets: [
-                        { label: '화이트 (6명)', data: [6, 6, 5, 1, 0.9, 0.8, 0.2, 0.2, 0.2], borderColor: '#f0eee7', borderWidth: 2, tension: 0.2 },
-                        { label: '블루 (3명)', data: [3, 3, 3, 3, 3, 3, 2.9, 2.8, 2.6], borderColor: '#1646f5', borderWidth: 2.5, tension: 0.2 },
-                        { label: '레드 (3명)', data: [3, 3, 3, 3, 3, 2.6, 1.1, 1.0, 0.9], borderColor: '#ef321f', borderWidth: 2, tension: 0.2 },
-                        { label: '블랙 (1명)', data: [1, 1, 1, 1, 1, 1, 1, 1, 1], borderColor: '#777777', borderDash: [4, 4], borderWidth: 1.5 }
+                        { label: '화이트 (최종 1명)', data: [6.0, 6.0, 5.85, 5.85, 1.29, 1.0, 1.0, 1.0, 1.0], borderColor: '#f0eee7', borderWidth: 2.5, tension: 0.2 },
+                        { label: '블루 (최종 1명)', data: [3.0, 3.0, 3.0, 2.75, 1.20, 1.0, 1.0, 1.0, 1.0], borderColor: '#1646f5', borderWidth: 2, tension: 0.2 },
+                        { label: '레드 (최종 1명)', data: [3.0, 3.0, 3.0, 2.56, 1.11, 1.0, 1.0, 1.0, 1.0], borderColor: '#ef321f', borderWidth: 2, tension: 0.2 },
+                        { label: '블랙 (최종 1명)', data: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0], borderColor: '#f59e0b', borderDash: [4, 4], borderWidth: 2 }
                     ]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 9 } } } },
-                    scales: { y: { min: 0, max: 7 } }
+                    plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } },
+                    scales: { y: { min: 0, max: 7, ticks: { stepSize: 1 } } }
                 }
             });
         }
@@ -1658,18 +1787,27 @@
             new Chart(ctxPrize, {
                 type: 'bar',
                 data: {
-                    labels: ['블랙 (1명)', '블루 (3명)', '레드 (3명)', '화이트 (6명)'],
+                    labels: ['🥇 블랙 (1명)', '🥈 화이트 (1명)', '🥉 블루 (1명)', '💥 레드 (1명)'],
                     datasets: [{
                         label: '1인당 기대 상금 (만 원)',
-                        data: [9736, 2775, 1509, 32],
-                        backgroundColor: ['#d97706', '#1646f5', '#ef321f', '#e5e7eb'],
+                        data: [7625, 1184, 1068, 339],
+                        backgroundColor: ['#d97706', '#f0eee7', '#1646f5', '#ef321f'],
                         borderWidth: 0
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
+                    plugins: { 
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.raw.toLocaleString()}만 원 (1,000회 실전 평균)`;
+                                }
+                            }
+                        }
+                    },
                     scales: { y: { beginAtZero: true } }
                 }
             });
